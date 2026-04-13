@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iglesia Bíblica Ciudad de Dios - Rosario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #0072BC;
+      --blue-light: #3FA9F5;
+      --blue-dark: #005a94;
+      --blue-deeper: #003d66;
+      --text: #1a1a1a;
+      --text-muted: #5c5c5c;
+      --bg: #f8f8f6;
+      --white: #ffffff;
+      --cream: #fdfcfa;
+      
+      /* Easing curves */
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+      
+      /* Max widths */
+      --content-max-width: 1400px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== NAV ========== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.25rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      transition: background 300ms var(--ease-out), padding 300ms var(--ease-out);
+    }
+
+    .nav.scrolled {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0.875rem 4rem;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .nav-logo-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.1;
+      transition: color 300ms var(--ease-out);
+    }
+
+    .nav.scrolled .nav-logo-name {
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 300ms var(--ease-out);
+    }
+
+    .nav.scrolled .nav-links a {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 0.625rem 1.25rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--white);
+      border-radius: 4px;
+      transition: all 200ms var(--ease-out);
+    }
+
+    .nav.scrolled .nav-cta {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      height: 100vh;
+      max-height: 850px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 4rem;
+      background: linear-gradient(rgba(0,114,188,0.7), rgba(0,61,102,0.85)), url('https://picsum.photos/seed/church/1920/1080');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content {
+      max-width: 700px;
+      color: var(--white);
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      padding: 1rem 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 200ms var(--ease-out);
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--blue);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    /* ========== SECTIONS ========== */
+    section { padding: 5rem 4rem; }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    /* ========== WELCOME ========== */
+    .welcome {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      background: var(--cream);
+    }
+
+    .welcome-img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    }
+
+    /* ========== CARDS ========== */
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      transition: transform 200ms var(--ease-out);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* ========== GRID ========== */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: #111;
+      color: var(--white);
+      padding: 4rem;
+    }
+
+    @media (max-width: 1024px) {
+      .nav, section, .footer { padding: 2rem; }
+      .welcome, .grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-name">Iglesia Bíblica Ciudad de Dios</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Nosotros</a></li>
+      <li><a href="#">Sermones</a></li>
+      <li><a href="#">Eventos</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Visítanos</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Existimos para la gloria de Dios y el bien de los hombres</h1>
+      <a href="#" class="btn btn-primary">Conócenos más</a>
+    </div>
+  </section>
+
+  <section class="welcome">
+    <div>
+      <h2 class="section-title">Bienvenidos</h2>
+      <p>Un mensaje de nuestro Pastor Cristian Palomares. Somos una comunidad centrada en las Escrituras...</p>
+    </div>
+    <img src="https://picsum.photos/seed/pastor/800/600" alt="Pastor Cristian Palomares" class="welcome-img">
+  </section>
+
+  <section>
+    <h2 class="section-title">Sermón Destacado</h2>
+    <div class="card" style="display: flex; gap: 2rem; align-items: center;">
+      <img src="https://picsum.photos/seed/romanos/400/250" alt="Serie Romanos" style="border-radius: 8px; width: 300px;">
+      <div>
+        <span style="color: var(--blue); font-weight: 500; font-size: 0.875rem;">Serie Actual: Romanos</span>
+        <h3 style="font-family: 'Fraunces', serif; font-size: 1.5rem; margin: 0.5rem 0;">La Justificación por la Fe</h3>
+        <button class="btn btn-primary" style="background: var(--blue); color: white; margin-top: 1rem;">Reproducir Sermón</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--bg);">
+    <h2 class="section-title">Próximos Eventos</h2>
+    <div class="grid-3">
+      <div class="card">
+        <img src="https://picsum.photos/seed/event1/400/250" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>Reunión de Jóvenes</h3>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">Sábado 19:00 hs</p>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/seed/event2/400/250" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>Estudio Bíblico</h3>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">Miércoles 20:00 hs</p>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/seed/event3/400/250" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+        <h3>Cena del Señor</h3>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">Primer Domingo del Mes</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Nuestras Reuniones</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+      <div>
+        <div class="card" style="margin-bottom: 1rem;">
+          <h4>Domingos 10:00 hs</h4>
+          <p>Culto de Adoración</p>
+        </div>
+        <p>San Martín 2650, Rosario, Santa Fe</p>
+      </div>
+      <div style="background: #eee; border-radius: 12px; height: 300px; display: flex; align-items: center; justify-content: center;">
+        Mapa de Google Maps
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="grid-3">
+      <div>
+        <h3>IBCD</h3>
+        <p>Iglesia Bíblica Ciudad de Dios</p>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <p>San Martín 2650, Rosario</p>
+        <p>info@ibcd.com.ar</p>
+      </div>
+      <div>
+        <h4>Redes Sociales</h4>
+        <p>Instagram / Facebook / YouTube</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>

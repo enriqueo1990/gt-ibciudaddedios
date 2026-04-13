@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Instrument Serif", serif;
+  --font-sans: "Inter", sans-serif;
+  --color-ibcd-blue: #0072BC;
+  --color-ibcd-blue-light: #3FA9F5;
+  --color-ibcd-orange: #E67E22;
+  --color-ibcd-bg: #fcfcfc;
+  --color-ibcd-accent: #f0f4f8;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-white text-slate-900;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+}
+
+.container-custom {
+  @apply max-w-[1200px] mx-auto px-6 md:px-12;
+}
