@@ -8,12 +8,14 @@ import Visitanos from './Visitanos.tsx';
 import Sermones from './Sermones.tsx';
 import SermonDetalle from './SermonDetalle.tsx';
 import SerieDetalle from './SerieDetalle.tsx';
+import Articulos from './Articulos.tsx';
+import ArticuloDetalle from './ArticuloDetalle.tsx';
 import './index.css';
 
 const path = window.location.pathname;
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {path === '/creencias' ? <Creencias /> : path === '/liderazgo' ? <Liderazgo /> : path === '/eventos' ? <Eventos /> : path === '/visitanos' ? <Visitanos /> : path === '/sermones' ? <Sermones /> : path === '/sermon' ? <SermonDetalle /> : path === '/serie' ? <SerieDetalle /> : <App />}
+    {path === '/creencias' ? <Creencias /> : path === '/liderazgo' ? <Liderazgo /> : path === '/eventos' ? <Eventos /> : path === '/visitanos' ? <Visitanos /> : path === '/sermones' ? <Sermones /> : path === '/sermon' ? <SermonDetalle /> : path === '/serie' ? <SerieDetalle /> : path === '/articulos' ? <Articulos /> : path === '/articulo' ? <ArticuloDetalle /> : <App />}
   </StrictMode>,
 );

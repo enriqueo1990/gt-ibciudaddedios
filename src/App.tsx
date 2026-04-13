@@ -109,8 +109,9 @@ export default function App() {
               </div>
             </div>
 
-            <a href="/eventos" className={`text-[13px] font-medium tracking-wide transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-600' : 'text-white/80'}`}>Eventos</a>
-            <a href="/sermones" className={`text-[13px] font-medium tracking-wide transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-600' : 'text-white/80'}`}>Sermones</a>
+            <a href="/eventos" className={`text-[11px] uppercase tracking-[0.2em] font-medium transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-900' : 'text-white/90'}`}>Eventos</a>
+            <a href="/sermones" className={`text-[11px] uppercase tracking-[0.2em] font-medium transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-900' : 'text-white/90'}`}>Sermones</a>
+            <a href="/articulos" className={`text-[11px] uppercase tracking-[0.2em] font-medium transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-900' : 'text-white/90'}`}>Artículos</a>
             
             <a 
               href="/visitanos" 
@@ -156,6 +157,7 @@ export default function App() {
 
             <a href="/eventos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Eventos</a>
             <a href="/sermones" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Sermones</a>
+            <a href="/articulos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Artículos</a>
             <a href="/visitanos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Visítanos</a>
           </motion.div>
         )}
@@ -458,6 +460,7 @@ export default function App() {
                   <li><a href="/creencias" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Creencias</a></li>
                   <li><a href="/eventos" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Eventos</a></li>
                   <li><a href="/sermones" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Sermones</a></li>
+                  <li><a href="/articulos" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Artículos</a></li>
                   <li><a href="/visitanos" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Visítanos</a></li>
                 </ul>
               </div>

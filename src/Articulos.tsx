@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Facebook, Instagram, Youtube, Play, ChevronDown, ArrowUpRight, BookOpen } from 'lucide-react';
+import { Menu, X, Facebook, Instagram, Youtube, ChevronDown, ArrowUpRight, Calendar, User, Tag } from 'lucide-react';
 
 const Logo = ({ lightText = false, className = "" }: { lightText?: boolean, className?: string }) => {
-  const textFill1 = lightText ? "#FFFFFF" : "#4D4D4D"; // IGLESIA BÍBLICA
-  const textFill2 = lightText ? "#FFFFFF" : "#0072BC"; // CIUDAD DE DIOS
+  const textFill1 = lightText ? "#FFFFFF" : "#4D4D4D"; 
+  const textFill2 = lightText ? "#FFFFFF" : "#0072BC"; 
   const iconFill = "#0072BC";
 
   return (
@@ -68,16 +68,64 @@ const Logo = ({ lightText = false, className = "" }: { lightText?: boolean, clas
   );
 };
 
-export default function Sermones() {
+export default function Articulos() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const series = [
-    { title: "Romanos: La Justicia de Dios", sermons: 24, img: "romans", current: true },
-    { title: "Efesios: Nuestra Riqueza en Cristo", sermons: 16, img: "ephesians", current: false },
-    { title: "Salmos: Cánticos del Corazón", sermons: 12, img: "psalms", current: false },
-    { title: "Atributos de Dios", sermons: 8, img: "attributes", current: false },
-    { title: "Génesis: El Principio", sermons: 30, img: "genesis", current: false },
-    { title: "Sermón del Monte", sermons: 14, img: "mount", current: false },
+  const articles = [
+    {
+      id: 1,
+      title: "La importancia de la membresía en la iglesia local",
+      excerpt: "Unirse a una iglesia local no es simplemente añadir tu nombre a una lista, es un compromiso bíblico con un cuerpo de creyentes para el cuidado mutuo y la gloria de Dios.",
+      author: "Pr. Cristian Palomares",
+      date: "10 Abril, 2026",
+      category: "Eclesiología",
+      img: "church"
+    },
+    {
+      id: 2,
+      title: "Cómo leer la Biblia de manera efectiva",
+      excerpt: "Consejos prácticos y teológicos para acercarnos a las Escrituras no solo para obtener información, sino para experimentar transformación.",
+      author: "Pr. Juan Pérez",
+      date: "03 Abril, 2026",
+      category: "Vida Cristiana",
+      img: "bible"
+    },
+    {
+      id: 3,
+      title: "Entendiendo la Gracia Soberana",
+      excerpt: "Una mirada profunda a cómo la gracia de Dios opera en la salvación, desde la elección hasta la glorificación, dándole a Él toda la gloria.",
+      author: "Pr. Cristian Palomares",
+      date: "28 Marzo, 2026",
+      category: "Teología",
+      img: "grace"
+    },
+    {
+      id: 4,
+      title: "El rol de la familia en la adoración",
+      excerpt: "La adoración no se limita al domingo por la mañana. Descubre cómo cultivar un ambiente de adoración y discipulado en el hogar.",
+      author: "Pr. Marcos Silva",
+      date: "20 Marzo, 2026",
+      category: "Familia",
+      img: "family"
+    },
+    {
+      id: 5,
+      title: "Orando los Salmos en tiempos de aflicción",
+      excerpt: "Los Salmos nos dan un vocabulario para nuestro dolor. Aprende a usar este libro inspirado para derramar tu corazón delante del Señor.",
+      author: "Pr. Juan Pérez",
+      date: "12 Marzo, 2026",
+      category: "Vida Cristiana",
+      img: "pray"
+    },
+    {
+      id: 6,
+      title: "El peligro del pragmatismo en la iglesia",
+      excerpt: "Por qué debemos confiar en los medios de gracia ordinarios que Dios ha establecido en lugar de buscar técnicas modernas para el crecimiento.",
+      author: "Pr. Cristian Palomares",
+      date: "05 Marzo, 2026",
+      category: "Eclesiología",
+      img: "building"
+    }
   ];
 
   return (
@@ -89,7 +137,7 @@ export default function Sermones() {
             <Logo lightText={false} className="h-10 w-auto" />
           </a>
           
-          <div className="hidden md:flex gap-10 items-center">
+          <div className="hidden md:flex gap-8 lg:gap-10 items-center">
             <a href="/" className="text-[11px] uppercase tracking-[0.2em] font-medium text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Inicio</a>
             
             <div className="relative group">
@@ -105,8 +153,8 @@ export default function Sermones() {
             </div>
 
             <a href="/eventos" className="text-[11px] uppercase tracking-[0.2em] font-medium text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Eventos</a>
-            <a href="/sermones" className="text-[11px] uppercase tracking-[0.2em] font-medium text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Sermones</a>
-            <a href="/articulos" className="text-[11px] uppercase tracking-[0.2em] font-medium text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Artículos</a>
+            <a href="/sermones" className="text-[11px] uppercase tracking-[0.2em] font-medium text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Sermones</a>
+            <a href="/articulos" className="text-[11px] uppercase tracking-[0.2em] font-medium text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Artículos</a>
             <a href="/visitanos" className="text-[11px] uppercase tracking-[0.2em] font-medium text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Visítanos</a>
           </div>
 
@@ -137,8 +185,8 @@ export default function Sermones() {
             </div>
 
             <a href="/eventos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Eventos</a>
-            <a href="/sermones" className="text-4xl font-serif text-ibcd-blue italic transition-all" onClick={() => setMobileMenuOpen(false)}>Sermones</a>
-            <a href="/articulos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Artículos</a>
+            <a href="/sermones" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Sermones</a>
+            <a href="/articulos" className="text-4xl font-serif text-ibcd-blue italic transition-all" onClick={() => setMobileMenuOpen(false)}>Artículos</a>
             <a href="/visitanos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Visítanos</a>
           </motion.div>
         )}
@@ -149,90 +197,86 @@ export default function Sermones() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <span className="text-[10px] uppercase tracking-[0.3em] text-ibcd-orange font-bold mb-6 block">
-              Predicación Expositiva
+              Recursos y Reflexiones
             </span>
             <h1 className="text-6xl md:text-8xl font-serif leading-[0.95] mb-8">
-              La fe viene por el <span className="italic">oír</span>.
+              Artículos <span className="italic">Pastorales</span>.
             </h1>
             <p className="text-slate-500 text-lg md:text-xl leading-relaxed font-light max-w-2xl">
-              Explora nuestro archivo de sermones y series de enseñanza. Creemos en la predicación expositiva que revela el significado original del texto bíblico.
+              Escritos por nuestro equipo pastoral para edificar a la iglesia, profundizar en la teología y aplicar el evangelio a la vida cotidiana.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Featured Sermon */}
+      {/* Featured Article */}
       <section className="py-24 bg-white border-b border-slate-100">
         <div className="container-custom">
           <div className="flex justify-between items-baseline mb-12">
-            <h2 className="text-3xl font-serif italic">Sermón Más Reciente</h2>
+            <h2 className="text-3xl font-serif italic">Artículo Destacado</h2>
           </div>
 
           <a 
-            href="/sermon"
+            href="/articulo"
             className="bg-white border border-slate-100 overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all group cursor-pointer block"
           >
-            <div className="md:w-1/2 aspect-video bg-slate-900 relative overflow-hidden">
+            <div className="md:w-1/2 aspect-video md:aspect-auto bg-slate-100 relative overflow-hidden">
               <img 
-                src="https://picsum.photos/seed/sermon-min/1200/800" 
-                alt="Sermon" 
-                className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000"
+                src="https://picsum.photos/seed/featured-article/1200/800" 
+                alt="Artículo Destacado" 
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <button className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all group-hover:bg-ibcd-blue group-hover:border-ibcd-blue outline-none focus-visible:bg-ibcd-blue">
-                  <Play size={24} fill="currentColor" className="ml-1" />
-                </button>
-              </div>
             </div>
             <div className="md:w-1/2 p-12 flex flex-col justify-center">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-ibcd-orange font-bold mb-4 block">Serie: Romanos</span>
-              <h3 className="text-3xl font-serif mb-6 leading-tight group-hover:text-ibcd-blue transition-colors">La Justicia de Dios revelada en el Evangelio</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-8">
-                Un estudio profundo sobre cómo la gracia de Dios nos alcanza y nos transforma desde el corazón hacia afuera, basado en Romanos 1:16-17.
+              <span className="text-[10px] uppercase tracking-[0.2em] text-ibcd-orange font-bold mb-4 block">Eclesiología</span>
+              <h3 className="text-3xl md:text-4xl font-serif mb-6 leading-tight group-hover:text-ibcd-blue transition-colors">La importancia de la membresía en la iglesia local</h3>
+              <p className="text-slate-500 text-base leading-relaxed mb-8">
+                Unirse a una iglesia local no es simplemente añadir tu nombre a una lista, es un compromiso bíblico con un cuerpo de creyentes para el cuidado mutuo, la rendición de cuentas y la gloria de Dios. Descubre por qué la membresía importa.
               </p>
-              <div className="flex items-center gap-4 text-xs font-medium text-slate-400">
-                <span>13 Abril, 2026</span>
+              <div className="flex items-center gap-4 text-xs font-medium text-slate-400 mt-auto">
+                <span className="flex items-center gap-1"><Calendar size={14} /> 10 Abril, 2026</span>
                 <span className="w-1 h-1 rounded-full bg-slate-300"></span>
-                <span>Pr. Cristian Palomares</span>
+                <span className="flex items-center gap-1"><User size={14} /> Pr. Cristian Palomares</span>
               </div>
             </div>
           </a>
         </div>
       </section>
 
-      {/* Series Grid */}
+      {/* Articles Grid */}
       <section className="py-32 bg-slate-50">
         <div className="container-custom">
-          <h2 className="text-4xl font-serif mb-16">Series de Sermones</h2>
+          <h2 className="text-4xl font-serif mb-16">Últimos Artículos</h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {series.map((item, i) => (
+            {articles.slice(1).map((article) => (
               <a 
-                key={i} 
-                href="/serie"
-                className="bg-white border border-slate-100 overflow-hidden group hover:border-ibcd-blue/30 transition-colors flex flex-col"
+                key={article.id} 
+                href="/articulo"
+                className="bg-white border border-slate-100 overflow-hidden group hover:border-ibcd-blue/30 hover:shadow-sm transition-all flex flex-col"
               >
                 <div className="aspect-[16/10] bg-slate-100 relative overflow-hidden">
                   <img 
-                    src={`https://picsum.photos/seed/series-${item.img}/800/500`} 
-                    alt={item.title} 
+                    src={`https://picsum.photos/seed/${article.img}/800/500`} 
+                    alt={article.title} 
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     referrerPolicy="no-referrer"
                   />
-                  {item.current && (
-                    <div className="absolute top-4 right-4 bg-ibcd-orange text-white text-[9px] uppercase tracking-widest font-bold px-3 py-1 rounded-sm shadow-sm">
-                      Serie Actual
-                    </div>
-                  )}
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-slate-900 text-[9px] uppercase tracking-widest font-bold px-3 py-1 rounded-sm shadow-sm flex items-center gap-1">
+                    <Tag size={10} /> {article.category}
+                  </div>
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
-                  <h3 className="text-xl font-serif mb-3 group-hover:text-ibcd-blue transition-colors">{item.title}</h3>
+                  <h3 className="text-xl font-serif mb-4 group-hover:text-ibcd-blue transition-colors leading-snug">{article.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-8 font-light line-clamp-3">
+                    {article.excerpt}
+                  </p>
                   <div className="mt-auto flex items-center justify-between pt-6 border-t border-slate-50">
-                    <span className="text-xs text-slate-400 flex items-center gap-2">
-                      <BookOpen size={14} />
-                      {item.sermons} Sermones
-                    </span>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] font-bold text-slate-900 uppercase tracking-wider">{article.author}</span>
+                      <span className="text-[10px] text-slate-400">{article.date}</span>
+                    </div>
                     <ArrowUpRight size={16} className="text-slate-300 group-hover:text-ibcd-blue transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </div>
                 </div>

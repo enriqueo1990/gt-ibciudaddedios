@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Facebook, Instagram, Youtube, Play, ChevronDown, ArrowUpRight, BookOpen } from 'lucide-react';
+import { Menu, X, Facebook, Instagram, Youtube, ChevronDown, ArrowLeft, Calendar, User, Tag, Share2 } from 'lucide-react';
 
 const Logo = ({ lightText = false, className = "" }: { lightText?: boolean, className?: string }) => {
-  const textFill1 = lightText ? "#FFFFFF" : "#4D4D4D"; // IGLESIA BÍBLICA
-  const textFill2 = lightText ? "#FFFFFF" : "#0072BC"; // CIUDAD DE DIOS
+  const textFill1 = lightText ? "#FFFFFF" : "#4D4D4D"; 
+  const textFill2 = lightText ? "#FFFFFF" : "#0072BC"; 
   const iconFill = "#0072BC";
 
   return (
@@ -68,17 +68,8 @@ const Logo = ({ lightText = false, className = "" }: { lightText?: boolean, clas
   );
 };
 
-export default function Sermones() {
+export default function ArticuloDetalle() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const series = [
-    { title: "Romanos: La Justicia de Dios", sermons: 24, img: "romans", current: true },
-    { title: "Efesios: Nuestra Riqueza en Cristo", sermons: 16, img: "ephesians", current: false },
-    { title: "Salmos: Cánticos del Corazón", sermons: 12, img: "psalms", current: false },
-    { title: "Atributos de Dios", sermons: 8, img: "attributes", current: false },
-    { title: "Génesis: El Principio", sermons: 30, img: "genesis", current: false },
-    { title: "Sermón del Monte", sermons: 14, img: "mount", current: false },
-  ];
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-ibcd-blue selection:text-white">
@@ -89,7 +80,7 @@ export default function Sermones() {
             <Logo lightText={false} className="h-10 w-auto" />
           </a>
           
-          <div className="hidden md:flex gap-10 items-center">
+          <div className="hidden md:flex gap-8 lg:gap-10 items-center">
             <a href="/" className="text-[11px] uppercase tracking-[0.2em] font-medium text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Inicio</a>
             
             <div className="relative group">
@@ -105,8 +96,8 @@ export default function Sermones() {
             </div>
 
             <a href="/eventos" className="text-[11px] uppercase tracking-[0.2em] font-medium text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Eventos</a>
-            <a href="/sermones" className="text-[11px] uppercase tracking-[0.2em] font-medium text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Sermones</a>
-            <a href="/articulos" className="text-[11px] uppercase tracking-[0.2em] font-medium text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Artículos</a>
+            <a href="/sermones" className="text-[11px] uppercase tracking-[0.2em] font-medium text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Sermones</a>
+            <a href="/articulos" className="text-[11px] uppercase tracking-[0.2em] font-medium text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Artículos</a>
             <a href="/visitanos" className="text-[11px] uppercase tracking-[0.2em] font-medium text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Visítanos</a>
           </div>
 
@@ -137,110 +128,127 @@ export default function Sermones() {
             </div>
 
             <a href="/eventos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Eventos</a>
-            <a href="/sermones" className="text-4xl font-serif text-ibcd-blue italic transition-all" onClick={() => setMobileMenuOpen(false)}>Sermones</a>
-            <a href="/articulos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Artículos</a>
+            <a href="/sermones" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Sermones</a>
+            <a href="/articulos" className="text-4xl font-serif text-ibcd-blue italic transition-all" onClick={() => setMobileMenuOpen(false)}>Artículos</a>
             <a href="/visitanos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Visítanos</a>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Hero Header */}
-      <section className="pt-48 pb-32 bg-slate-50 border-b border-slate-100">
+      {/* Main Content */}
+      <main className="pt-32 pb-32">
         <div className="container-custom">
-          <div className="max-w-3xl">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-ibcd-orange font-bold mb-6 block">
-              Predicación Expositiva
-            </span>
-            <h1 className="text-6xl md:text-8xl font-serif leading-[0.95] mb-8">
-              La fe viene por el <span className="italic">oír</span>.
-            </h1>
-            <p className="text-slate-500 text-lg md:text-xl leading-relaxed font-light max-w-2xl">
-              Explora nuestro archivo de sermones y series de enseñanza. Creemos en la predicación expositiva que revela el significado original del texto bíblico.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Sermon */}
-      <section className="py-24 bg-white border-b border-slate-100">
-        <div className="container-custom">
-          <div className="flex justify-between items-baseline mb-12">
-            <h2 className="text-3xl font-serif italic">Sermón Más Reciente</h2>
-          </div>
-
-          <a 
-            href="/sermon"
-            className="bg-white border border-slate-100 overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all group cursor-pointer block"
-          >
-            <div className="md:w-1/2 aspect-video bg-slate-900 relative overflow-hidden">
-              <img 
-                src="https://picsum.photos/seed/sermon-min/1200/800" 
-                alt="Sermon" 
-                className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <button className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all group-hover:bg-ibcd-blue group-hover:border-ibcd-blue outline-none focus-visible:bg-ibcd-blue">
-                  <Play size={24} fill="currentColor" className="ml-1" />
-                </button>
-              </div>
-            </div>
-            <div className="md:w-1/2 p-12 flex flex-col justify-center">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-ibcd-orange font-bold mb-4 block">Serie: Romanos</span>
-              <h3 className="text-3xl font-serif mb-6 leading-tight group-hover:text-ibcd-blue transition-colors">La Justicia de Dios revelada en el Evangelio</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-8">
-                Un estudio profundo sobre cómo la gracia de Dios nos alcanza y nos transforma desde el corazón hacia afuera, basado en Romanos 1:16-17.
-              </p>
-              <div className="flex items-center gap-4 text-xs font-medium text-slate-400">
-                <span>13 Abril, 2026</span>
-                <span className="w-1 h-1 rounded-full bg-slate-300"></span>
-                <span>Pr. Cristian Palomares</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </section>
-
-      {/* Series Grid */}
-      <section className="py-32 bg-slate-50">
-        <div className="container-custom">
-          <h2 className="text-4xl font-serif mb-16">Series de Sermones</h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {series.map((item, i) => (
-              <a 
-                key={i} 
-                href="/serie"
-                className="bg-white border border-slate-100 overflow-hidden group hover:border-ibcd-blue/30 transition-colors flex flex-col"
-              >
-                <div className="aspect-[16/10] bg-slate-100 relative overflow-hidden">
-                  <img 
-                    src={`https://picsum.photos/seed/series-${item.img}/800/500`} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                    referrerPolicy="no-referrer"
-                  />
-                  {item.current && (
-                    <div className="absolute top-4 right-4 bg-ibcd-orange text-white text-[9px] uppercase tracking-widest font-bold px-3 py-1 rounded-sm shadow-sm">
-                      Serie Actual
-                    </div>
-                  )}
-                </div>
-                <div className="p-8 flex-1 flex flex-col">
-                  <h3 className="text-xl font-serif mb-3 group-hover:text-ibcd-blue transition-colors">{item.title}</h3>
-                  <div className="mt-auto flex items-center justify-between pt-6 border-t border-slate-50">
-                    <span className="text-xs text-slate-400 flex items-center gap-2">
-                      <BookOpen size={14} />
-                      {item.sermons} Sermones
-                    </span>
-                    <ArrowUpRight size={16} className="text-slate-300 group-hover:text-ibcd-blue transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </div>
-                </div>
-              </a>
-            ))}
+          {/* Breadcrumbs */}
+          <div className="mb-8 flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-slate-400">
+            <a href="/articulos" className="hover:text-ibcd-blue transition-colors flex items-center gap-1">
+              <ArrowLeft size={14} /> Artículos
+            </a>
+            <span>/</span>
+            <a href="#" className="hover:text-ibcd-blue transition-colors">Eclesiología</a>
           </div>
+
+          {/* Article Header */}
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-slate-100 text-slate-900 text-[10px] uppercase tracking-widest font-bold px-4 py-2 rounded-sm mb-8">
+              <Tag size={12} className="text-ibcd-orange" /> Eclesiología
+            </div>
+            <h1 className="text-4xl md:text-6xl font-serif leading-tight mb-8">
+              La importancia de la membresía en la iglesia local
+            </h1>
+
+            {/* Meta Info */}
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+              <div className="flex items-center gap-2">
+                <User size={16} className="text-slate-400" />
+                <span className="font-medium text-slate-900">Pr. Cristian Palomares</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Calendar size={16} className="text-slate-400" />
+                <span>10 Abril, 2026</span>
+              </div>
+              <button className="flex items-center gap-2 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue ml-4">
+                <Share2 size={16} /> <span>Compartir</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Hero Image */}
+          <div className="aspect-[21/9] bg-slate-100 relative rounded-sm overflow-hidden mb-16 max-w-5xl mx-auto">
+            <img 
+              src="https://picsum.photos/seed/church/1920/800" 
+              alt="Iglesia local" 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+
+          {/* Article Content */}
+          <div className="max-w-3xl mx-auto">
+            <div className="prose prose-slate prose-lg max-w-none font-light leading-relaxed text-slate-600">
+              <p className="text-xl text-slate-900 font-medium mb-8">
+                Unirse a una iglesia local no es simplemente añadir tu nombre a una lista, es un compromiso bíblico con un cuerpo de creyentes para el cuidado mutuo, la rendición de cuentas y la gloria de Dios.
+              </p>
+              
+              <p>
+                En nuestra cultura moderna, altamente individualista e independiente, la idea de comprometerse formalmente con una institución a menudo se ve con sospecha. Muchos cristianos hoy en día prefieren ser "consumidores" de la iglesia: asisten a los servicios, disfrutan de la música, escuchan el sermón y se van a casa sin establecer vínculos profundos. Sin embargo, cuando examinamos el Nuevo Testamento, descubrimos que esta mentalidad es ajena al diseño de Dios para Su pueblo.
+              </p>
+
+              <h3>1. Un compromiso visible con un cuerpo local</h3>
+              <p>
+                La iglesia universal está compuesta por todos los creyentes verdaderos en todo el mundo y a lo largo de la historia. Pero esta realidad universal debe tener una expresión local y visible. En el Nuevo Testamento, vemos que los creyentes se reunían en lugares específicos (Corinto, Éfeso, Roma) y sabían exactamente quiénes formaban parte de su comunidad.
+              </p>
+              <p>
+                La membresía de la iglesia es simplemente la manera en que formalizamos y hacemos visible nuestro compromiso con un grupo específico de creyentes. Es decir: "Yo soy responsable por ustedes, y ustedes son responsables por mí".
+              </p>
+
+              <blockquote className="border-l-4 border-ibcd-orange pl-6 italic my-8 text-slate-500">
+                "No podemos obedecer los mandamientos de 'unos a otros' en el Nuevo Testamento (amaos unos a otros, exhortaos unos a otros, soportaos unos a otros) en abstracto. Debemos hacerlo en el contexto de una comunidad local comprometida."
+              </blockquote>
+
+              <h3>2. Sumisión al liderazgo pastoral</h3>
+              <p>
+                Hebreos 13:17 nos instruye: <em>"Obedeced a vuestros pastores, y sujetaos a ellos; porque ellos velan por vuestras almas, como quienes han de dar cuenta"</em>.
+              </p>
+              <p>
+                Para que un pastor pueda "velar por las almas" y "dar cuenta" a Dios, necesita saber exactamente por quiénes es responsable. Un pastor no dará cuenta por todos los cristianos de su ciudad, sino por el rebaño específico que Dios le ha confiado (1 Pedro 5:2-3). La membresía define quiénes conforman ese rebaño.
+              </p>
+
+              <h3>3. Disciplina y restauración</h3>
+              <p>
+                En Mateo 18 y 1 Corintios 5, Jesús y Pablo enseñan sobre la disciplina en la iglesia. Si un hermano persiste en un pecado no arrepentido, la iglesia debe actuar para llamarlo al arrepentimiento. El paso final de este proceso es tratar a la persona como un "gentil y publicano", lo que implica removerlo de la comunión de la iglesia.
+              </p>
+              <p>
+                Lógicamente, no puedes "remover" a alguien de algo a lo que nunca perteneció formalmente. La disciplina eclesiástica presupone una membresía definida. Su propósito no es castigar, sino restaurar al pecador y proteger la pureza y el testimonio de la iglesia.
+              </p>
+
+              <h3>Conclusión</h3>
+              <p>
+                La membresía en la iglesia local es un acto de amor y obediencia. Es renunciar a nuestra independencia para someternos al cuidado de los pastores y al amor de los hermanos. Si eres un creyente en Cristo, te animamos a que no te conformes con ser un asistente casual. Busca una iglesia bíblica, comprométete con ella y sirve para la edificación del cuerpo y la gloria de Dios.
+              </p>
+            </div>
+            
+            {/* Author Bio */}
+            <div className="mt-16 p-8 bg-slate-50 border border-slate-100 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+              <div className="w-24 h-24 rounded-full overflow-hidden shrink-0 bg-slate-200">
+                <img 
+                  src="https://picsum.photos/seed/pastor/200/200" 
+                  alt="Pr. Cristian Palomares" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div>
+                <h4 className="text-lg font-serif mb-2">Pr. Cristian Palomares</h4>
+                <p className="text-slate-500 text-sm leading-relaxed font-light">
+                  Pastor principal de la Iglesia Bíblica Ciudad de Dios. Apasionado por la predicación expositiva y la teología reformada. Casado con María y padre de tres hijos.
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
-      </section>
+      </main>
 
       {/* Footer */}
       <footer className="py-20 bg-white border-t border-slate-100">
