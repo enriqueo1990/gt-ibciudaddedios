@@ -1,76 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronDown, ArrowUpRight, Facebook, Instagram, Youtube } from 'lucide-react';
-
-const Logo = ({ lightText = false, className = "" }: { lightText?: boolean, className?: string }) => {
-  const textFill1 = lightText ? "#FFFFFF" : "#4D4D4D"; // IGLESIA BÍBLICA
-  const textFill2 = lightText ? "#FFFFFF" : "#0072BC"; // CIUDAD DE DIOS
-  const iconFill = "#0072BC";
-
-  return (
-    <svg viewBox="0 0 553.46 276.82" className={className} xmlns="http://www.w3.org/2000/svg">
-      <g>
-        {/* CIUDAD */}
-        <g fill={textFill2} className="transition-colors duration-500">
-          <path d="M329.64,156.16c-12.69,0-22.96-10.28-22.96-22.96s10.28-22.96,22.96-22.96c8.69,0,16.05,4.82,19.92,11.73-3.87,2.03-4.19,2.22-8.5,4.31-2.22-3.87-6.53-6.53-11.42-6.53-7.42,0-13.45,6.09-13.45,13.45s6.03,13.45,13.45,13.45c5.07,0,9.51-2.73,11.8-7.04,4.31,2.22,4.44,2.47,8.5,4.31-3.87,7.29-11.35,12.24-20.3,12.24Z"/>
-          <path d="M354.5,110.75h9.96v45.29h-9.96v-45.29Z"/>
-          <path d="M410.06,138.91c0,12.24-7.23,18.2-19.35,18.2s-19.28-5.83-19.28-18.2v-28.16h9.96v28.16c0,4.95,1.27,9.83,9.32,9.83,7.1,0,9.39-3.04,9.39-9.83v-28.16h9.96v28.16Z"/>
-          <path d="M417.03,110.75h19.54c11.74,0,20.55,7.42,20.55,22.39,0,13.13-6.72,22.9-20.55,22.9h-19.54v-45.29ZM426.99,147.66h8.88c5.77,0,11.29-3.55,11.29-13.57,0-9.13-3.23-14.97-13.07-14.97h-7.1v28.54Z"/>
-          <path d="M458.13,156.04l20.55-45.23h10.02l20.23,45.23h-9.64l-4.44-10.02h-22.9l-4.76,10.02h-9.07ZM483.82,119.31l-7.61,17.51h15.03l-7.36-17.51h-.06Z"/>
-          <path d="M512.04,110.75h19.54c11.74,0,20.55,7.42,20.55,22.39,0,13.13-6.72,22.9-20.55,22.9h-19.54v-45.29ZM522,147.66h8.88c5.77,0,11.29-3.55,11.29-13.57,0-9.13-3.24-14.97-13.07-14.97h-7.1v28.54Z"/>
-        </g>
-        {/* DE DIOS */}
-        <g fill={textFill2} className="transition-colors duration-500">
-          <path d="M305.34,170.75h19.54c11.74,0,20.55,7.42,20.55,22.39,0,13.13-6.72,22.9-20.55,22.9h-19.54v-45.29ZM315.3,207.66h8.88c5.77,0,11.29-3.55,11.29-13.57,0-9.13-3.24-14.97-13.07-14.97h-7.1v28.54Z"/>
-          <path d="M359.25,197.96v9.64h25.56v8.37h-35.2v-45.42h33.05v8.37h-23.41v10.21h20.68v8.82h-20.68Z"/>
-          <path d="M407.9,170.75h19.54c11.74,0,20.55,7.42,20.55,22.39,0,13.13-6.72,22.9-20.55,22.9h-19.54v-45.29ZM417.86,207.66h8.88c5.77,0,11.29-3.55,11.29-13.57,0-9.13-3.24-14.97-13.07-14.97h-7.1v28.54Z"/>
-          <path d="M453.31,170.75h9.96v45.29h-9.96v-45.29Z"/>
-          <path d="M490.61,216.61c-12.94,0-23.41-10.47-23.41-23.41s10.47-23.47,23.41-23.47,23.47,10.47,23.47,23.47-10.59,23.41-23.47,23.41ZM476.78,193.2c0,7.55,6.28,13.83,13.83,13.83s13.7-6.28,13.7-13.83-6.15-13.89-13.7-13.89-13.83,6.34-13.83,13.89Z"/>
-          <path d="M524.98,202.59c1.01,5.96,6.34,6.79,10.02,6.79,3.49,0,8.82-1.01,8.82-5.65,0-9.64-26.96-3.42-26.96-20.36,0-9.32,8.75-13.7,16.94-13.7,9.45,0,18.14,4.12,18.14,14.59l-9.64-1.39c-1.21-5.27-5.84-5.46-8.94-5.46s-6.85,1.33-6.85,5.14c0,3.36,2.16,4.12,13.51,6.85,3.36.82,13.45,2.92,13.45,13.19,0,8.31-6.47,14.53-18.84,14.53-10.15,0-19.28-4.95-19.28-16.11l9.64,1.59Z"/>
-        </g>
-        {/* IGLESIA BÍBLICA */}
-        <g fill={textFill1} className="transition-colors duration-500">
-          <path d="M309.23,60.57v29.17h-3.25v-29.17h3.25Z"/>
-          <path d="M329.6,67.61v2.5h-3.08v-2.67c0-2.63-1.04-4.21-3.42-4.21s-3.42,1.58-3.42,4.21v15.42c0,2.62,1.08,4.21,3.42,4.21s3.42-1.58,3.42-4.21v-5.83h-3v-2.92h6.08v8.58c0,4.42-2.08,7.33-6.58,7.33s-6.54-2.92-6.54-7.33v-15.08c0-4.42,2.08-7.33,6.54-7.33s6.58,2.92,6.58,7.33Z"/>
-          <path d="M336.86,89.74v-29.17h3.25v26.21h8.33v2.96h-11.58Z"/>
-          <path d="M365.45,73.49v2.92h-7.13v10.38h8.75v2.96h-12v-29.17h12v2.96h-8.75v9.96h7.13Z"/>
-          <path d="M386.87,67.57v.79h-3.08v-.96c0-2.62-1-4.17-3.33-4.17s-3.33,1.54-3.33,4.12c0,6.54,9.79,7.17,9.79,15.38,0,4.42-2.12,7.29-6.58,7.29s-6.54-2.88-6.54-7.29v-1.67h3.04v1.83c0,2.62,1.08,4.17,3.42,4.17s3.42-1.54,3.42-4.17c0-6.5-9.75-7.13-9.75-15.33,0-4.5,2.08-7.29,6.46-7.29s6.5,2.88,6.5,7.29Z"/>
-          <path d="M397.17,60.57v29.17h-3.25v-29.17h3.25Z"/>
-          <path d="M407.96,83.86l-1.12,5.88h-3l5.58-29.17h4.71l5.58,29.17h-3.25l-1.12-5.88h-7.38ZM408.38,81.07h6.5l-3.29-16.83-3.21,16.83Z"/>
-          <path d="M443.59,60.57c4.54,0,6.33,2.17,6.33,6.46v1.38c0,3.08-.88,5-3.42,5.79,2.83.79,3.92,3.04,3.92,6.25v2.46c0,4.38-2.13,6.83-6.67,6.83h-6.71v-29.17h6.54ZM442.8,72.95c2.58,0,3.92-.83,3.92-3.88v-1.71c0-2.58-.88-3.83-3.21-3.83h-3.21v9.42h2.5ZM443.76,86.78c2.38,0,3.46-1.25,3.46-3.96v-2.58c0-3.25-1.29-4.33-4.08-4.33h-2.83v10.88h3.46Z"/>
-          <path d="M455.59,60.57h3.25v29.17h-3.25v-29.17ZM455.59,49.07h3.25v5.5h-3.25v-5.5Z"/>
-          <path d="M465.13,60.57c4.54,0,6.33,2.17,6.33,6.46v1.38c0,3.08-.88,5-3.42,5.79,2.83.79,3.92,3.04,3.92,6.25v2.46c0,4.38-2.13,6.83-6.67,6.83h-6.71v-29.17h6.54ZM464.34,72.95c2.58,0,3.92-.83,3.92-3.88v-1.71c0-2.58-.88-3.83-3.21-3.83h-3.21v9.42h2.5ZM465.3,86.78c2.38,0,3.46-1.25,3.46-3.96v-2.58c0-3.25-1.29-4.33-4.08-4.33h-2.83v10.88h3.46Z"/>
-          <path d="M485.8,89.74v-29.17h3.25v26.21h8.33v2.96h-11.58Z"/>
-          <path d="M503.22,60.57h3.25v29.17h-3.25v-29.17Z"/>
-          <path d="M527.76,60.28c5.42,0,9.29,2.67,10.08,7.96l-3.21.38c-.5-3.67-2.67-5.38-6.88-5.38s-6.75,2.42-6.75,10.63,2.54,10.63,6.75,10.63,6.38-1.71,6.88-5.38l3.21.38c-.79,5.29-4.67,7.96-10.08,7.96-6.17,0-10.08-3.67-10.08-13.58s3.92-13.58,10.08-13.58Z"/>
-          <path d="M541.89,83.86l-1.12,5.88h-3l5.58-29.17h4.71l5.58,29.17h-3.25l-1.12-5.88h-7.38ZM542.3,81.07h6.5l-3.29-16.83-3.21,16.83Z"/>
-        </g>
-        {/* ICON */}
-        <g fill={iconFill}>
-          <path d="M129.56,236.46H39.29v-5.21c0-13.88,11.25-25.13,25.13-25.13h40.01c13.88,0,25.13,11.25,25.13,25.13v5.21Z"/>
-          <path d="M228.66,236.46h-90.27v-5.21c0-13.88,11.25-25.13,25.13-25.13h40.01c13.88,0,25.13,11.25,25.13,25.13v5.21Z"/>
-          <path d="M134.42,168.04H34.43v-5.21c0-13.88,11.25-25.13,25.13-25.13h49.73c13.88,0,25.13,11.25,25.13,25.13v5.21Z"/>
-          <path d="M233.52,168.04h-90.27v-5.21c0-13.88,11.25-25.13,25.13-25.13h40.01c13.88,0,25.13,11.25,25.13,25.13v5.21Z"/>
-          <path d="M134.42,99.63H34.43v-5.21c0-13.88,11.25-25.13,25.13-25.13h49.73c13.88,0,25.13,11.25,25.13,25.13v5.21Z"/>
-          <path d="M233.52,99.63h-90.27v-5.21c0-13.88,11.25-25.13,25.13-25.13h40.01c13.88,0,25.13,11.25,25.13,25.13v5.21Z"/>
-          <path d="M134.42,31.21H34.43v-5.21c0-13.88,11.25-25.13,25.13-25.13h49.73c13.88,0,25.13,11.25,25.13,25.13v5.21Z"/>
-          <path d="M233.52,31.21h-90.27v-5.21c0-13.88,11.25-25.13,25.13-25.13h40.01c13.88,0,25.13,11.25,25.13,25.13v5.21Z"/>
-          <path d="M134.42,276.82H34.43v-32.55h99.99v32.55Z"/>
-          <path d="M233.52,276.82h-90.27v-32.55h90.27v32.55Z"/>
-          <path d="M134.42,208.41H34.43v-32.55h99.99v32.55Z"/>
-          <path d="M233.52,208.41h-90.27v-32.55h90.27v32.55Z"/>
-          <path d="M134.42,140H34.43v-32.55h99.99v32.55Z"/>
-          <path d="M233.52,140h-90.27v-32.55h90.27v32.55Z"/>
-          <path d="M134.42,71.58H34.43V39.04h99.99v32.55Z"/>
-          <path d="M233.52,71.58h-90.27V39.04h90.27v32.55Z"/>
-          <path d="M25.6,276.82H0V0h25.6v276.82Z"/>
-          <path d="M267.95,276.82h-25.6V0h25.6v276.82Z"/>
-          <path d="M143.25,276.82h-17.65V0h17.65v276.82Z"/>
-        </g>
-      </g>
-    </svg>
-  );
-};
+import { Logo } from './components/Logo';
 
 export default function Creencias() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -78,36 +9,88 @@ export default function Creencias() {
 
   const beliefs = [
     {
-      title: "Las Sagradas Escrituras",
-      content: "Creemos que la Biblia, compuesta por los 66 libros del Antiguo y Nuevo Testamento, es la Palabra de Dios inspirada, inerrante e infalible. Es la autoridad suprema y final en todos los asuntos de fe y práctica. Creemos que el Espíritu Santo guió a los autores humanos de tal manera que, a través de sus personalidades y estilos individuales, compusieron y registraron la Palabra de Dios sin error en los manuscritos originales."
+      title: "I. De las Escrituras",
+      content: "Creemos que la Santa Biblia fue escrita por hombres divinamente inspirados y que es un tesoro perfecto de instrucción divina; Dios es su autor, la salvación es su fin y es la verdad sin ningún tipo de error en todo lo que dice y sin ningún tipo de error en su contenido. La Biblia revela los principios por los cuales Dios nos juzgará y, por lo tanto, es y permanecerá siendo hasta el fin del mundo el verdadero centro de la unión cristiana, y la regla suprema por la cual toda conducta humana, credos y opiniones deben ser probados.\n\n2 Ti. 3:16, 17; 2 P. 1:21; 2 S. 23:2; Hch. 1:16; Pr. 30:5, 6; Jn 17:17; Ro. 3:4; Ap. 22:18, 19; Ro. 2:12; 1 Co. 4:3, 4; Lc. 10:10-16; 12:47, 48."
     },
     {
-      title: "La Trinidad",
-      content: "Creemos en un solo Dios vivo y verdadero, un Espíritu infinito, perfecto en todos sus atributos, uno en esencia, existiendo eternamente en tres Personas: Padre, Hijo y Espíritu Santo. Cada persona es plenamente Dios, compartiendo la misma naturaleza y perfecciones, y dignos de la misma adoración, confianza y obediencia."
+      title: "II. Del Dios Verdadero",
+      content: "Creemos que solo existe un solo Dios, el único Dios vivo y verdadero, es un Espíritu eterno, personal, e inteligente, y su nombre es YAHWEH, el Creador, Gobernador Supremo del universo; inefablemente glorioso en santidad y digno del más elevado honor, obediencia y amor; en la unidad de Dios existen tres personas: el Padre, el Hijo y el Espíritu Santo; iguales en divina perfección y ejecutando distintos, pero armoniosos, oficios en la gran obra de redención.\n\nJn. 4:24; Sal. 147:5; He. 3:4; Ro. 1:20; Jer. 10:10; Éx. 15:11; Is. 6:3; 1 P. 1:16; Ap. 4:6-8; Mr. 12:30; Ap. 4:11; Mt. 10:37; Jer. 2:12, 13; Mt. 28:19; Jn. 15:26; 1 Co. 12:4-6."
     },
     {
-      title: "Dios el Padre",
-      content: "Creemos que Dios el Padre, la primera persona de la Trinidad, ordena y dispone todas las cosas de acuerdo a su propio propósito y gracia. Él es el Creador de todas las cosas. Como el único Gobernante absoluto y omnipotente del universo, Él es soberano en la creación, providencia y redención."
+      title: "III. De la Caída del Hombre",
+      content: "Creemos que el hombre fue creado en santidad, sujeto a la ley de su Creador; pero, por transgresión voluntaria, el hombre cayó de tal santidad y estado de felicidad. En consecuencia, toda la humanidad es ahora pecadora, no por fuerza sino por elección. El hombre está entonces, por naturaleza, desprovisto de la santidad que requiere la ley de Dios, inclinado al mal y, por lo tanto, bajo justa condenación a la ruina eterna, sin defensa ni excusa.\n\nGn. 1:27; Gn. 1:31; Ec. 7:29; Hch. 17:26-29; Gn. 2:16-17; Gn. 3:6-24; Ro. 5:12; Ro. 5:15-19; Sal. 51:5; Ro. 8:7; Is. 53:6; Gn. 6:12; Ro. 3:9-18; Ef. 2:1-3; Ro. 1:18,32; Ro. 2:1-16; Gá. 3:10; Mt. 20:15; Ez. 18:19-20; Ro. 1:20; Ro. 3:19; Gá. 3:22."
     },
     {
-      title: "Jesucristo",
-      content: "Creemos que Jesucristo, la segunda persona de la Trinidad, posee todos los atributos divinos, y en estos es coigual, coeterno y consustancial con el Padre. Creemos en su nacimiento virginal, su vida sin pecado, sus milagros, su muerte vicaria y expiatoria, su resurrección corporal, su ascensión a la diestra del Padre y su futuro regreso personal y visible en poder y gloria."
+      title: "IV. Del Modo de la Salvación",
+      content: "Creemos que la salvación de los pecadores es totalmente por gracia a través de la obra mediadora del Hijo de Dios, el cual, por elección del Padre, voluntariamente tomó sobre Él nuestra naturaleza, aunque sin pecado; honró la ley divina con su obediencia personal, y por su muerte hizo completa expiación por nuestros pecados. Habiendo resucitado de los muertos, ahora está en el Cielo sentado en el trono y, reuniendo en su maravillosa persona las más tiernas simpatías de perfección divina, está calificado en todos los aspectos para ser un Salvador idóneo, compasivo y todo suficiente.\n\nEf. 2:3; Mt. 18:11; 1 Jn. 4:10; 1 Co. 3:5-7; Hch. 15:11; Jn. 3:16; Jn. 1:1-14; Heb. 4:14; Heb. 12:24; Fil. 2:9,14; 2 Co. 5:21; Is. 42:21; Fil. 2:8; Gá. 4:4-5; Ro. 3:21; Is. 53:4-5; Mt. 20:28; Ro. 4:25; Ro. 3:21-26; 1 Jn. 2:3; 1 Co. 15:1-3; Heb. 9:13-15; Heb. 1:8; Heb. 1:3; Col. 3:1-4; Heb. 7:25; Col. 2:18; Heb. 7:26; Sal. 89:19; Sal. 34."
     },
     {
-      title: "El Espíritu Santo",
-      content: "Creemos que el Espíritu Santo es una persona divina, eterna, no creada, que posee todos los atributos de personalidad y deidad. Es coigual y consustancial con el Padre y el Hijo. Su obra incluye convencer al mundo de pecado, de justicia y de juicio; glorificar al Señor Jesucristo y transformar a los creyentes a la imagen de Cristo."
+      title: "V. De la Justificación",
+      content: "Creemos que la gran bendición del Evangelio que Cristo les asegura a los que creen en Él es la Justificación; esa justificación incluye el perdón del pecado y la promesa de vida eterna en los principios de la justicia; que la misma es imputada, no en consideración de las buenas obras que pudimos haber hecho, sino únicamente a través de la fe en la sangre del Redentor; en virtud de dicha fe, Su justicia perfecta nos es imputada gratuitamente por Dios; que esta fe nos trae a un estado de bendita paz y favor con Dios, y nos asegura toda otra bendición que sea necesaria en este tiempo y por la eternidad.\n\nJn. 1:16; Ef. 3:8; Hch. 13:39; Is. 53:11-12; Ro. 5:1-2; Ro. 5:9; Zac. 13:1; Mt. 9:6; Hch. 10:43; Ro. 5:17; Tito 3:5-7; 1 P. 3:7; 1 Jn. 2:25; Ro. 5:21; Ro. 4:4-5; Ro. 6:23; Fil. 3:7-9; Ro. 5:19; Ro. 3:24-26; Ro. 4:23-25; 1 Jn. 2:12; Ro. 5:3; Ro. 5:11; 1 Co. 1:30-31; Mt. 6:33; 1 Ti. 4:8."
     },
     {
-      title: "El Hombre y el Pecado",
-      content: "Creemos que el hombre fue creado directa e inmediatamente por Dios a Su imagen y semejanza. Fue creado libre de pecado con una naturaleza racional, inteligencia, voluntad y responsabilidad moral ante Dios. Por el pecado de desobediencia de Adán, el hombre perdió su inocencia, incurrió en la pena de muerte espiritual y física, y quedó sujeto a la ira de Dios."
+      title: "VI. Del Ofrecimiento Gratuito de la Salvación",
+      content: "Creemos que las bendiciones de la salvación se encuentran disponibles para todos a través del Evangelio; que es el deber inmediato de todos aceptarlas por una fe sincera, arrepentida y obediente; y que nada impide la salvación del más grande pecador sobre la tierra, sino su propia depravación inherente y su rechazo voluntario del Evangelio; dicho rechazo lo envuelve en una condenación mayor.\n\nIs. 55:1; Ap. 22:17; Ro. 16:25-26; Mc. 1:15; Ro. 1:15-17; Jn. 5:40; Mt. 23:37; Ro. 9:32; Pr. 1:24; Hch. 13:46; Jn. 3:19; Mt. 11:20; Lc. 10:27; 2 Ts. 1:8."
     },
     {
-      title: "La Salvación",
-      content: "Creemos que la salvación es totalmente por la gracia de Dios, basada en la redención de Jesucristo, el mérito de su sangre derramada, y no sobre la base del mérito u obras humanas. La justificación es un acto de Dios por el cual Él declara justo a aquellos que, a través de la fe en Cristo, se arrepienten de sus pecados y lo confiesan como Señor soberano."
+      title: "VII. De la Gracia en la Regeneración",
+      content: "Creemos que, para ser salvos, los pecadores deben ser regenerados o nacidos de nuevo; que la regeneración consiste en proveer una sana disposición de la mente, lo cual es efectuado en una manera que va más allá de nuestra comprensión, por el poder del Espíritu Santo en conexión con la verdad divina para asegurar nuestra obediencia voluntaria al evangelio; y que la evidencia apropiada aparece en los santos frutos de arrepentimiento, fe y nueva vida.\n\nJn. 3:3; Jn. 3:6-7; 1 Co. 3:14; Ap. 14:3; Ap. 21:27; 2 Co. 5:17; Ez. 36:26; Dt. 30:6; Ro. 2:28-29; Ro. 5:5; 1 Jn. 4:7; Jn. 3:8; Jn. 1:13; Stg. 1:16-18; 1 Co. 1:30; Fil. 2:13; 1 P. 1:22-25; 1 Jn. 5:1; Ef. 4:20-24; Col. 3:9-11; Ef. 5:9; Ro. 8:9; Gá. 5:16-23; Ef. 3:14-21; Mt. 3:8-10; Mt. 7:20; 1 Jn. 5:4, 18."
     },
     {
-      title: "La Iglesia",
-      content: "Creemos que todos los que depositan su fe en Jesucristo son inmediatamente unidos por el Espíritu Santo en un cuerpo espiritual, la iglesia, de la cual Cristo es la cabeza. El propósito de la iglesia es glorificar a Dios edificándose a sí misma en la fe, instruyéndose en la Palabra, teniendo comunión, guardando las ordenanzas y avanzando y comunicando el evangelio al mundo entero."
+      title: "VIII. Del Arrepentimiento y la Fe",
+      content: "Creemos que el arrepentimiento y la fe son deberes sagrados y también gracias inseparables, cultivadas en el alma por el Espíritu regenerador de Dios; siendo profundamente convencidos de culpa, peligro e impotencia, y del medio de salvación a través de Cristo, nos volvemos a Dios con contrición sincera, confesión y súplica por misericordia; al mismo tiempo, recibimos al Señor Jesucristo como nuestro Profeta, Sacerdote y Rey, confiando en Él como el único y suficiente Salvador.\n\nMc. 1:15; Hch. 11:18; Ef. 2:8; 1 Jn. 5:1; Jn. 16:8; Hch. 2:37-38; Hch. 16:30-31; Lc. 18:13; Lc. 15:18-21; Stg. 4:7-10; 2 Co. 7:11; 1 Ti. 6:12-13; Sal. 51; Ro. 10:9-11; Hch. 3:22-23; Heb. 4:14; Sal. 2:6; Heb. 1:8; Heb. 7:25; 2 Ti. 1:12."
+    },
+    {
+      title: "IX. Del Propósito de la Gracia de Dios",
+      content: "Creemos que la Elección es el propósito eterno de Dios, a través de la cual Él por gracia regenera, santifica y salva a los pecadores; esto es perfectamente compatible con el libre albedrío del hombre; que comprende todos los medios en relación con el fin; que es la más gloriosa muestra de la bondad soberana de Dios, siendo infinitamente libre, sabio, santo e inmutable; que excluye totalmente la jactancia y promueve la humildad, el amor, la oración, la alabanza, la confianza en Dios y la imitación activa de su misericordia gratuita; que alienta el uso de los medios del más alto nivel; que puede comprobarse por sus efectos en todos los que verdaderamente creen en el Evangelio; que es el fundamento de la seguridad cristiana y comprobarlo respecto a nosotros mismos demanda y merece nuestra mayor diligencia.\n\n2 Ti. 1:8-9; Ef. 1:3-14; 1 P. 1:1-2; Ro. 11:5-6; Jn. 15:16; 1 Jn. 4:19; 2 Ts. 2:13-14; Hch. 13:48; Jn. 10:16; Mt. 20:16; Hch. 15:14; Éx. 33:18-19; Mt. 20:15; Ef. 1:11; Ro. 9:23-24; Jer. 31:3; Ro. 11:28-29; Stg. 1:17-18; 2 Ti. 1:9; Ro. 11:32-36; 1 Co. 1:26-31; Ro. 3:27; Ro. 4:16; Col. 3:12; 1 Co. 3:5-7; 1 Co. 15:10; 1 P. 5:10; Hch. 1:24; 1 Ts. 2:13; 1 P. 2:9; Lc. 18:7; 1 Ts. 2:12; 2 Ti. 2:10; 1 Co. 9:22; Ro. 8:28-30; Jn. 6:37-40; 1 Ts. 1:4-10; Is. 42:16; 2 P. 1:10-11; Fil. 3:12; Heb. 6:11."
+    },
+    {
+      title: "X. De la Santificación",
+      content: "Creemos que la santificación es el proceso por el cual, de acuerdo a la voluntad de Dios, somos hechos partícipes de Su santidad; que es una obra progresiva que empezó en la regeneración y es llevada a cabo en el corazón de los creyentes por la presencia y el poder del Espíritu Santo, el Consolador, en uso continuo de los medios designados ―especialmente la Palabra de Dios, el auto-examen, la auto-negación, vigilancia y oración.\n\n1 Ts. 4:3; 1 Ts. 5:23; 2 Co. 7:1; 2 Co. 13:10; Fil. 3:12-16; 1 Jn. 2:29; Ro. 8:5; Ef. 1:4; Pr. 4:18; 2 Co. 3:18; Heb. 6:1; 2 P. 1:5-8; Jn. 3:6; Fil. 1:9-11; Ef. 1:13-14; Fil. 2:12-13; Ef. 4:11-12; 1 P. 2:2; 2 P. 3:18; 2 Co. 13:5; Lc. 11:35; Lc. 9:23; Mt. 26:41; Ef. 6:18; Ef. 4:30."
+    },
+    {
+      title: "XI. De la Perseverancia de los Santos",
+      content: "Creemos que sólo los creyentes verdaderos perseveran hasta el fin; que su unión perseverante a Cristo es la gran marca que los distingue de los profesantes superficiales; que una Providencia especial vela por su bienestar y que son guardados por el poder de Dios mediante la fe para salvación.\n\nJn. 8:31; 1 Jn. 2:27-28; 1 Jn. 3:9; 1 Jn. 5:18; 1 Jn. 2:19; Jn. 13:18; Mt. 13:20-21; Jn. 6:66-69; Job 17:9; Ro. 8:28; Mt. 6:30-33; Jer. 32:40; Sal. 121:3; Sal. 91:11-12; Fil. 1:6; Fil. 2:13; Jud. 24-25; Heb. 1:14; 2 Re. 6:16; Heb. 13:5; 1 Jn. 4:4."
+    },
+    {
+      title: "XII. De la Armonía entre la Ley y el Evangelio",
+      content: "Creemos que la Ley de Dios es la regla eterna e inmutable de su gobierno moral; que es santa, justa y buena; que la inhabilidad que la Escritura asigna al hombre pecador en cumplir sus preceptos se levanta enteramente de su amor por el pecado; que el librarlo de esto y restaurarlo a través del Mediador a una obediencia no fingida a la Ley santa, es uno de los grandes propósitos del Evangelio y de los Medios de la Gracia conectados con el establecimiento de la iglesia visible.\n\nRo. 3:31; Mt. 5:17; Lc. 16:17; Ro. 3:20; Ro. 4:15; Ro. 7:12; Ro. 7:7,14-22; Gá. 3:21; Sal. 119; Ro. 8:7-8; Jos. 24:19; Jer. 13:23; Jn. 6:44; Jn. 5:44; Ro. 8:2-4; Ro. 10:4; 1 Ti. 1:5; Heb. 8:10; Jud. 20-21."
+    },
+    {
+      title: "XIII. De la Iglesia Evangélica",
+      content: "Creemos que una iglesia visible de Cristo es una congregación de creyentes bautizados, asociados por un pacto en la fe y comunión en el Evangelio; observando las ordenanzas de Cristo, gobernados por Sus leyes y ejerciendo los dones, derechos y privilegios investidos en ellos por medio de su palabra; que sus únicos oficiales bíblicos son los ancianos (también llamados obispos o pastores) y diáconos, cuyas afirmaciones/demandas, calificaciones y funciones están especificadas en las Epístolas a Timoteo y Tito.\n\n1 Co. 1:1-3; Mt. 18:17; Hch. 5:11; Hch. 8:1; Hch. 11:21-23; 1 Co. 4:17; 1 Co. 14:23; 3 Jn. 9; 1 Ti. 3:5; Hch. 2:41-42; 2 Co. 8:5; Hch. 2:47; 1 Co. 5:12-13; 1 Co. 11:2; 2 Ts. 3:6; Ro. 16:17-20; 1 Co. 11:23-24; Mt. 18:15-20; 1 Co. 5:6; 2 Co. 2:17; Mt. 28:20; Jn. 14:15; Jn. 15:12; 1 Jn. 2:21; 1 Ts. 4:2; 2 Jn. 6; Gá. 6:2; Ef. 4:7; 1 Co. 14:12; Fil. 1:1; Hch. 14:23; Hch. 15:22; 1 Ti. 3; Tito 1."
+    },
+    {
+      title: "XIV. Del Bautismo y la Cena del Señor",
+      content: "Creemos que el bautismo cristiano es la inmersión de un creyente en agua, en el nombre del Padre, del Hijo y del Espíritu Santo, para mostrar así en un emblema solemne y hermoso nuestra fe en el crucificado, enterrado y resucitado Salvador, con sus efectos en nuestra muerte al pecado y resurrección a una nueva vida; que es requisito previo para los privilegios de una relación eclesiástica y para la Cena del Señor, en la cual los miembros de la iglesia, por el sagrado uso del pan y del vino, han de conmemorar juntos el amor agonizante de Cristo, precedido siempre por un solemne auto-examen.\n\nHch. 8:36-39; Mt. 3:5-6; Jn. 3:22-23; Jn. 4:12; Mt. 28:19-20; Mc. 16:16; Hch. 2:38; Hch. 8:12; Hch. 16:32-34; Hch. 18:8; Hch. 10:47-48; Gá. 3:26-28; Ro. 6:4; Col. 2:12; 1 P. 3:20-21; Hch. 22:16; Hch. 2:41-42; 1 Co. 11:26; Mt. 26:26-29; Mc. 14:22-25; Lc. 22:14-20; 1 Co. 11:28; 1 Co. 5:1-8; 1 Co. 10:3-32; 1 Co. 11:17-32; Jn. 6:26."
+    },
+    {
+      title: "XV. Del Día del Señor",
+      content: "Creemos que el primer día de la semana es el Día del Señor; que este era el día en que las iglesias del Nuevo Testamento se reunían para la adoración cristiana y para la edificación en memoria de la resurrección de nuestro Señor; por lo tanto, que el domingo está reservado para la reunión de la iglesia con esos mismos fines.\n\nHch. 20:7; Gn. 2:3; Col. 2:16-17; Mc. 2:27; Jn. 20:19; 1 Co. 16:1-2; Ex. 20:8; Ap. 1:10; Sal. 118:15,24; Is. 58:13-14; Is. 56:2-8; Heb. 10:24-25; Hch. 11:26; Hch. 13:44; Lv. 19:30; Lc. 4:16; Hch. 17:2-3; Sal. 26:8; Sal. 87:3; Heb. 4:3-11."
+    },
+    {
+      title: "XVI. Del Gobierno Civil",
+      content: "Creemos que el Gobierno Civil es divinamente designado para los intereses y el buen orden de la sociedad humana, y que los magistrados deben ser llevados en oración, diligentemente honrados y obedecidos, excepto en aquellos asuntos que se opongan a la voluntad de nuestro Señor Jesucristo, quien es el único Señor de nuestras consciencias y el Príncipe de los reyes de la tierra.\n\nRo. 13:1-7; Dt. 16:18; 2 S. 23:3; Ex. 18:23; Jer. 30:21; Mt. 22:21; Tito 3:1; 1 P. 2:13; 1 Ti. 2:1-4; Hch. 5:29; Mt. 28; Dn. 3:15-18; Dn. 6:7-10; Hch. 4:18-20; Mt. 23:10; Ro. 14:4; Ap. 19:16; Sal. 72:11; Sal. 2; Ro. 14:9-13."
+    },
+    {
+      title: "XVII. Del Justo y el Injusto",
+      content: "Creemos que hay una diferencia esencial y radical entre los justos y los injustos; que sólo aquellos que son justificados mediante la fe en el nombre del Señor Jesucristo y santificados por el Espíritu de nuestro Dios son verdaderamente justos a Sus ojos, mientras que los que continúan en la impenitencia y la incredulidad son malvados a Sus ojos; y que la distinción se mantiene entre los hombres tanto en la muerte cómo después de ella.\n\nMal. 3:18; Pr. 12:26; Is. 5:20; Gn. 18:23; Jer. 15:19; Hch. 10:34-35; Ro. 6:16; Ro. 1:17; Ro. 7:6; 1 Jn. 2:29; 1 Jn. 3:7; Ro. 6:18,22; 1 Co. 11:32; Pr. 11:31; 1 P. 4:17-18; 1 Jn. 5:19; Gá. 3:10; Jn. 3:36; Is. 57:21; Sal. 10:4; Is. 55:6-7; Pr. 14:32; Lc. 16:25; Jn. 8:21-24; Pr. 10:24; Lc. 12:4-5; Lc. 9:23-26; Ec. 3:17; Mt. 7:13-14."
+    },
+    {
+      title: "XVIII. Del Mundo Venidero",
+      content: "Creemos que el fin del mundo se acerca; que en el día postrero Cristo descenderá del cielo y resucitará a los muertos de sus tumbas para retribución final; que una solemne separación tendrá lugar; que los malvados serán sentenciados a un castigo eterno, y los justos a un gozo eterno; y que este juicio fijará para siempre el estado final de los los hombres en el cielo o en el infierno, según los principios de la justicia.\n\n1 P. 4:7; 1 Co. 7:29-31; Heb. 1:10-12; Mt. 24:35; 1 Jn. 2:17; Mt. 28:20; Mt. 13:39-40; 2 P. 3:3-13; Hch. 1:11; Ap. 1:7; Heb. 9:28; Hch. 3:21; 1 Ts. 4:13-18; 1 Ts. 5:1-11; Hch. 24:15; 1 Co. 15:12-58; Lc. 14:14; Dn. 12:2; Jn. 5:28-29; Jn. 6:40; Jn. 11:25-26; 2 Ti. 1:10; Hch. 10:42; Mt. 13:49; Mt. 13:37-43; Mt. 24:30-31; Mt. 25:31-46; Ap. 22:11; 1 Co. 6:9-10; Mc. 9:43-48; 2 P. 2:9; Jud. 7; Fil. 3:19; Ro. 6:23; 2 Co. 5:10-11; Jn. 4:36; 2 Co. 4:18; Ro. 3:5-6; 2 Ts. 1:6-12; Heb. 6:1-2; 1 Co. 4:5; Hch. 17:31; Ro. 2:2-16; Ap. 20:11-12; 1 Jn. 2:28; 1 Jn. 4:17; 2 P. 3:11-12."
+    },
+    {
+      title: "XIX. Sobre el Complementarismo",
+      content: "Creemos que el hombre y la mujer son ambos creados a la imagen de Dios, lo cual implica que ambos tienen la misma importancia y el mismo valor esencial dado por Dios. Sin embargo, los roles no son los mismos, ambos existen para complementarse uno al otro en roles, capacidades y autoridad en las diferentes esferas de la sociedad humana. De esa manera, creemos que el hombre tiene el llamado a ser cabeza y líder, ejerciendo un liderazgo amoroso y servicial, mientras que la mujer tiene el llamado a ser ayuda idónea para el hombre, apoyando gozosamente el liderazgo del hombre por medio de sus dones y capacidades en sumisión piadosa.\n\nGn.1:27; 1 Co. 11:11, 12; Gá. 3:28; Gn. 2:15-18, Ef. 5:22-24; Gn. 2:24; Ef. 5:25-30; Gn 2:18; 1 Co. 11:3; Ef. 5:22-24."
+    },
+    {
+      title: "XX. Del Matrimonio y la Sexualidad",
+      content: "Creemos que el matrimonio involucra la unión de un hombre y una mujer en una fidelidad sagrada y permanente. La intimidad sexual es solamente ejercida propiamente y perseguida dentro de los confines de la relación marital. La inmoralidad sexual, definida como cualquier actividad sexual fuera de los límites de la relación sagrada matrimonial entre un hombre y una mujer, es clara y expresamente prohibida por el Señor. Entendemos como pecaminosa la intención o el deseo de quirúrgicamente alterar el sexo biológico a un sexo distinto. El Evangelio provee redención y restauración a todo el que confiesa y abandona su pecado, buscando misericordia y perdón a través de Jesucristo.\n\nGn. 2:24; Mt. 19:1-9; Mc. 10:1-12; Mt. 15:19; 1 Co. 6:9-11; 1 Ts. 4:3; Heb. 13:4; Gn. 1:27; Ro. 1:26-32; 1 Co. 6:9-11; Ef. 2:1-10; Tito 3:3-7; Mt. 11:28-30; 1 Co. 10:13; Heb. 2:17-18; Heb. 4:14-16."
+    },
+    {
+      title: "XXI. De la Vida dada por Dios",
+      content: "Creemos que Dios es el único ser que tiene vida en sí mismo, y por medio de quien recibe vida todo ser que la posee. Afirmamos que es la prerrogativa divina el dar la vida y el quitarla, conforme sea su santa y sabia voluntad. Teniendo en cuenta el origen divino de la vida, es menester protegerla y preservarla hasta donde sea humanamente posible. El aborto, la eutanasia, el suicidio y el homicidio, son pecados condenados por las Escrituras.\n\n1 S 2:6; Jn. 14:6; Job 12:10, 34:14-15; Hch. 17:25; Gn. 2:7; Is. 57:16; Jer. 1:5; Sal. 139:13-16; Éx. 21:22-25; Gn. 9:6."
     }
   ];
 
@@ -183,17 +166,30 @@ export default function Creencias() {
       {/* Hero Header */}
       <section className="pt-48 pb-32 bg-slate-50 border-b border-slate-100">
         <div className="container-custom">
-          <div className="max-w-3xl">
+          <div className="max-w-4xl">
             <span className="text-[10px] uppercase tracking-[0.3em] text-ibcd-orange font-bold mb-6 block">
               Nuestra Identidad
             </span>
             <h1 className="text-6xl md:text-8xl font-serif leading-[0.95] mb-8">
               Confesión de <span className="italic">Fe.</span>
             </h1>
-            <p className="text-slate-500 text-lg md:text-xl leading-relaxed font-light max-w-2xl">
-              Un resumen de las verdades bíblicas fundamentales que abrazamos como congregación. 
-              Estas convicciones guían nuestra enseñanza, nuestra adoración y nuestra vida en comunidad.
-            </p>
+            <div className="space-y-6 text-slate-500 text-lg md:text-xl leading-relaxed font-light max-w-3xl">
+              <p className="font-medium text-slate-900">
+                Confesión Bautista de Fe de New Hampshire de 1833
+              </p>
+              <p>
+                La Confesión Bautista de Fe de New Hampshire (1833) nació en medio de un importante movimiento de renovación espiritual en Estados Unidos conocido como el Segundo Gran Despertar—un periodo a principios del siglo XIX en el que crecieron con fuerza las iglesias evangélicas, incluidas las bautistas, gracias a un énfasis en la conversión personal y la evangelización masiva.
+              </p>
+              <p>
+                Ante este crecimiento, se vio la necesidad de una declaración de fe concisa que reflejara la herencia reformada y que, al mismo tiempo, fuera más accesible que confesiones anteriores. Por eso, nuestra iglesia la ha adoptado como un excelente resumen de nuestras convicciones fundamentales, al proveer una base sólida y clara para nuestra fe y práctica congregacional.
+              </p>
+              <div className="pt-8 border-t border-slate-200">
+                <p className="text-sm uppercase tracking-widest font-bold text-slate-900 mb-4">Preámbulo</p>
+                <p className="text-base italic">
+                  La presente confesión es una adaptación de la Confesión Bautista de Fe de New Hampshire de 1833, siendo un extracto de la más reconocida confesión bautista, la Confesión Bautista de Fe de Londres de 1689. Teniendo en cuenta la contextualización de cada iglesia local, se ha editado y agregado a la confesión puntos importantes que ponen en claro la postura de los miembros de Iglesia Bíblica de la Gracia.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -225,10 +221,15 @@ export default function Creencias() {
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="pb-12 pr-12 md:pr-24">
-                          <p className="text-slate-500 leading-relaxed font-light text-lg">
-                            {belief.content}
-                          </p>
+                        <div className="pb-12 pr-12 md:pr-24 space-y-6">
+                          {belief.content.split('\n\n').map((paragraph, pIndex) => (
+                            <p 
+                              key={pIndex} 
+                              className={`leading-relaxed ${pIndex === 0 ? 'text-slate-600 font-light text-xl' : 'text-slate-400 text-sm italic'}`}
+                            >
+                              {paragraph}
+                            </p>
+                          ))}
                         </div>
                       </motion.div>
                     )}
