@@ -95,16 +95,16 @@ export default function App() {
           </a>
 
           <div className="hidden md:flex items-center gap-12">
-            <a href="/" className={`text-[13px] font-medium tracking-wide transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-600' : 'text-white/80'}`}>Inicio</a>
+            <a href="/" className={`text-[11px] uppercase tracking-[0.2em] font-medium transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-900' : 'text-white/90'}`}>Inicio</a>
             
             <div className="relative group">
-              <button className={`text-[13px] font-medium tracking-wide transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none flex items-center gap-1 ${isScrolled ? 'text-slate-600' : 'text-white/80'}`}>
-                Nosotros <ChevronDown size={14} />
+              <button className={`text-[11px] uppercase tracking-[0.2em] font-medium transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none flex items-center gap-1 ${isScrolled ? 'text-slate-900' : 'text-white/90'}`}>
+                Nosotros <ChevronDown size={12} />
               </button>
               <div className="absolute top-full left-0 pt-4 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300">
                 <div className="bg-white border border-slate-100 shadow-lg py-2 min-w-[160px] flex flex-col rounded-sm">
-                  <a href="/liderazgo" className="px-4 py-2 text-[13px] font-medium text-slate-600 hover:text-ibcd-blue hover:bg-slate-50 transition-colors">Liderazgo</a>
-                  <a href="/creencias" className="px-4 py-2 text-[13px] font-medium text-slate-600 hover:text-ibcd-blue hover:bg-slate-50 transition-colors">Creencias</a>
+                  <a href="/liderazgo" className="px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-medium text-slate-500 hover:text-ibcd-blue hover:bg-slate-50 transition-colors">Liderazgo</a>
+                  <a href="/creencias" className="px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-medium text-slate-500 hover:text-ibcd-blue hover:bg-slate-50 transition-colors">Creencias</a>
                 </div>
               </div>
             </div>
@@ -115,7 +115,7 @@ export default function App() {
             
             <a 
               href="/visitanos" 
-              className={`text-[13px] font-semibold px-6 py-2.5 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ibcd-blue outline-none ${
+              className={`text-[11px] uppercase tracking-[0.2em] font-bold px-6 py-2.5 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ibcd-blue outline-none ${
                 isScrolled 
                   ? 'bg-slate-900 text-white hover:bg-ibcd-blue' 
                   : 'bg-white text-slate-900 hover:bg-slate-100'
