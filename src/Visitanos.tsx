@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Youtube, MapPin, Clock, Car, Music, Baby, BookOpen } from 'lucide-react';
+import { Facebook, Instagram, Youtube, MapPin, Clock, Car, Music, Baby, BookOpen, Shirt } from 'lucide-react';
 import { Logo } from './components/Logo';
 import { Navbar } from './components/Navbar';
 
@@ -139,7 +139,7 @@ export default function Visitanos() {
             </div>
 
             <div className="bg-white p-8 border border-slate-100 hover:border-ibcd-blue/30 transition-colors group">
-              <Menu className="text-slate-300 group-hover:text-ibcd-orange transition-colors mb-6" size={32} />
+              <Shirt className="text-slate-300 group-hover:text-ibcd-orange transition-colors mb-6" size={32} />
               <h3 className="text-xl font-serif mb-3">Vestimenta</h3>
               <p className="text-slate-500 font-light text-sm leading-relaxed">
                 No tenemos un código de vestimenta. Verás personas de traje y otras en jeans. Ven como te sientas cómodo; lo importante es tu presencia.
