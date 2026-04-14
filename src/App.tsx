@@ -1,20 +1,9 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Play, Calendar, MapPin, Facebook, Instagram, Youtube, Menu, X, ArrowUpRight, ChevronRight, Hash, BookOpen, ChevronDown } from 'lucide-react';
+import { motion } from 'motion/react';
+import { Play, Calendar, MapPin, Facebook, Instagram, Youtube, ArrowUpRight, ChevronRight, Hash, BookOpen } from 'lucide-react';
 import { Logo } from './components/Logo';
+import { Navbar } from './components/Navbar';
 
 export default function App() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const galleryItems = [
     { title: 'Bautismos 2025', tag: 'Vida Nueva', desc: 'Celebrando la fe de nuevos creyentes en nuestra comunidad.', img: 'baptism', height: 'h-80' },
     { title: 'Tiempo de Alabanza', tag: 'Adoración', desc: 'Nuestra congregación unida en cánticos y gratitud.', img: 'worship', height: 'h-64' },
@@ -26,88 +15,7 @@ export default function App() {
 
   return (
     <div className="bg-white selection:bg-ibcd-blue/10 selection:text-ibcd-blue">
-      {/* Navigation */}
-      <nav 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? 'py-4 bg-white/80 backdrop-blur-xl border-b border-slate-100' : 'py-8 bg-transparent'
-        }`}
-      >
-        <div className="container-custom flex justify-between items-center">
-          <a href="/" className="flex items-center group outline-none focus-visible:ring-2 focus-visible:ring-ibcd-blue rounded-sm">
-            <Logo 
-              lightText={!isScrolled && !mobileMenuOpen} 
-              className="h-10 md:h-12 w-auto transition-all duration-500 group-hover:scale-105" 
-            />
-          </a>
-
-          <div className="hidden md:flex items-center gap-12">
-            <a href="/" className={`text-[11px] uppercase tracking-[0.2em] font-medium transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-900' : 'text-white/90'}`}>Inicio</a>
-            
-            <div className="relative group">
-              <button className={`text-[11px] uppercase tracking-[0.2em] font-medium transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none flex items-center gap-1 ${isScrolled ? 'text-slate-900' : 'text-white/90'}`}>
-                Nosotros <ChevronDown size={12} />
-              </button>
-              <div className="absolute top-full left-0 pt-4 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300">
-                <div className="bg-white border border-slate-100 shadow-lg py-2 min-w-[160px] flex flex-col rounded-sm">
-                  <a href="/liderazgo" className="px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-medium text-slate-500 hover:text-ibcd-blue hover:bg-slate-50 transition-colors">Liderazgo</a>
-                  <a href="/creencias" className="px-4 py-2 text-[11px] uppercase tracking-[0.2em] font-medium text-slate-500 hover:text-ibcd-blue hover:bg-slate-50 transition-colors">Creencias</a>
-                </div>
-              </div>
-            </div>
-
-            <a href="/eventos" className={`text-[11px] uppercase tracking-[0.2em] font-medium transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-900' : 'text-white/90'}`}>Eventos</a>
-            <a href="/sermones" className={`text-[11px] uppercase tracking-[0.2em] font-medium transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-900' : 'text-white/90'}`}>Sermones</a>
-            <a href="/articulos" className={`text-[11px] uppercase tracking-[0.2em] font-medium transition-all hover:text-ibcd-blue focus-visible:text-ibcd-blue outline-none ${isScrolled ? 'text-slate-900' : 'text-white/90'}`}>Artículos</a>
-            
-            <a 
-              href="/visitanos" 
-              className={`text-[11px] uppercase tracking-[0.2em] font-bold px-6 py-2.5 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ibcd-blue outline-none ${
-                isScrolled 
-                  ? 'bg-slate-900 text-white hover:bg-ibcd-blue' 
-                  : 'bg-white text-slate-900 hover:bg-slate-100'
-              }`}
-            >
-              Visítanos
-            </a>
-          </div>
-
-          <button 
-            className="md:hidden p-2 outline-none focus-visible:text-ibcd-blue"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="text-slate-900" />
-            ) : (
-              <Menu className={isScrolled ? 'text-slate-900' : 'text-white'} />
-            )}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-white flex flex-col justify-center items-center gap-8"
-          >
-            <a href="/" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Inicio</a>
-            
-            <div className="flex flex-col items-center gap-4">
-              <span className="text-4xl font-serif text-slate-900">Nosotros</span>
-              <a href="/liderazgo" className="text-xl font-serif text-slate-500 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Liderazgo</a>
-              <a href="/creencias" className="text-xl font-serif text-slate-500 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Creencias</a>
-            </div>
-
-            <a href="/eventos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Eventos</a>
-            <a href="/sermones" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Sermones</a>
-            <a href="/articulos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Artículos</a>
-            <a href="/visitanos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Visítanos</a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Navbar isHome />
 
       {/* Hero Section */}
       <section className="relative h-[90vh] min-h-[700px] flex items-center bg-slate-950 overflow-hidden">
