@@ -20,14 +20,14 @@ export default function App() {
       {/* Hero Section */}
       <section className="relative h-[90vh] min-h-[700px] flex items-center bg-slate-950 overflow-hidden">
         <div className="absolute inset-0 opacity-40">
-          <img 
-            src="https://picsum.photos/seed/minimal-church/1920/1080" 
-            alt="IBCD Background" 
+          <img
+            src="/portada.jpg"
+            alt="IBCD Background"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
         </div>
-        
+
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -78,7 +78,7 @@ export default function App() {
                 </div>
               </motion.div>
             </div>
-            
+
             <div className="lg:col-span-5">
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
@@ -86,14 +86,14 @@ export default function App() {
                 viewport={{ once: true }}
                 className="relative aspect-[3/4] bg-slate-100 overflow-hidden group"
               >
-                <img 
-                  src="https://picsum.photos/seed/pastor-minimal/800/1000" 
-                  alt="Pastor Cristian" 
+                <img
+                  src="/bautismo-portada.png"
+                  alt="Bautismo"
                   className="w-full h-full object-cover transition-all duration-1000"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-ibcd-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute bottom-8 left-8 text-white z-10">
+                <div className="absolute bottom-8 left-8 text-white z-10 hidden">
                   <p className="font-serif text-2xl">Cristian Palomares</p>
                   <p className="text-xs uppercase tracking-widest opacity-70">Pastor Principal</p>
                 </div>
@@ -113,14 +113,14 @@ export default function App() {
             </a>
           </div>
 
-          <a 
+          <a
             href="/sermon"
             className="bg-white border border-slate-100 overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all group block"
           >
             <div className="md:w-1/2 aspect-video bg-slate-900 relative overflow-hidden">
-              <img 
-                src="https://picsum.photos/seed/sermon-min/1200/800" 
-                alt="Sermon" 
+              <img
+                src="https://picsum.photos/seed/sermon-min/1200/800"
+                alt="Sermon"
                 className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000"
                 referrerPolicy="no-referrer"
               />
@@ -160,7 +160,7 @@ export default function App() {
 
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
             {galleryItems.map((item, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -168,13 +168,13 @@ export default function App() {
                 transition={{ delay: i * 0.1 }}
                 className={`relative group overflow-hidden bg-slate-100 break-inside-avoid rounded-sm cursor-pointer`}
               >
-                <img 
-                  src={`https://picsum.photos/seed/ibcd-gal-${item.img}/800/1000`} 
-                  alt={item.title} 
+                <img
+                  src={`https://picsum.photos/seed/ibcd-gal-${item.img}/800/1000`}
+                  alt={item.title}
                   className="w-full h-auto object-cover transition-all duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
-                
+
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
                   <div className="flex items-center gap-2 mb-3">
@@ -205,8 +205,8 @@ export default function App() {
               { title: 'Conferencia Misiones', date: '26 ABR', loc: 'Rosario' },
               { title: 'Bautismos', date: '03 MAY', loc: 'IBCD' },
             ].map((event, i) => (
-              <a 
-                key={i} 
+              <a
+                key={i}
                 href="/eventos"
                 className="bg-white p-12 hover:bg-slate-50 transition-colors group cursor-pointer outline-none focus-visible:bg-slate-50 block"
               >
@@ -234,11 +234,11 @@ export default function App() {
               Cimentados en la <span className="italic">autoridad inerrante</span> de la Biblia.
             </h2>
             <p className="text-slate-500 text-lg mb-12 leading-relaxed font-light">
-              Abrazamos las doctrinas de la gracia y nos identificamos con la fe cristiana histórica, 
+              Abrazamos las doctrinas de la gracia y nos identificamos con la fe cristiana histórica,
               buscando glorificar a Dios en todo lo que hacemos.
             </p>
-            <a 
-              href="/creencias" 
+            <a
+              href="/creencias"
               className="group inline-flex items-center gap-4 text-xs uppercase tracking-widest font-bold text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue"
             >
               <span className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center transition-all group-hover:border-ibcd-blue group-hover:bg-ibcd-blue/5">
@@ -269,7 +269,7 @@ export default function App() {
                     <p className="text-xs text-white/60 mt-2">Estudio Bíblico</p>
                   </div>
                 </div>
-                
+
                 <div className="pt-12 border-t border-white/10">
                   <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4">Ubicación</p>
                   <p className="text-xl font-serif opacity-90 hover:text-ibcd-blue transition-colors cursor-pointer">San Martín 2650, Rosario</p>
@@ -279,10 +279,10 @@ export default function App() {
                 </div>
               </div>
             </div>
-            
+
             <div className="aspect-square bg-white/5 rounded-sm overflow-hidden opacity-50 hover:opacity-100 transition-all duration-700 border border-white/5">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3347.856723467439!2d-60.6481!3d-32.9575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab1000000001%3A0x0!2zMzLCsDU3JzI3LjAiUyA2MMKwMzgnNTMuMiJX!5e0!3m2!1ses!2sar!4v1620000000000!5m2!1ses!2sar" 
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3347.856723467439!2d-60.6481!3d-32.9575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab1000000001%3A0x0!2zMzLCsDU3JzI3LjAiUyA2MMKwMzgnNTMuMiJX!5e0!3m2!1ses!2sar!4v1620000000000!5m2!1ses!2sar"
                 className="w-full h-full border-0"
                 allowFullScreen
                 loading="lazy"
@@ -304,7 +304,7 @@ export default function App() {
                 Una iglesia bíblica comprometida con la sana doctrina y la gloria de Dios en Rosario.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-3 gap-16">
               <div>
                 <p className="text-[10px] uppercase tracking-widest font-bold mb-6 text-slate-900">Explorar</p>
@@ -328,7 +328,7 @@ export default function App() {
               </div>
             </div>
           </div>
-          
+
           <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-slate-50 text-[10px] text-slate-400 uppercase tracking-widest font-medium">
             <p>© 2026 IBCD Rosario</p>
             <div className="flex gap-8">
