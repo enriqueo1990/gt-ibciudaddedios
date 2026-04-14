@@ -2,66 +2,16 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Facebook, Instagram, Youtube, ChevronDown, ArrowUpRight, Calendar, User, Tag } from 'lucide-react';
 import { Logo } from './components/Logo';
+import { getPosts } from './lib/api';
+import { useFetch } from './lib/hooks';
 
 export default function Articulos() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const articles = [
-    {
-      id: 1,
-      title: "La importancia de la membresía en la iglesia local",
-      excerpt: "Unirse a una iglesia local no es simplemente añadir tu nombre a una lista, es un compromiso bíblico con un cuerpo de creyentes para el cuidado mutuo y la gloria de Dios.",
-      author: "Pr. Cristian Palomares",
-      date: "10 Abril, 2026",
-      category: "Eclesiología",
-      img: "church"
-    },
-    {
-      id: 2,
-      title: "Cómo leer la Biblia de manera efectiva",
-      excerpt: "Consejos prácticos y teológicos para acercarnos a las Escrituras no solo para obtener información, sino para experimentar transformación.",
-      author: "Pr. Juan Pérez",
-      date: "03 Abril, 2026",
-      category: "Vida Cristiana",
-      img: "bible"
-    },
-    {
-      id: 3,
-      title: "Entendiendo la Gracia Soberana",
-      excerpt: "Una mirada profunda a cómo la gracia de Dios opera en la salvación, desde la elección hasta la glorificación, dándole a Él toda la gloria.",
-      author: "Pr. Cristian Palomares",
-      date: "28 Marzo, 2026",
-      category: "Teología",
-      img: "grace"
-    },
-    {
-      id: 4,
-      title: "El rol de la familia en la adoración",
-      excerpt: "La adoración no se limita al domingo por la mañana. Descubre cómo cultivar un ambiente de adoración y discipulado en el hogar.",
-      author: "Pr. Marcos Silva",
-      date: "20 Marzo, 2026",
-      category: "Familia",
-      img: "family"
-    },
-    {
-      id: 5,
-      title: "Orando los Salmos en tiempos de aflicción",
-      excerpt: "Los Salmos nos dan un vocabulario para nuestro dolor. Aprende a usar este libro inspirado para derramar tu corazón delante del Señor.",
-      author: "Pr. Juan Pérez",
-      date: "12 Marzo, 2026",
-      category: "Vida Cristiana",
-      img: "pray"
-    },
-    {
-      id: 6,
-      title: "El peligro del pragmatismo en la iglesia",
-      excerpt: "Por qué debemos confiar en los medios de gracia ordinarios que Dios ha establecido en lugar de buscar técnicas modernas para el crecimiento.",
-      author: "Pr. Cristian Palomares",
-      date: "05 Marzo, 2026",
-      category: "Eclesiología",
-      img: "building"
-    }
-  ];
+  const { data: articles, loading, error } = useFetch(getPosts);
+
+  const featuredArticle = articles?.[0] ?? null;
+  const restArticles = articles?.slice(1) ?? [];
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-ibcd-blue selection:text-white">
@@ -156,31 +106,30 @@ export default function Articulos() {
             <h2 className="text-3xl font-serif italic">Artículo Destacado</h2>
           </div>
 
+          {loading && <p className="text-slate-400 text-sm">Cargando...</p>}
+          {error && <p className="text-slate-400 text-sm">Error al cargar.</p>}
+          {featuredArticle && (
           <a 
-            href="/articulo"
+            href={`/articulos/${featuredArticle.slug}`}
             className="bg-white border border-slate-100 overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all group cursor-pointer block"
           >
             <div className="md:w-1/2 aspect-video md:aspect-auto bg-slate-100 relative overflow-hidden">
               <img 
-                src="https://picsum.photos/seed/featured-article/1200/800" 
-                alt="Artículo Destacado" 
+                src={featuredArticle._embedded?.['wp:featuredmedia']?.[0]?.source_url || `https://picsum.photos/seed/featured-article/1200/800`} 
+                alt={featuredArticle.title.rendered} 
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
             </div>
             <div className="md:w-1/2 p-12 flex flex-col justify-center">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-ibcd-orange font-bold mb-4 block">Eclesiología</span>
-              <h3 className="text-3xl md:text-4xl font-serif mb-6 leading-tight group-hover:text-ibcd-blue transition-colors">La importancia de la membresía en la iglesia local</h3>
-              <p className="text-slate-500 text-base leading-relaxed mb-8">
-                Unirse a una iglesia local no es simplemente añadir tu nombre a una lista, es un compromiso bíblico con un cuerpo de creyentes para el cuidado mutuo, la rendición de cuentas y la gloria de Dios. Descubre por qué la membresía importa.
-              </p>
+              <h3 className="text-3xl md:text-4xl font-serif mb-6 leading-tight group-hover:text-ibcd-blue transition-colors" dangerouslySetInnerHTML={{ __html: featuredArticle.title.rendered }} />
+              <p className="text-slate-500 text-base leading-relaxed mb-8" dangerouslySetInnerHTML={{ __html: featuredArticle.excerpt.rendered }} />
               <div className="flex items-center gap-4 text-xs font-medium text-slate-400 mt-auto">
-                <span className="flex items-center gap-1"><Calendar size={14} /> 10 Abril, 2026</span>
-                <span className="w-1 h-1 rounded-full bg-slate-300"></span>
-                <span className="flex items-center gap-1"><User size={14} /> Pr. Cristian Palomares</span>
+                <span className="flex items-center gap-1"><Calendar size={14} /> {new Date(featuredArticle.date).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
               </div>
             </div>
           </a>
+          )}
         </div>
       </section>
 
@@ -190,32 +139,26 @@ export default function Articulos() {
           <h2 className="text-4xl font-serif mb-16">Últimos Artículos</h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.slice(1).map((article) => (
+            {restArticles.map((article) => (
               <a 
                 key={article.id} 
-                href="/articulo"
+                href={`/articulos/${article.slug}`}
                 className="bg-white border border-slate-100 overflow-hidden group hover:border-ibcd-blue/30 hover:shadow-sm transition-all flex flex-col"
               >
                 <div className="aspect-[16/10] bg-slate-100 relative overflow-hidden">
                   <img 
-                    src={`https://picsum.photos/seed/${article.img}/800/500`} 
-                    alt={article.title} 
+                    src={article._embedded?.['wp:featuredmedia']?.[0]?.source_url || `https://picsum.photos/seed/${article.slug}/800/500`} 
+                    alt={article.title.rendered} 
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-slate-900 text-[9px] uppercase tracking-widest font-bold px-3 py-1 rounded-sm shadow-sm flex items-center gap-1">
-                    <Tag size={10} /> {article.category}
-                  </div>
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
-                  <h3 className="text-xl font-serif mb-4 group-hover:text-ibcd-blue transition-colors leading-snug">{article.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-8 font-light line-clamp-3">
-                    {article.excerpt}
-                  </p>
+                  <h3 className="text-xl font-serif mb-4 group-hover:text-ibcd-blue transition-colors leading-snug" dangerouslySetInnerHTML={{ __html: article.title.rendered }} />
+                  <p className="text-slate-500 text-sm leading-relaxed mb-8 font-light line-clamp-3" dangerouslySetInnerHTML={{ __html: article.excerpt.rendered }} />
                   <div className="mt-auto flex items-center justify-between pt-6 border-t border-slate-50">
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-bold text-slate-900 uppercase tracking-wider">{article.author}</span>
-                      <span className="text-[10px] text-slate-400">{article.date}</span>
+                      <span className="text-[10px] text-slate-400">{new Date(article.date).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                     </div>
                     <ArrowUpRight size={16} className="text-slate-300 group-hover:text-ibcd-blue transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </div>
