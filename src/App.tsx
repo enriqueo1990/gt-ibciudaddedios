@@ -2,8 +2,15 @@ import { motion } from 'motion/react';
 import { Play, Calendar, MapPin, Facebook, Instagram, Youtube, ArrowUpRight, ChevronRight, Hash, BookOpen } from 'lucide-react';
 import { Logo } from './components/Logo';
 import { Navbar } from './components/Navbar';
+import { Link } from 'react-router-dom';
+import { getLatestSermons, getUpcomingEvents } from './lib/api';
+import { useFetch } from './lib/hooks';
 
 export default function App() {
+  const { data: latestSermons, loading: loadingSermon } = useFetch(getLatestSermons);
+  const { data: events, loading: loadingEvents } = useFetch(getUpcomingEvents);
+  const featuredSermon = latestSermons?.[0] ?? null;
+
   const galleryItems = [
     { title: 'Bautismos 2025', tag: 'Vida Nueva', desc: 'Celebrando la fe de nuevos creyentes en nuestra comunidad.', img: 'baptism', height: 'h-80' },
     { title: 'Tiempo de Alabanza', tag: 'Adoración', desc: 'Nuestra congregación unida en cánticos y gratitud.', img: 'worship', height: 'h-64' },
@@ -108,41 +115,55 @@ export default function App() {
         <div className="container-custom">
           <div className="flex justify-between items-baseline mb-16">
             <h2 className="text-4xl font-serif italic">Sermones</h2>
-            <a href="/sermones" className="text-xs uppercase tracking-widest font-bold text-slate-400 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">
+            <Link to="/sermones" className="text-xs uppercase tracking-widest font-bold text-slate-400 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">
               Archivo completo
-            </a>
+            </Link>
           </div>
 
-          <a
-            href="/sermon"
-            className="bg-white border border-slate-100 overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all group block"
-          >
-            <div className="md:w-1/2 aspect-video bg-slate-900 relative overflow-hidden">
-              <img
-                src="https://picsum.photos/seed/sermon-min/1200/800"
-                alt="Sermon"
-                className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <button className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all group-hover:bg-ibcd-blue group-hover:border-ibcd-blue outline-none focus-visible:bg-ibcd-blue">
-                  <Play size={24} fill="currentColor" />
-                </button>
-              </div>
+          {loadingSermon && (
+            <div className="bg-white border border-slate-100 h-64 flex items-center justify-center text-slate-300 text-sm">
+              Cargando sermón…
             </div>
-            <div className="md:w-1/2 p-12 flex flex-col justify-center">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-ibcd-orange font-bold mb-4 block">Serie: Romanos</span>
-              <h3 className="text-3xl font-serif mb-6 leading-tight group-hover:text-ibcd-blue transition-colors cursor-pointer">La Justicia de Dios revelada en el Evangelio</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-8">
-                Un estudio profundo sobre cómo la gracia de Dios nos alcanza y nos transforma desde el corazón hacia afuera.
-              </p>
-              <div className="flex items-center gap-4 text-[11px] text-slate-400 font-medium">
-                <span>06 ABR 2026</span>
-                <span className="w-1 h-1 bg-slate-200 rounded-full" />
-                <span className="group-hover:text-ibcd-blue transition-colors cursor-pointer">PR. CRISTIAN PALOMARES</span>
+          )}
+
+          {featuredSermon && (
+            <Link
+              to={`/sermones/${featuredSermon.slug}`}
+              className="bg-white border border-slate-100 overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-md transition-all group block"
+            >
+              <div className="md:w-1/2 aspect-video bg-slate-900 relative overflow-hidden">
+                <img
+                  src={featuredSermon.featured_image || 'https://picsum.photos/seed/sermon-min/1200/800'}
+                  alt="Sermon"
+                  className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <button className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all group-hover:bg-ibcd-blue group-hover:border-ibcd-blue outline-none focus-visible:bg-ibcd-blue">
+                    <Play size={24} fill="currentColor" />
+                  </button>
+                </div>
               </div>
-            </div>
-          </a>
+              <div className="md:w-1/2 p-12 flex flex-col justify-center">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-ibcd-orange font-bold mb-4 block">
+                  Serie: {featuredSermon.sermon_data.series?.[0]?.name ?? 'Sermón'}
+                </span>
+                <h3 className="text-3xl font-serif mb-6 leading-tight group-hover:text-ibcd-blue transition-colors cursor-pointer">
+                  {featuredSermon.title}
+                </h3>
+                <p className="text-slate-500 text-sm leading-relaxed mb-8">
+                  {featuredSermon.sermon_data.summary}
+                </p>
+                <div className="flex items-center gap-4 text-[11px] text-slate-400 font-medium">
+                  <span>{featuredSermon.sermon_data.date_label}</span>
+                  <span className="w-1 h-1 bg-slate-200 rounded-full" />
+                  <span className="group-hover:text-ibcd-blue transition-colors cursor-pointer">
+                    {featuredSermon.sermon_data.preachers?.[0]?.name}
+                  </span>
+                </div>
+              </div>
+            </Link>
+          )}
         </div>
       </section>
 
@@ -199,26 +220,41 @@ export default function App() {
       <section id="eventos" className="py-32 bg-slate-50">
         <div className="container-custom">
           <h2 className="text-4xl font-serif italic mb-16">Próximos Encuentros</h2>
-          <div className="grid md:grid-cols-3 gap-px bg-slate-200 border border-slate-200">
-            {[
-              { title: 'Retiro de Jóvenes', date: '19 ABR', loc: 'Funes' },
-              { title: 'Conferencia Misiones', date: '26 ABR', loc: 'Rosario' },
-              { title: 'Bautismos', date: '03 MAY', loc: 'IBCD' },
-            ].map((event, i) => (
-              <a
-                key={i}
-                href="/eventos"
-                className="bg-white p-12 hover:bg-slate-50 transition-colors group cursor-pointer outline-none focus-visible:bg-slate-50 block"
-              >
-                <p className="text-[10px] uppercase tracking-widest text-ibcd-orange font-bold mb-4">{event.date}</p>
-                <h4 className="text-2xl font-serif mb-8 group-hover:italic group-hover:text-ibcd-blue transition-all">{event.title}</h4>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-400 group-hover:text-slate-600 transition-colors">{event.loc}</span>
-                  <ArrowUpRight size={16} className="text-slate-300 group-hover:text-ibcd-blue transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </div>
-              </a>
-            ))}
-          </div>
+
+          {loadingEvents && (
+            <div className="bg-white border border-slate-200 h-40 flex items-center justify-center text-slate-300 text-sm">
+              Cargando eventos…
+            </div>
+          )}
+
+          {!loadingEvents && (!events || events.length === 0) && (
+            <p className="text-slate-400 text-sm">No hay eventos próximos.</p>
+          )}
+
+          {!loadingEvents && events && events.length > 0 && (
+            <div className="grid md:grid-cols-3 gap-px bg-slate-200 border border-slate-200">
+              {events.slice(0, 3).map((evento, i) => (
+                <Link
+                  key={i}
+                  to="/eventos"
+                  className="bg-white p-12 hover:bg-slate-50 transition-colors group cursor-pointer outline-none focus-visible:bg-slate-50 block"
+                >
+                  <p className="text-[10px] uppercase tracking-widest text-ibcd-orange font-bold mb-4">
+                    {new Date(evento.gtc_evento_data.start_date + 'T00:00:00').toLocaleDateString('es-AR', { day: '2-digit', month: 'short' }).toUpperCase()}
+                  </p>
+                  <h4 className="text-2xl font-serif mb-8 group-hover:italic group-hover:text-ibcd-blue transition-all">
+                    {evento.title.rendered}
+                  </h4>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-400 group-hover:text-slate-600 transition-colors">
+                      {evento.gtc_evento_data.location_name}
+                    </span>
+                    <ArrowUpRight size={16} className="text-slate-300 group-hover:text-ibcd-blue transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
