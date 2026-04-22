@@ -291,12 +291,12 @@ export default function App() {
         {/* Background photo */}
         <div className="absolute inset-0">
           <img
-            src="/portada.jpg"
+            src="/fondo-visitanos.jpg"
             alt=""
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-45"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/90 to-slate-950/70" />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-950/60 to-slate-950/40" />
         </div>
         <div className="container-custom relative z-10">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
