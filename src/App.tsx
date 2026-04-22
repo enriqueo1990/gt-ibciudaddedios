@@ -12,12 +12,12 @@ export default function App() {
   const featuredSermon = latestSermons?.[0] ?? null;
 
   const galleryItems = [
-    { title: 'Bautismos 2025', tag: 'Vida Nueva', desc: 'Celebrando la fe de nuevos creyentes en nuestra comunidad.', img: 'baptism', height: 'h-80' },
-    { title: 'Tiempo de Alabanza', tag: 'Adoración', desc: 'Nuestra congregación unida en cánticos y gratitud.', img: 'worship', height: 'h-64' },
-    { title: 'Grupos de Conexión', tag: 'Comunidad', desc: 'Estudiando la Palabra en hogares de toda la ciudad.', img: 'community', height: 'h-96' },
-    { title: 'Ministerio Infantil', tag: 'Niños', desc: 'Sembrando la semilla del Evangelio en los más pequeños.', img: 'kids', height: 'h-72' },
-    { title: 'Cena del Señor', tag: 'Comunión', desc: 'Recordando el sacrificio de Cristo en unidad.', img: 'communion', height: 'h-80' },
-    { title: 'Retiro Anual', tag: 'Crecimiento', desc: 'Un tiempo apartado para la reflexión y el compañerismo.', img: 'retreat', height: 'h-64' },
+    { title: 'Bautismos', tag: 'Vida Nueva', desc: 'Celebrando la fe de nuevos creyentes en nuestra comunidad.', img: '/bautismo2.jpg', height: 'h-100' },
+    { title: 'Tiempo de Alabanza', tag: 'Adoración', desc: 'Nuestra congregación unida en cánticos y gratitud.', img: '/adorar2.png', height: 'h-120' },
+    { title: 'Grupos de Conexión', tag: 'Comunidad', desc: 'Estudiando la Palabra en hogares de toda la ciudad.', img: '/biblia5.jpg', height: 'h-96' },
+    { title: 'Ministerio Infantil', tag: 'Niños', desc: 'Sembrando la semilla del Evangelio en los más pequeños.', img: '/kids.jpg', height: 'h-90' },
+    { title: 'Cena del Señor', tag: 'Comunión', desc: 'Recordando el sacrificio de Cristo en unidad.', img: '/santacena5.jpg', height: 'h-120' },
+    { title: 'Unos a otros', tag: 'Crecimiento', desc: 'Valoramos y alentamos el ministerio de cuidarnos unos a otros.', img: '/cristian2.jpg', height: 'h-120' },
   ];
 
   return (
@@ -187,12 +187,12 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`relative group overflow-hidden bg-slate-100 break-inside-avoid rounded-sm cursor-pointer`}
+                className={`relative group overflow-hidden bg-slate-100 break-inside-avoid rounded-sm cursor-pointer ${item.height}`}
               >
                 <img
-                  src={`https://picsum.photos/seed/ibcd-gal-${item.img}/800/1000`}
+                  src={item.img.startsWith('/') ? item.img : `https://picsum.photos/seed/ibcd-gal-${item.img}/800/1000`}
                   alt={item.title}
-                  className="w-full h-auto object-cover transition-all duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
 
