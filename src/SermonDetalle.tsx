@@ -77,7 +77,7 @@ export default function SermonDetalle() {
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-ibcd-blue selection:text-white">
       <Navbar />
 
-      <main className="pt-32 pb-32">
+      <main className="pt-28 pb-16">
         <div className="container-custom">
 
           {/* Breadcrumbs */}
@@ -94,12 +94,12 @@ export default function SermonDetalle() {
           </div>
 
           {/* Header Layout: Text + Metadata */}
-          <div className="flex flex-col lg:flex-row gap-16 lg:items-end mb-16">
+          <div className="flex flex-col lg:flex-row gap-8 lg:items-end mb-10">
             <div className="lg:w-2/3">
-              <h1 className="text-5xl md:text-7xl font-serif leading-[1.1] mb-8">
+              <h1 className="text-4xl md:text-5xl font-serif leading-[1.1] mb-4">
                 {sermon.title}
               </h1>
-              <p className="text-slate-500 text-lg leading-relaxed font-light mb-8">
+              <p className="text-slate-500 text-base leading-relaxed font-light mb-4">
                 {sd.hook}
               </p>
               <div className="flex flex-wrap gap-6 text-sm font-medium text-slate-500">
@@ -126,7 +126,7 @@ export default function SermonDetalle() {
 
           {/* Video Player */}
           {ytId && (
-            <div className="mb-16 aspect-video bg-slate-950 rounded-sm overflow-hidden shadow-2xl relative group">
+            <div className="mb-8 aspect-video bg-slate-950 rounded-sm overflow-hidden shadow-2xl relative group">
               <iframe
                 src={`https://www.youtube.com/embed/${ytId}`}
                 title={sermon.title}
@@ -139,7 +139,7 @@ export default function SermonDetalle() {
 
           {/* Audio Player Component */}
           {sd.media.audio && (
-            <div className="mb-20 max-w-4xl mx-auto">
+            <div className="mb-10 max-w-4xl mx-auto">
               <AudioPlayer
                 src={sd.media.audio}
                 title={sermon.title}
@@ -149,13 +149,13 @@ export default function SermonDetalle() {
           )}
 
           {/* Sermon Info Grid */}
-          <div className="max-w-4xl mx-auto grid md:grid-cols-12 gap-16">
+          <div className="max-w-4xl mx-auto grid md:grid-cols-12 gap-10">
             <div className="md:col-span-8">
 
               {/* Notas del Sermón */}
               {sd.computed?.has_notes && sd.notes && (
-                <div className="mt-12">
-                  <h3 className="text-2xl font-serif mb-6 text-slate-900 uppercase tracking-tight">Notas del Sermón</h3>
+                <div className="mt-8">
+                  <h3 className="text-lg font-serif mb-4 text-slate-900">Notas del Sermón</h3>
                   <div
                     className={`relative overflow-hidden transition-all duration-500 ${notesExpanded ? 'max-h-[9999px]' : 'max-h-[200px]'
                       }`}
@@ -214,85 +214,74 @@ export default function SermonDetalle() {
                   </div>
                 </div>
               )}
-            </div>
-          </div>
 
-          {/* Recursos del Sermón */}
-          {(sd.media.audio || sd.media.pdf || sd.media.ppt || sd.media.word) && (
-            <div className="max-w-4xl mx-auto mt-20 pt-16 border-t border-slate-100">
-              <h3 className="text-2xl font-serif mb-6 text-slate-900 uppercase tracking-tight">Recursos del Sermón</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {sd.media.audio && (
-                  <a href={sd.media.audio} download target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-6 py-4 border border-slate-200 rounded-sm hover:border-ibcd-blue hover:bg-ibcd-blue/5 transition-all text-sm font-medium text-slate-600 hover:text-ibcd-blue">
-                    <Download size={16} /> Audio MP3
+              {(sd.media.audio || sd.media.pdf || sd.media.ppt || sd.media.word) && (
+                <div className="p-8 bg-slate-50 rounded-sm border border-slate-100">
+                  <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-4">Recursos</p>
+                  <div className="flex flex-col gap-2">
+                    {sd.media.audio && (
+                      <a href={sd.media.audio} download target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors">
+                        <Download size={14} /> Audio MP3
+                      </a>
+                    )}
+                    {sd.media.pdf && (
+                      <a href={sd.media.pdf} download target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors">
+                        <Download size={14} /> Notas PDF
+                      </a>
+                    )}
+                    {sd.media.ppt && (
+                      <a href={sd.media.ppt} download target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors">
+                        <Download size={14} /> Presentación
+                      </a>
+                    )}
+                    {sd.media.word && (
+                      <a href={sd.media.word} download target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors">
+                        <Download size={14} /> Documento Word
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <div className="p-8 bg-slate-50 rounded-sm border border-slate-100">
+                <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-4">Compartir</p>
+                <div className="flex flex-col gap-2">
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(window.location.href);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors text-left"
+                  >
+                    <Share2 size={14} />
+                    {copied ? '¡Copiado!' : 'Copiar enlace'}
+                  </button>
+                  <a
+                    href={`https://wa.me/?text=${encodeURIComponent(sermon.title + ' — ' + window.location.href)}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors"
+                  >
+                    WhatsApp
                   </a>
-                )}
-                {sd.media.pdf && (
-                  <a href={sd.media.pdf} download target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-6 py-4 border border-slate-200 rounded-sm hover:border-ibcd-blue hover:bg-ibcd-blue/5 transition-all text-sm font-medium text-slate-600 hover:text-ibcd-blue">
-                    <Download size={16} /> Notas PDF
+                  <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors"
+                  >
+                    Facebook
                   </a>
-                )}
-                {sd.media.ppt && (
-                  <a href={sd.media.ppt} download target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-6 py-4 border border-slate-200 rounded-sm hover:border-ibcd-blue hover:bg-ibcd-blue/5 transition-all text-sm font-medium text-slate-600 hover:text-ibcd-blue">
-                    <Download size={16} /> Presentación
-                  </a>
-                )}
-                {sd.media.word && (
-                  <a href={sd.media.word} download target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-6 py-4 border border-slate-200 rounded-sm hover:border-ibcd-blue hover:bg-ibcd-blue/5 transition-all text-sm font-medium text-slate-600 hover:text-ibcd-blue">
-                    <Download size={16} /> Documento Word
-                  </a>
-                )}
+                </div>
               </div>
-            </div>
-          )}
-
-          {/* Compartir */}
-          <div className="max-w-4xl mx-auto mt-12 pt-12 border-t border-slate-100">
-            <h3 className="text-2xl font-serif mb-6 text-slate-900 uppercase tracking-tight">Compartir este sermón</h3>
-            <div className="flex flex-wrap gap-4">
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(window.location.href);
-                  setCopied(true);
-                  setTimeout(() => setCopied(false), 2000);
-                }}
-                className="flex items-center gap-2 px-6 py-3 border border-slate-200 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-all text-sm font-medium text-slate-500"
-              >
-                <Share2 size={16} />
-                {copied ? '¡Enlace copiado!' : 'Copiar enlace'}
-              </button>
-              <a
-                href={`https://wa.me/?text=${encodeURIComponent(sermon.title + ' — ' + window.location.href)}`}
-                target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 border border-slate-200 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-all text-sm font-medium text-slate-500"
-              >
-                WhatsApp
-              </a>
-              <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
-                target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 border border-slate-200 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-all text-sm font-medium text-slate-500"
-              >
-                Facebook
-              </a>
             </div>
           </div>
         </div>
       </main>
 
-      {/* Footer CTA */}
-      <section className="py-24 bg-slate-950 text-white text-center">
-        <div className="container-custom">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 font-bold mb-8">Continuar escuchando</p>
-          <Link to="/sermones" className="text-4xl md:text-5xl font-serif italic hover:text-ibcd-orange transition-all duration-500">
-            Explora el archivo completo
-          </Link>
-        </div>
-      </section>
 
       <Footer />
     </div>
