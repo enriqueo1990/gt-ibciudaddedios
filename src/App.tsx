@@ -287,8 +287,18 @@ export default function App() {
       </section>
 
       {/* Meetings & Contact */}
-      <section id="contacto" className="py-32 bg-slate-950 text-white">
-        <div className="container-custom">
+      <section id="contacto" className="py-32 bg-slate-950 text-white relative overflow-hidden">
+        {/* Background photo */}
+        <div className="absolute inset-0">
+          <img
+            src="/portada.jpg"
+            alt=""
+            className="w-full h-full object-cover opacity-20"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/90 to-slate-950/70" />
+        </div>
+        <div className="container-custom relative z-10">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div>
               <h2 className="text-5xl md:text-7xl font-serif mb-16">Visítanos.</h2>
@@ -296,13 +306,13 @@ export default function App() {
                 <div className="flex gap-12">
                   <div className="group cursor-pointer">
                     <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4 group-hover:text-ibcd-orange transition-colors">Domingos</p>
-                    <p className="text-3xl font-serif group-hover:italic transition-all">10:00 AM</p>
+                    <p className="text-3xl font-serif group-hover:italic transition-all">10:00 H</p>
                     <p className="text-xs text-white/60 mt-2">Culto de Adoración</p>
                   </div>
                   <div className="group cursor-pointer">
-                    <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4 group-hover:text-ibcd-orange transition-colors">Miércoles</p>
-                    <p className="text-3xl font-serif group-hover:italic transition-all">07:30 PM</p>
-                    <p className="text-xs text-white/60 mt-2">Estudio Bíblico</p>
+                    <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4 group-hover:text-ibcd-orange transition-colors">Jueves</p>
+                    <p className="text-3xl font-serif group-hover:italic transition-all">19:00 H</p>
+                    <p className="text-xs text-white/60 mt-2">Culto de Oración</p>
                   </div>
                 </div>
 
