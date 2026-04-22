@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import {
-  ArrowLeft, Calendar, User, Bookmark, Share2, Download
-} from 'lucide-react';
-import { getSermonBySlug } from './lib/api';
+import { ArrowLeft, Download, Link2 as LinkIcon, Share2 } from 'lucide-react';
+import { getSermonBySlug, getSeriesWithSermons } from './lib/api';
 import { useFetch } from './lib/hooks';
 import { AudioPlayer } from './components/AudioPlayer';
 import { Navbar } from './components/Navbar';
@@ -15,37 +13,35 @@ function extractYouTubeId(url: string): string | null {
 }
 
 function processNotes(html: string): string {
-  // Remover spans de timestamps de YouTube
   let processed = html.replace(/<span class="ytwMarkdownDivTimestamp"[^>]*>[^<]*<\/span>/g, '');
-
-  // Normalizar saltos de línea
   processed = processed.replace(/\r\n/g, '\n');
-
-  // Separar por bloques (doble salto de línea)
   const blocks = processed.split(/\n\n+/);
-
   processed = blocks.map(block => {
     const trimmed = block.trim();
     if (!trimmed) return '';
-    // Si ya empieza con un tag HTML de bloque, dejarlo tal cual
     if (/^<(h[1-6]|ul|ol|li|blockquote|div|table|hr|p|figure)/i.test(trimmed)) {
       return trimmed;
     }
-    // Si no, envolverlo en <p>
     return `<p>${trimmed}</p>`;
   }).join('\n');
-
   return processed;
 }
 
 export default function SermonDetalle() {
   const { slug } = useParams<{ slug: string }>();
-  const [notesExpanded, setNotesExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const { data: sermon, loading, error } = useFetch(
     () => getSermonBySlug(slug!),
     [slug]
+  );
+
+  // Calcular series/slug para el segundo fetch
+  const seriesSlug = sermon?.sermon_data?.series?.[0]?.slug ?? null;
+
+  const { data: seriesData } = useFetch(
+    () => seriesSlug ? getSeriesWithSermons(seriesSlug) : Promise.resolve(null),
+    [seriesSlug]
   );
 
   if (loading) {
@@ -73,215 +69,234 @@ export default function SermonDetalle() {
   const series = sd.series?.[0];
   const ytId = sd.media.video_youtube ? extractYouTubeId(sd.media.video_youtube) : null;
 
+  // Navegación anterior/siguiente dentro de la serie
+  const sermonsList = seriesData?.sermons ?? [];
+  const currentIndex = sermonsList.findIndex((s) => s.slug === slug);
+  const prevSermon = currentIndex > 0 ? sermonsList[currentIndex - 1] : null;
+  const nextSermon = currentIndex !== -1 && currentIndex < sermonsList.length - 1 ? sermonsList[currentIndex + 1] : null;
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-ibcd-blue selection:text-white">
       <Navbar />
 
-      <main className="pt-28 pb-16">
-        <div className="container-custom">
+      <main className="pt-24 pb-16">
 
-          {/* Breadcrumbs */}
-          <div className="mb-8 flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-slate-400">
-            <Link to="/sermones" className="hover:text-ibcd-blue transition-colors flex items-center gap-1">
-              <ArrowLeft size={14} /> Archivo
-            </Link>
-            {series && (
-              <>
-                <span>/</span>
-                <Link to={`/series/${series.slug}`} className="hover:text-ibcd-blue transition-colors">{series.name}</Link>
-              </>
+        {/* Hero: Video o Imagen */}
+        <div className="w-full bg-slate-950">
+          <div className="max-w-5xl mx-auto">
+            {ytId ? (
+              <div className="aspect-video">
+                <iframe
+                  src={`https://www.youtube.com/embed/${ytId}`}
+                  title={sermon.title}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <div className="aspect-video relative overflow-hidden">
+                <img
+                  src={sermon.featured_image || '/portada.jpg'}
+                  alt={sermon.title}
+                  className="w-full h-full object-cover opacity-60"
+                />
+              </div>
             )}
           </div>
+        </div>
 
-          {/* Header Layout: Text + Metadata */}
-          <div className="flex flex-col lg:flex-row gap-8 lg:items-end mb-10">
-            <div className="lg:w-2/3">
-              <h1 className="text-4xl md:text-5xl font-serif leading-[1.1] mb-4">
-                {sermon.title}
-              </h1>
-              <p className="text-slate-500 text-base leading-relaxed font-light mb-4">
-                {sd.hook}
-              </p>
-              <div className="flex flex-wrap gap-6 text-sm font-medium text-slate-500">
-                <div className="flex items-center gap-2">
-                  <Calendar size={14} className="text-ibcd-blue/50" />
-                  <span>{sd.date_label}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <User size={14} className="text-ibcd-blue/50" />
-                  <span>{preacher}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Bookmark size={14} className="text-ibcd-blue/50" />
-                  <span>Pasaje: {sd.passage}</span>
-                </div>
-              </div>
-            </div>
-            <div className="lg:w-1/3 flex lg:justify-end gap-4">
-              <button className="p-4 rounded-full border border-slate-200 hover:border-ibcd-blue hover:bg-ibcd-blue/5 transition-all text-slate-400 hover:text-ibcd-blue">
-                <Share2 size={18} />
-              </button>
-            </div>
-          </div>
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto">
 
-          {/* Video Player */}
-          {ytId && (
-            <div className="mb-8 aspect-video bg-slate-950 rounded-sm overflow-hidden shadow-2xl relative group">
-              <iframe
-                src={`https://www.youtube.com/embed/${ytId}`}
-                title={sermon.title}
-                className="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          )}
-
-          {/* Audio Player Component */}
-          {sd.media.audio && (
-            <div className="mb-10 max-w-4xl mx-auto">
-              <AudioPlayer
-                src={sd.media.audio}
-                title={sermon.title}
-                preacher={preacher}
-              />
-            </div>
-          )}
-
-          {/* Sermon Info Grid */}
-          <div className="max-w-4xl mx-auto grid md:grid-cols-12 gap-10">
-            <div className="md:col-span-8">
-
-              {/* Notas del Sermón */}
-              {sd.computed?.has_notes && sd.notes && (
-                <div className="mt-8">
-                  <h3 className="text-lg font-serif mb-4 text-slate-900">Notas del Sermón</h3>
-                  <div
-                    className={`relative overflow-hidden transition-all duration-500 ${notesExpanded ? 'max-h-[9999px]' : 'max-h-[200px]'
-                      }`}
-                  >
-                    <div
-                      className="prose prose-slate prose-lg max-w-none font-light leading-relaxed prose-headings:font-serif prose-headings:text-slate-900 prose-h1:text-3xl prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-p:text-slate-600 prose-p:mb-4 prose-strong:text-slate-800 prose-em:text-slate-700 prose-ul:text-slate-600 prose-ol:text-slate-600 prose-li:mb-2 prose-blockquote:border-ibcd-blue prose-blockquote:text-slate-500 prose-blockquote:italic"
-                      dangerouslySetInnerHTML={{ __html: processNotes(sd.notes) }}
-                    />
-                    {!notesExpanded && (
-                      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
-                    )}
-                  </div>
-                  <button
-                    onClick={() => setNotesExpanded(!notesExpanded)}
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-serif italic text-slate-400 hover:text-slate-700 transition-colors border-b border-slate-200 hover:border-slate-700 pb-px"
-                  >
-                    {notesExpanded ? 'Ver menos' : 'Ver más'}
-                  </button>
-                </div>
-              )}
-            </div>
-
-            <div className="md:col-span-4 space-y-12">
+            {/* Breadcrumb */}
+            <div className="mt-8 mb-6 flex items-center gap-2 text-xs text-slate-500 font-medium">
+              <Link to="/sermones" className="hover:text-ibcd-blue transition-colors flex items-center gap-1">
+                <ArrowLeft size={14} /> Sermones
+              </Link>
               {series && (
-                <div className="p-8 bg-slate-50 rounded-sm border border-slate-100">
-                  <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-6">Perteneciente a:</p>
-                  <Link to={`/series/${series.slug}`} className="group block">
-                    <div className="w-full aspect-square bg-slate-900 mb-4 rounded-sm overflow-hidden">
-                      <img
-                        src={sermon.featured_image || '/portada.jpg'}
-                        alt={series.name}
-                        className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-500"
-                      />
-                    </div>
-                    <h4 className="font-serif text-xl group-hover:text-ibcd-blue transition-colors leading-tight">{series.name}</h4>
-                    <p className="text-xs text-slate-400 mt-2">Ver todos los sermones de la serie</p>
+                <>
+                  <span>/</span>
+                  <Link to={`/series/${series.slug}`} className="hover:text-ibcd-blue transition-colors">{series.name}</Link>
+                </>
+              )}
+            </div>
+
+            {/* Título y metadata */}
+            <h1 className="text-3xl md:text-4xl font-serif leading-tight mb-3">
+              {sermon.title}
+            </h1>
+            <p className="text-slate-600 text-base leading-relaxed mb-5">
+              {sd.hook}
+            </p>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600 mb-8">
+              {preacher && <span>{preacher}</span>}
+              {preacher && <span className="w-1 h-1 rounded-full bg-slate-400" />}
+              <span>{sd.date_label}</span>
+              <span className="w-1 h-1 rounded-full bg-slate-400" />
+              <span>{sd.passage}</span>
+              {series && (
+                <>
+                  <span className="w-1 h-1 rounded-full bg-slate-400" />
+                  <Link to={`/series/${series.slug}`} className="hover:text-ibcd-blue transition-colors">
+                    Serie: {series.name}
                   </Link>
-                </div>
+                </>
               )}
+            </div>
 
-              {preacher && (
-                <div className="p-8 bg-slate-50 rounded-sm border border-slate-100">
-                  <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-6">Predicador</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 bg-slate-200">
-                      <img
-                        src="/cristian-palomares.jpg"
-                        alt={preacher}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <h4 className="font-serif text-lg leading-tight">{preacher}</h4>
-                      <p className="text-xs text-slate-400 mt-1">Pastor · IBCD Rosario</p>
-                    </div>
-                  </div>
-                </div>
-              )}
+            {/* Audio Player */}
+            {sd.media.audio && (
+              <div className="mb-8">
+                <AudioPlayer
+                  src={sd.media.audio}
+                  title={sermon.title}
+                  preacher={preacher}
+                />
+              </div>
+            )}
 
-              {(sd.media.audio || sd.media.pdf || sd.media.ppt || sd.media.word) && (
-                <div className="p-8 bg-slate-50 rounded-sm border border-slate-100">
-                  <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-4">Recursos</p>
-                  <div className="flex flex-col gap-2">
+            {/* Acciones */}
+            <div className="mb-12 pb-12 border-b border-slate-200">
+              {/* Descargas */}
+              {(sd.media.audio || (sd.media as any).pdf || (sd.media as any).ppt || (sd.media as any).word) && (
+                <div className="mb-5">
+                  <p className="text-[11px] uppercase tracking-widest font-semibold text-slate-400 mb-3">Descargar</p>
+                  <div className="flex flex-wrap gap-2">
                     {sd.media.audio && (
                       <a href={sd.media.audio} download target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors">
-                        <Download size={14} /> Audio MP3
+                        className="inline-flex items-center gap-2 px-5 py-2 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-ibcd-blue transition-colors">
+                        <Download size={14} /> Audio
                       </a>
                     )}
-                    {sd.media.pdf && (
-                      <a href={sd.media.pdf} download target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors">
-                        <Download size={14} /> Notas PDF
+                    {(sd.media as any).pdf && (
+                      <a href={(sd.media as any).pdf} download target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2 border border-slate-300 text-sm font-medium text-slate-700 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-colors">
+                        <Download size={14} /> PDF
                       </a>
                     )}
-                    {sd.media.ppt && (
-                      <a href={sd.media.ppt} download target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors">
+                    {(sd.media as any).ppt && (
+                      <a href={(sd.media as any).ppt} download target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2 border border-slate-300 text-sm font-medium text-slate-700 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-colors">
                         <Download size={14} /> Presentación
                       </a>
                     )}
-                    {sd.media.word && (
-                      <a href={sd.media.word} download target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors">
-                        <Download size={14} /> Documento Word
+                    {(sd.media as any).word && (
+                      <a href={(sd.media as any).word} download target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2 border border-slate-300 text-sm font-medium text-slate-700 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-colors">
+                        <Download size={14} /> Word
                       </a>
                     )}
                   </div>
                 </div>
               )}
-
-              <div className="p-8 bg-slate-50 rounded-sm border border-slate-100">
-                <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-4">Compartir</p>
-                <div className="flex flex-col gap-2">
+              {/* Compartir */}
+              <div>
+                <p className="text-[11px] uppercase tracking-widest font-semibold text-slate-400 mb-3">Compartir</p>
+                <div className="flex flex-wrap gap-2">
+                  {'share' in navigator && (
+                    <button
+                      onClick={() => navigator.share({
+                        title: sermon.title,
+                        text: sd.hook || sermon.title,
+                        url: window.location.href,
+                      })}
+                      className="inline-flex items-center gap-2 px-5 py-2 bg-ibcd-blue text-white text-sm font-medium rounded-full hover:opacity-90 transition-opacity">
+                      <Share2 size={14} /> Compartir
+                    </button>
+                  )}
+                  <a href={`https://wa.me/?text=${encodeURIComponent(sermon.title + ' — ' + window.location.href)}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2 border border-slate-300 text-sm text-slate-700 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-colors">
+                    WhatsApp
+                  </a>
+                  <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2 border border-slate-300 text-sm text-slate-700 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-colors">
+                    Facebook
+                  </a>
+                  <a href={`https://www.threads.net/intent/post?text=${encodeURIComponent(sermon.title + ' ' + window.location.href)}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2 border border-slate-300 text-sm text-slate-700 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-colors">
+                    Threads
+                  </a>
+                  <a href="https://www.instagram.com/"
+                    target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2 border border-slate-300 text-sm text-slate-700 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-colors">
+                    Instagram
+                  </a>
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(window.location.href);
                       setCopied(true);
                       setTimeout(() => setCopied(false), 2000);
                     }}
-                    className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors text-left"
-                  >
-                    <Share2 size={14} />
-                    {copied ? '¡Copiado!' : 'Copiar enlace'}
+                    className="inline-flex items-center gap-2 px-5 py-2 border border-slate-300 text-sm text-slate-700 rounded-full hover:border-ibcd-blue hover:text-ibcd-blue transition-colors">
+                    <LinkIcon size={14} /> {copied ? '¡Copiado!' : 'Copiar enlace'}
                   </button>
-                  <a
-                    href={`https://wa.me/?text=${encodeURIComponent(sermon.title + ' — ' + window.location.href)}`}
-                    target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors"
-                  >
-                    WhatsApp
-                  </a>
-                  <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
-                    target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:text-ibcd-blue transition-colors"
-                  >
-                    Facebook
-                  </a>
                 </div>
               </div>
             </div>
+
+            {sd.computed?.has_notes && sd.notes && (
+              <div className="mb-12">
+                <h2 className="text-xl font-serif mb-6">Notas del Sermón</h2>
+                <div
+                  className="prose prose-slate max-w-none font-light leading-relaxed prose-headings:font-serif prose-headings:text-slate-900 prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-p:text-slate-600 prose-p:mb-4 prose-strong:text-slate-800 prose-em:text-slate-700 prose-ul:text-slate-600 prose-ol:text-slate-600 prose-li:mb-1 prose-blockquote:border-ibcd-blue prose-blockquote:text-slate-500 prose-blockquote:italic"
+                  dangerouslySetInnerHTML={{ __html: processNotes(sd.notes as string) }}
+                />
+              </div>
+            )}
+
+            {/* Predicador */}
+            {preacher && (
+              <div className="py-12 border-t border-slate-200">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                  <div className="w-20 h-20 rounded-full overflow-hidden shrink-0 bg-slate-200">
+                    <img
+                      src={`/${sd.preachers?.[0]?.slug || 'cristian-palomares'}.jpg`}
+                      alt={preacher}
+                      className="w-full h-full object-cover"
+                      onError={(e) => { (e.target as HTMLImageElement).src = '/portada.jpg'; }}
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-slate-400 mb-1">Predicador</p>
+                    <p className="text-2xl font-serif text-slate-900 mb-2">{preacher}</p>
+                    <p className="text-sm text-slate-500 leading-relaxed">
+                      Pastor de la Iglesia Bíblica Ciudad de Dios en Rosario, Argentina. Comprometido con la predicación expositiva y la edificación del pueblo de Dios.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Navegación anterior/siguiente */}
+            {(prevSermon || nextSermon) && (
+              <div className="border-t border-slate-200">
+                <div className="grid grid-cols-2">
+                  {prevSermon ? (
+                    <Link to={`/sermones/${prevSermon.slug}`} className="group py-10 pr-8 border-r border-slate-200">
+                      <p className="text-xs uppercase tracking-widest text-slate-400 mb-3 group-hover:text-ibcd-blue transition-colors">← Sermón anterior</p>
+                      <p className="text-xl font-serif text-slate-900 group-hover:text-ibcd-blue transition-colors leading-snug">{prevSermon.title}</p>
+                    </Link>
+                  ) : (
+                    <div className="border-r border-slate-200" />
+                  )}
+                  {nextSermon ? (
+                    <Link to={`/sermones/${nextSermon.slug}`} className="group py-10 pl-8 text-right">
+                      <p className="text-xs uppercase tracking-widest text-slate-400 mb-3 group-hover:text-ibcd-blue transition-colors">Siguiente sermón →</p>
+                      <p className="text-xl font-serif text-slate-900 group-hover:text-ibcd-blue transition-colors leading-snug">{nextSermon.title}</p>
+                    </Link>
+                  ) : <div />}
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
-      </main>
 
+      </main>
 
       <Footer />
     </div>
