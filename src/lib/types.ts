@@ -6,6 +6,18 @@ export interface WPTerm {
   link: string;
 }
 
+/** Datos extendidos de un predicador desde /wp/v2/predicadores */
+export interface WPPreacher {
+  id: number;
+  name: string;
+  slug: string;
+  preacher_data: {
+    image_url: string;
+    role: string;
+    short_bio: string;
+  };
+}
+
 export interface WPSermonMedia {
   audio: string;
   video_youtube: string;

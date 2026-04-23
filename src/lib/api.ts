@@ -1,4 +1,4 @@
-import type { WPSermon, WPSeries, WPSeriesWithSermons, WPEvent, WPPost } from './types';
+import type { WPSermon, WPSeries, WPSeriesWithSermons, WPEvent, WPPost, WPPreacher } from './types';
 
 const BASE_URL = import.meta.env.VITE_WP_API_URL as string;
 
@@ -25,6 +25,12 @@ export function getSermonBySlug(slug: string): Promise<WPSermon> {
 /** Devuelve { series, sermons[] } — el endpoint combina ambos en una sola llamada */
 export function getSeriesWithSermons(slug: string): Promise<WPSeriesWithSermons> {
   return wpFetch<WPSeriesWithSermons>(`/sf-sermones/v1/series/${slug}/sermons`);
+}
+
+/** Obtener datos extendidos de un predicador (bio, cargo, foto) por su slug */
+export async function getPreacherBySlug(slug: string): Promise<WPPreacher | null> {
+  const results = await wpFetch<WPPreacher[]>(`/wp/v2/predicadores?slug=${slug}`);
+  return results?.[0] ?? null;
 }
 
 /** Eventos próximos desde el CPT gtc_evento, ordenados por fecha de inicio */

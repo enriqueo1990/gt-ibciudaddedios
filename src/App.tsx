@@ -219,7 +219,7 @@ export default function App() {
       {/* Events - Clean Grid */}
       <section id="eventos" className="py-32 bg-slate-50">
         <div className="container-custom">
-          <h2 className="text-4xl font-serif italic mb-16">Próximos Encuentros</h2>
+          <h2 className="text-4xl font-serif italic mb-16">Próximos Eventos</h2>
 
           {loadingEvents && (
             <div className="bg-white border border-slate-200 h-40 flex items-center justify-center text-slate-300 text-sm">

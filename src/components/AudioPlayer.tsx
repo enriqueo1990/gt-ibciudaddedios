@@ -126,22 +126,20 @@ export function AudioPlayer({ src, title, downloadName, preacher }: AudioPlayerP
   return (
     <div
       data-audioplayer
-      className="bg-white border border-slate-100 rounded-sm shadow-sm overflow-hidden"
+      className="bg-slate-100 rounded-lg overflow-hidden"
     >
       {/* Hidden native audio */}
       <audio ref={audioRef} src={src} preload="metadata" />
 
       {/* Header strip */}
-      <div className="flex items-center gap-3 px-5 py-3 bg-slate-50 border-b border-slate-100">
+      <div className="flex items-center gap-3 px-5 py-3 border-b border-slate-200">
         {/* Animated waveform when playing */}
         <div className="flex items-end gap-[3px] h-4 shrink-0">
           {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
               className={`w-[3px] bg-ibcd-blue rounded-full transition-all duration-150 ${
-                isPlaying
-                  ? 'animate-bounce'
-                  : 'h-[4px]'
+                isPlaying ? 'animate-bounce' : 'h-[4px]'
               }`}
               style={
                 isPlaying
@@ -152,7 +150,7 @@ export function AudioPlayer({ src, title, downloadName, preacher }: AudioPlayerP
           ))}
         </div>
 
-        <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 truncate flex-1">
+        <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 truncate flex-1">
           {title ?? 'Audio del sermón'} {preacher && `— ${preacher}`}
         </span>
 
@@ -161,7 +159,7 @@ export function AudioPlayer({ src, title, downloadName, preacher }: AudioPlayerP
           <a
             href={src}
             download={downloadName ?? 'sermon.mp3'}
-            className="text-slate-400 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue"
+            className="text-slate-400 hover:text-slate-800 transition-colors outline-none focus-visible:text-ibcd-blue"
             title="Descargar MP3"
           >
             <Download size={15} />
@@ -174,13 +172,13 @@ export function AudioPlayer({ src, title, downloadName, preacher }: AudioPlayerP
 
         {/* Progress bar */}
         <div className="flex items-center gap-3">
-          <span className="text-[11px] font-mono text-slate-400 tabular-nums w-8 text-right shrink-0">
+          <span className="text-[11px] font-mono text-slate-500 tabular-nums w-8 text-right shrink-0">
             {formatTime(currentTime)}
           </span>
 
           <div
             ref={progressRef}
-            className="relative flex-1 h-1 bg-slate-100 rounded-full cursor-pointer group"
+            className="relative flex-1 h-1 bg-slate-300 rounded-full cursor-pointer group"
             onClick={handleSeek}
             onMouseDown={() => setIsDragging(true)}
             onMouseUp={() => setIsDragging(false)}
@@ -207,7 +205,7 @@ export function AudioPlayer({ src, title, downloadName, preacher }: AudioPlayerP
             />
           </div>
 
-          <span className="text-[11px] font-mono text-slate-400 tabular-nums w-8 shrink-0">
+          <span className="text-[11px] font-mono text-slate-500 tabular-nums w-8 shrink-0">
             {formatTime(duration)}
           </span>
         </div>
@@ -220,7 +218,7 @@ export function AudioPlayer({ src, title, downloadName, preacher }: AudioPlayerP
             {/* Skip back 10s */}
             <button
               onClick={() => skip(-10)}
-              className="w-9 h-9 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors rounded-full hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-ibcd-blue"
+              className="w-9 h-9 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors rounded-full hover:bg-slate-200 outline-none focus-visible:ring-2 focus-visible:ring-ibcd-blue"
               title="Retroceder 10 segundos"
               aria-label="Retroceder 10 segundos"
             >
@@ -231,7 +229,7 @@ export function AudioPlayer({ src, title, downloadName, preacher }: AudioPlayerP
             <button
               onClick={togglePlay}
               disabled={isLoading}
-              className="w-11 h-11 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-ibcd-blue transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ibcd-blue focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-wait"
+              className="w-11 h-11 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-ibcd-blue hover:text-white transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ibcd-blue focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 disabled:opacity-50 disabled:cursor-wait"
               aria-label={isPlaying ? 'Pausar' : 'Reproducir'}
             >
               {isLoading ? (
@@ -249,7 +247,7 @@ export function AudioPlayer({ src, title, downloadName, preacher }: AudioPlayerP
             {/* Skip forward 30s */}
             <button
               onClick={() => skip(30)}
-              className="w-9 h-9 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors rounded-full hover:bg-slate-50 outline-none focus-visible:ring-2 focus-visible:ring-ibcd-blue"
+              className="w-9 h-9 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors rounded-full hover:bg-slate-200 outline-none focus-visible:ring-2 focus-visible:ring-ibcd-blue"
               title="Avanzar 30 segundos"
               aria-label="Avanzar 30 segundos"
             >
