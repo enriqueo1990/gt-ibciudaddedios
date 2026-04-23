@@ -153,7 +153,7 @@ export default function SermonDetalle() {
 
             {/* Audio Player */}
             {sd.media.audio && (
-              <div className="mb-8">
+              <div className="mb-12 md:mb-16">
                 <AudioPlayer
                   src={sd.media.audio}
                   title={sermon.title}
@@ -162,22 +162,26 @@ export default function SermonDetalle() {
               </div>
             )}
 
-            {sd.computed?.has_notes && sd.notes && (
-              <div className="mb-12">
-                <h2 className="text-xl font-serif mb-6">Notas del Sermón</h2>
+          </div>
+        </div>
+
+        {sd.computed?.has_notes && sd.notes && (
+          <section className="bg-[#FAF8F3] w-full py-16 md:py-20 mb-12">
+            <div className="container-custom">
+              <div className="max-w-3xl mx-auto">
 
                 {/* Contenedor colapsable */}
                 <div className="relative">
                   <div
                     id="sermon-notes-body"
                     style={{
-                      maxHeight: notesExpanded ? '9999px' : '12.5rem',
+                      maxHeight: notesExpanded ? '9999px' : '15rem',
                       overflow: 'hidden',
                       transition: 'max-height 0.5s cubic-bezier(0.4,0,0.2,1)',
                     }}
                   >
                     <div
-                      className="prose prose-slate max-w-none font-light leading-relaxed prose-headings:font-serif prose-headings:text-slate-900 prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-p:text-slate-600 prose-p:mb-4 prose-strong:text-slate-800 prose-em:text-slate-700 prose-ul:text-slate-600 prose-ol:text-slate-600 prose-li:mb-1 prose-blockquote:border-ibcd-blue prose-blockquote:text-slate-500 prose-blockquote:italic"
+                      className="prose prose-lg max-w-none font-serif leading-loose prose-headings:font-serif prose-headings:text-slate-900 prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-p:text-slate-700 prose-p:mb-4 prose-strong:text-slate-800 prose-em:text-slate-700 prose-ul:text-slate-700 prose-ol:text-slate-700 prose-li:mb-1 prose-blockquote:border-ibcd-blue prose-blockquote:text-slate-600 prose-blockquote:italic"
                       dangerouslySetInnerHTML={{ __html: processNotes(sd.notes as string) }}
                     />
                   </div>
@@ -186,8 +190,8 @@ export default function SermonDetalle() {
                   {!notesExpanded && (
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute bottom-0 left-0 right-0 h-16"
-                      style={{ background: 'linear-gradient(to bottom, transparent, white)' }}
+                      className="pointer-events-none absolute bottom-0 left-0 right-0 h-24"
+                      style={{ background: 'linear-gradient(to bottom, transparent, #FAF8F3)' }}
                     />
                   )}
                 </div>
@@ -197,12 +201,17 @@ export default function SermonDetalle() {
                   onClick={() => setNotesExpanded(v => !v)}
                   aria-expanded={notesExpanded}
                   aria-controls="sermon-notes-body"
-                  className="mt-4 text-xs font-medium text-slate-400 hover:text-ibcd-blue transition-colors uppercase tracking-widest"
+                  className="mt-6 text-xs font-medium text-slate-500 hover:text-ibcd-blue transition-colors uppercase tracking-widest"
                 >
                   {notesExpanded ? '↑ Ocultar notas' : 'Ver notas completas ↓'}
                 </button>
               </div>
-            )}
+            </div>
+          </section>
+        )}
+
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto">
 
             {/* Acciones */}
             <div className="mb-12 pb-12 pt-6">
