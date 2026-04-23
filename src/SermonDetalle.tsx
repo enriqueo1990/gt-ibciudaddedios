@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Download, Link2 as LinkIcon, Share2 } from 'lucide-react';
-import { getSermonBySlug, getSeriesWithSermons } from './lib/api';
+import { getSermonBySlug, getSeriesWithSermons, getPreacherBySlug } from './lib/api';
 import { useFetch } from './lib/hooks';
 import { AudioPlayer } from './components/AudioPlayer';
 import { Navbar } from './components/Navbar';
@@ -42,6 +42,13 @@ export default function SermonDetalle() {
   const { data: seriesData } = useFetch(
     () => seriesSlug ? getSeriesWithSermons(seriesSlug) : Promise.resolve(null),
     [seriesSlug]
+  );
+
+  // Fetch datos extendidos del predicador (bio, cargo, foto)
+  const preacherSlug = sermon?.sermon_data?.preachers?.[0]?.slug ?? null;
+  const { data: preacherData } = useFetch(
+    () => preacherSlug ? getPreacherBySlug(preacherSlug) : Promise.resolve(null),
+    [preacherSlug]
   );
 
   if (loading) {
@@ -254,7 +261,7 @@ export default function SermonDetalle() {
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                   <div className="w-20 h-20 rounded-full overflow-hidden shrink-0 bg-slate-200">
                     <img
-                      src={`/${sd.preachers?.[0]?.slug || 'cristian-palomares'}.jpg`}
+                      src={preacherData?.preacher_data?.image_url || `/${sd.preachers?.[0]?.slug || 'default'}.jpg`}
                       alt={preacher}
                       className="w-full h-full object-cover"
                       onError={(e) => { (e.target as HTMLImageElement).src = '/portada.jpg'; }}
@@ -263,9 +270,12 @@ export default function SermonDetalle() {
                   <div>
                     <p className="text-xs uppercase tracking-widest text-slate-400 mb-1">Predicador</p>
                     <p className="text-2xl font-serif text-slate-900 mb-2">{preacher}</p>
-                    <p className="text-sm text-slate-500 leading-relaxed">
-                      Pastor de la Iglesia Bíblica Ciudad de Dios en Rosario, Argentina. Comprometido con la predicación expositiva y la edificación del pueblo de Dios.
-                    </p>
+                    {(preacherData?.preacher_data?.role || preacherData?.preacher_data?.short_bio) && (
+                      <p className="text-sm text-slate-500 leading-relaxed">
+                        {[preacherData.preacher_data.role, preacherData.preacher_data.short_bio]
+                          .filter(Boolean).join(' · ')}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
