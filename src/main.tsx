@@ -11,11 +11,13 @@ import SermonDetalle from './SermonDetalle.tsx';
 import SerieDetalle from './SerieDetalle.tsx';
 import Articulos from './Articulos.tsx';
 import ArticuloDetalle from './ArticuloDetalle.tsx';
+import { ScrollToTop } from './components/ScrollToTop.tsx';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/creencias" element={<Creencias />} />
