@@ -11,7 +11,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
           <div className="max-w-xs">
             <Link to="/" className="inline-block mb-6 group outline-none focus-visible:ring-2 focus-visible:ring-ibcd-blue rounded-sm">
-              <Logo lightText={false} className="h-10 w-auto transition-all duration-500 group-hover:scale-105" />
+              <Logo lightText={false} className="h-[80px] w-auto transition-all duration-500 group-hover:scale-105" />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed">
               Una iglesia bíblica comprometida con la sana doctrina y la gloria de Dios en Rosario.

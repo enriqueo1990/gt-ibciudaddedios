@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Youtube, Play, ArrowUpRight, BookOpen } from 'lucide-react';
 import { Logo } from './components/Logo';
 import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
 import { getLatestSermons, getActiveSeries } from './lib/api';
 import { useFetch } from './lib/hooks';
 
@@ -124,54 +125,7 @@ export default function Sermones() {
       </section>
 
       {/* Footer */}
-      <footer className="py-20 bg-white border-t border-slate-100">
-        <div className="container-custom">
-          <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
-            <div className="max-w-xs">
-              <a href="/" className="inline-block mb-6 group outline-none focus-visible:ring-2 focus-visible:ring-ibcd-blue rounded-sm">
-                <Logo lightText={false} className="h-10 w-auto transition-all duration-500 group-hover:scale-105" />
-              </a>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Una iglesia bíblica comprometida con la sana doctrina y la gloria de Dios en Rosario.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-16">
-              <div>
-                <p className="text-[10px] uppercase tracking-widest font-bold mb-6 text-slate-900">Explorar</p>
-                <ul className="space-y-4 text-sm text-slate-500">
-                  <li><a href="/#nosotros" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Nosotros</a></li>
-                  <li><a href="/liderazgo" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Liderazgo</a></li>
-                  <li><a href="/creencias" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Creencias</a></li>
-                  <li><a href="/calendario" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Calendario</a></li>
-                  <li><a href="/sermones" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Sermones</a></li>
-                  <li><a href="/articulos" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Artículos</a></li>
-                  <li><a href="/visitanos" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Visítanos</a></li>
-                </ul>
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-widest font-bold mb-6 text-slate-900">Social</p>
-                <ul className="space-y-4 text-sm text-slate-500">
-                  <li><a href="#" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Instagram</a></li>
-                  <li><a href="#" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">YouTube</a></li>
-                  <li><a href="#" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Facebook</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-slate-400">
-              © {new Date().getFullYear()} Iglesia Bíblica Ciudad de Dios. Todos los derechos reservados.
-            </p>
-            <div className="flex gap-4 text-slate-400">
-              <a href="#" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue"><Instagram size={18} /></a>
-              <a href="#" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue"><Youtube size={18} /></a>
-              <a href="#" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue"><Facebook size={18} /></a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
