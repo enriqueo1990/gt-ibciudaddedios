@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Calendar as CalendarIcon, MapPin, Clock, Plus, Wifi } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from './components/Logo';
@@ -65,6 +65,7 @@ function groupByMonth(events: WPEvent[]): { month: string; events: WPEvent[] }[]
 
 export default function Eventos() {
   const { data: events, loading, error } = useFetch(getUpcomingEvents);
+  const prefersReducedMotion = useReducedMotion();
 
   // Separar destacados (featured=true) de los del listado mensual
   const featured = events?.filter(e => e.gtc_evento_data.featured) ?? [];
@@ -78,16 +79,86 @@ export default function Eventos() {
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-ibcd-blue selection:text-white">
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-48 pb-24 bg-white border-b border-slate-100">
+      {/* Vida de la Iglesia */}
+      <section className="pt-48 pb-24 bg-white border-b border-slate-100 overflow-hidden">
+        <div className="container-custom">
+          <div className="max-w-3xl mb-16">
+            <motion.span 
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+              whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, ease: "easeOut", delay: prefersReducedMotion ? 0 : 0.1 }}
+              className="text-[10px] uppercase tracking-[0.3em] text-ibcd-orange font-bold mb-6 block"
+            >
+              Calendario
+            </motion.span>
+            <motion.h1 
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+              whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="text-6xl md:text-8xl font-serif leading-[0.95] mb-8"
+            >
+              Vida de la <span className="italic">iglesia.</span>
+            </motion.h1>
+            <motion.p 
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+              whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="text-slate-500 text-lg md:text-xl leading-relaxed font-light max-w-2xl"
+            >
+              Cada semana nos reunimos como iglesia para escuchar la Palabra, orar, y crecer juntos. Te invitamos a sumarte a cualquiera de nuestras reuniones.
+            </motion.p>
+          </div>
+
+          <div className="w-full h-px bg-slate-200 mb-12"></div>
+
+          <div className="max-w-5xl">
+            <div className="flex flex-col">
+              {[
+                { day: 'Domingos', name: 'Servicio Dominical', time: '10:00 h' },
+                { day: 'Martes', name: 'Estudio Bíblico', time: '19:00 h' },
+                { day: 'Miércoles', name: 'Fundamentos de la Fe', time: '19:00 h' },
+                { day: 'Jueves', name: 'Culto de Oración', time: '19:00 h' },
+                { day: 'Sábados', name: 'Escuela Bíblica para Niños', time: '10:00 h' },
+                { day: 'Sábados', name: 'Reunión de Jóvenes y Adolescentes', time: '19:00 h' }
+              ].map((meeting, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+                  whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: prefersReducedMotion ? 0 : i * 0.06 }}
+                  className="group flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b border-slate-100 last:border-0 gap-1 md:gap-8 cursor-default transition-colors duration-200 ease-out hover:bg-transparent md:hover:bg-slate-50/50 md:px-4 md:-mx-4 rounded-sm"
+                >
+                  <div className="md:w-1/3 transition-transform duration-200 ease-out md:group-hover:translate-x-1">
+                    <span className="hidden md:block text-2xl font-serif text-slate-900">{meeting.day}</span>
+                    <span className="block md:hidden text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-1">{meeting.day}</span>
+                  </div>
+                  <div className="md:w-1/3">
+                    <span className="text-lg text-slate-900">{meeting.name}</span>
+                  </div>
+                  <div className="md:w-1/3 md:text-right">
+                    <span className="text-lg text-slate-500 font-light">{meeting.time}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Próximos Eventos */}
+      <section className="py-24 bg-white border-b border-slate-100">
         <div className="container-custom">
           <div className="max-w-3xl">
             <span className="text-[10px] uppercase tracking-[0.3em] text-ibcd-orange font-bold mb-6 block">
               Calendario
             </span>
-            <h1 className="text-6xl md:text-8xl font-serif leading-[0.95] mb-8">
+            <h2 className="text-6xl md:text-8xl font-serif leading-[0.95] mb-8">
               Próximos <span className="italic">Eventos.</span>
-            </h1>
+            </h2>
             <p className="text-slate-500 text-lg md:text-xl leading-relaxed font-light max-w-2xl">
               Únete a nosotros en nuestras próximas actividades. Un espacio para crecer en la Palabra, 
               fomentar la comunión y servir juntos como cuerpo de Cristo.
