@@ -130,12 +130,12 @@ export function Navbar({ isHome = false }: NavbarProps) {
             ))}
             
             <div className="flex flex-col items-center gap-4">
-              <span className="text-4xl font-serif text-slate-900">Nosotros</span>
+              <span className="text-4xl font-serif text-slate-900">NOSOTROS</span>
               <Link to="/liderazgo" className="text-xl font-serif text-slate-500 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Liderazgo</Link>
               <Link to="/creencias" className="text-xl font-serif text-slate-500 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Creencias</Link>
             </div>
 
-            <Link to="/visitanos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Visítanos</Link>
+            <Link to="/visitanos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>VISÍTANOS</Link>
           </motion.div>
         )}
       </AnimatePresence>
