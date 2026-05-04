@@ -29,7 +29,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
 
   const navLinks = [
     { name: 'INICIO', path: '/' },
-    { name: 'EVENTOS', path: '/eventos' },
+    { name: 'CALENDARIO', path: '/calendario' },
     { name: 'SERMONES', path: '/sermones' },
     { name: 'ARTÍCULOS', path: '/articulos' },
   ];

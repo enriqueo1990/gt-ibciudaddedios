@@ -63,7 +63,7 @@ function groupByMonth(events: WPEvent[]): { month: string; events: WPEvent[] }[]
 
 /* ── Component ── */
 
-export default function Eventos() {
+export default function Calendario() {
   const { data: events, loading, error } = useFetch(getUpcomingEvents);
   const prefersReducedMotion = useReducedMotion();
 
