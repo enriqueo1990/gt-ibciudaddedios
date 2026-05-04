@@ -87,7 +87,7 @@ export default function Creencias() {
     },
     {
       title: "XX. Del Matrimonio y la Sexualidad",
-      content: "Creemos que el matrimonio involucra la unión de un hombre y una mujer en una fidelidad sagrada y permanente. La intimidad sexual es solamente ejercida propiamente y perseguida dentro de los confines de la relación marital. La inmoralidad sexual, definida como cualquier actividad sexual fuera de los límites de la relación sagrada matrimonial entre un hombre y una mujer, es clara y expresamente prohibida por el Señor. Entendemos como pecaminosa la intención o el deseo de quirúrgicamente alterar el sexo biológico a un sexo distinto. El Evangelio provee redención y restauración a todo el que confiesa y abandona su pecado, buscando misericordia y perdón a través de Jesucristo.\n\nGn. 2:24; Mt. 19:1-9; Mc. 10:1-12; Mt. 15:19; 1 Co. 6:9-11; 1 Ts. 4:3; Heb. 13:4; Gn. 1:27; Ro. 1:26-32; 1 Co. 6:9-11; Ef. 2:1-10; Tito 3:3-7; Mt. 11:28-30; 1 Co. 10:13; Heb. 2:17-18; Heb. 4:14-16."
+      content: "Es la posición bíblica que el matrimonio involucre la unión de un hombre y una mujer en una fidelidad sagrada y permanente. Aunque varias culturas y costumbres tienen definiciones del matrimonio que evolucionan, solo Dios tiene la autoridad final para prescribir y describir la relación marital.\n\nLa intimidad sexual es solamente ejercida propiamente y perseguida dentro de los confines de la relación marital. La inmoralidad sexual, definida como cualquier actividad sexual fuera de los límites de la relación sagrada matrimonial entre un hombre y una mujer, es clara y expresamente prohibida por el Señor.\n\nComo consecuencia, la iglesia entiende que cualquiera y toda forma de inmoralidad sexual, incluyendo el adulterio, fornicación, conducta homosexual, conducta bisexual, bestialidad, incesto, pornografía y aun alguna intención lujuriosa, es pecaminosa y en última instancia, insatisfactoria.\n\nLa iglesia entiende como pecaminosa la intención o el deseo de quirúrgicamente alterar el sexo biológico a un sexo distinto. Ya que el cuerpo es una creación de Dios, la iglesia abraza que la identidad sexual está biológicamente determinada, y las normas de género asociadas han de ser observadas como apropiadas a los estándares bíblicos.\n\nAunque la expresión sexual pecaminosa es atroz, como lo es todo pecado, el Evangelio provee redención y restauración a todo el que confiesa y abandona su pecado, buscando misericordia y perdón a través de Jesucristo. Miembros, empleados, voluntarios y asistentes de la iglesia luchando con toda clase de tentación sexual encontrarán una iglesia lista para apuntarlos a Jesús y unirse a ellos para luchar por su obediencia a Cristo.\n\nLa declaración sobre el matrimonio y la sexualidad de la iglesia no proporciona motivos para la intolerancia, el fanatismo, la intimidación o el odio, ya que creemos plenamente que a cada persona se le debe conceder compasión, amor, bondad, respeto y dignidad, sin importar su estilo de vida.\n\nGn. 2:24; Mt. 19:1-9; Mc. 10:1-12; Mt. 15:19; 1 Co. 6:9-11; 1 Ts. 4:3; Heb. 13:4; Gn. 1:27; Ro. 1:26-32; Ef. 2:1-10; Tito 3:3-7; Mt. 11:28-30; 1 Co. 10:13; Heb. 2:17-18; Heb. 4:14-16."
     },
     {
       title: "XXI. De la Vida dada por Dios",
@@ -158,10 +158,10 @@ export default function Creencias() {
                         className="overflow-hidden"
                       >
                         <div className="pb-12 pr-12 md:pr-24 space-y-6">
-                          {belief.content.split('\n\n').map((paragraph, pIndex) => (
+                          {belief.content.split('\n\n').map((paragraph, pIndex, arr) => (
                             <p
                               key={pIndex}
-                              className={`leading-relaxed ${pIndex === 0 ? 'text-slate-600 font-light text-xl' : 'text-slate-400 text-sm italic'}`}
+                              className={`leading-relaxed ${pIndex === arr.length - 1 ? 'text-slate-400 text-sm italic' : 'text-slate-600 font-light text-xl'}`}
                             >
                               {paragraph}
                             </p>
@@ -172,22 +172,6 @@ export default function Creencias() {
                   </AnimatePresence>
                 </div>
               ))}
-            </div>
-
-            {/* Download Full Document CTA */}
-            <div className="mt-24 text-center">
-              <p className="text-sm text-slate-400 mb-8">
-                Para un estudio más profundo de nuestras convicciones doctrinales.
-              </p>
-              <a
-                href="#"
-                className="group inline-flex items-center gap-4 text-xs uppercase tracking-widest font-bold text-slate-900 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue"
-              >
-                <span className="w-16 h-16 rounded-full border border-slate-200 flex items-center justify-center transition-all group-hover:border-ibcd-blue group-hover:bg-ibcd-blue/5">
-                  <ArrowUpRight size={20} className="text-slate-400 group-hover:text-ibcd-blue transition-colors" />
-                </span>
-                Descargar Documento Completo (PDF)
-              </a>
             </div>
           </div>
         </div>

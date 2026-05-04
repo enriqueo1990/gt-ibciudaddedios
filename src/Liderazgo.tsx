@@ -83,7 +83,7 @@ export default function Liderazgo() {
       </section>
 
       {/* Líderes de Ministerios Section */}
-      <section className="py-32 bg-slate-50 border-t border-slate-100">
+      <section className="py-32 bg-slate-50 border-t border-slate-100 hidden">
         <div className="container-custom">
           <div className="max-w-2xl mb-16">
             <h2 className="text-4xl md:text-5xl font-serif mb-6">Líderes de Ministerios</h2>
