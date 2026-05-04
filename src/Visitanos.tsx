@@ -40,9 +40,19 @@ export default function Visitanos() {
                     <Clock size={20} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-serif mb-2">Reuniones Dominicales</h3>
-                    <p className="text-slate-500 font-light mb-1">10:00 AM — Culto de Adoración</p>
-                    <p className="text-slate-500 font-light">11:30 AM — Escuela Dominical</p>
+                    <h3 className="text-xl font-serif mb-2">Cronograma de actividades</h3>
+                    <p className="text-slate-500 font-light mb-4">
+                      Nuestras reuniones principales se desarrollan en los siguientes días y horarios:
+                    </p>
+                    <div className="text-slate-500 font-light space-y-1">
+                      <p><strong className="font-medium text-slate-700">Domingos 10:00 h:</strong> Servicio Dominical.</p>
+                      <p><strong className="font-medium text-slate-700">Martes 19:00 h:</strong> Estudio Bíblico.</p>
+                      <p><strong className="font-medium text-slate-700">Miércoles 19:00 h:</strong> Fundamentos de la fe.</p>
+                      <p><strong className="font-medium text-slate-700">Jueves 19:00 h:</strong> Culto de oración.</p>
+                      <p><strong className="font-medium text-slate-700">Sábados 10:00 h:</strong> Escuela bíblica para niños.</p>
+                      <p><strong className="font-medium text-slate-700">Sábados 19:00 h:</strong> Reunión de jóvenes y adolescentes.</p>
+                      <p><strong className="font-medium text-slate-700">Último domingo del mes 19:00 h:</strong> Reunión Evangelística.</p>
+                    </div>
                   </div>
                 </div>
 
@@ -67,34 +77,19 @@ export default function Visitanos() {
                   </div>
                 </div>
 
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center flex-shrink-0 text-ibcd-blue">
-                    <Car size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-serif mb-2">Estacionamiento</h3>
-                    <p className="text-slate-500 font-light">
-                      Contamos con estacionamiento gratuito en la parte trasera del edificio.
-                      También hay lugar disponible en las calles aledañas.
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
 
-            {/* Map Placeholder */}
-            <div className="aspect-square md:aspect-[4/5] bg-slate-100 rounded-sm overflow-hidden relative group">
-              <img
-                src="https://picsum.photos/seed/map/800/1000"
-                alt="Ubicación IBCD"
-                className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg text-ibcd-blue">
-                  <MapPin size={24} />
-                </div>
-              </div>
+            {/* Google Map */}
+            <div className="aspect-square md:aspect-[4/5] bg-slate-100 rounded-sm overflow-hidden relative">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.2427847990473!2d-60.64335432427218!3d-32.94460597217983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab40a92d0755%3A0x4c22fb0971eb0579!2sAv.%20San%20Mart%C3%ADn%201234%2C%20S2000%20Rosario%2C%20Santa%20Fe!5e0!3m2!1ses-419!2sar!4v1700000000000!5m2!1ses-419!2sar" 
+                className="w-full h-full border-0"
+                allowFullScreen={false} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Mapa de ubicación de la iglesia"
+              ></iframe>
             </div>
 
           </div>
