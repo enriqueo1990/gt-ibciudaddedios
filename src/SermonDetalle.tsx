@@ -181,7 +181,7 @@ export default function SermonDetalle() {
                     }}
                   >
                     <div
-                      className="prose prose-lg max-w-none font-serif leading-loose prose-headings:font-serif prose-headings:text-slate-900 prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-p:text-slate-700 prose-p:mb-4 prose-strong:text-slate-800 prose-em:text-slate-700 prose-ul:text-slate-700 prose-ol:text-slate-700 prose-li:mb-1 prose-blockquote:border-ibcd-blue prose-blockquote:text-slate-600 prose-blockquote:italic"
+                      className="prose prose-lg max-w-none font-sans font-light leading-relaxed text-slate-600 prose-headings:font-serif prose-headings:text-slate-900 prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-p:mb-4 prose-strong:text-slate-800 prose-em:text-slate-700 prose-ul:text-slate-700 prose-ol:text-slate-700 prose-li:mb-1 prose-blockquote:border-ibcd-blue prose-blockquote:text-slate-600 prose-blockquote:italic"
                       dangerouslySetInnerHTML={{ __html: processNotes(sd.notes as string) }}
                     />
                   </div>
