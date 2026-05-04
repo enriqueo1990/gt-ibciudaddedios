@@ -14,7 +14,7 @@ export default function ArticuloDetalle() {
   );
 
   const featuredImage = post?._embedded?.['wp:featuredmedia']?.[0]?.source_url;
-  const authorName = post?._embedded?.['author']?.[0]?.name;
+  const autor = post?.gtc_autor;
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-ibcd-blue selection:text-white">
@@ -42,10 +42,10 @@ export default function ArticuloDetalle() {
 
             {/* Meta Info */}
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
-              {authorName && (
+              {autor && (
               <div className="flex items-center gap-2">
                 <User size={16} className="text-slate-400" />
-                <span className="font-medium text-slate-900">{authorName}</span>
+                <span className="font-medium text-slate-900">{autor.nombre}</span>
               </div>
               )}
               <div className="flex items-center gap-2">
@@ -76,18 +76,26 @@ export default function ArticuloDetalle() {
             />
             
             {/* Author Bio */}
-            {authorName && (
+            {autor && (
             <div className="mt-16 p-8 bg-slate-50 border border-slate-100 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+              {autor.foto && (
               <div className="w-24 h-24 rounded-full overflow-hidden shrink-0 bg-slate-200">
                 <img 
-                  src={post._embedded?.['author']?.[0]?.avatar_urls?.['96'] || `https://picsum.photos/seed/author-${post.author}/200/200`} 
-                  alt={authorName} 
+                  src={autor.foto.url} 
+                  alt={autor.foto.alt || autor.nombre} 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
+              )}
               <div>
-                <h4 className="text-lg font-serif mb-2">{authorName}</h4>
+                <h4 className="text-lg font-serif mb-2">{autor.nombre}</h4>
+                {autor.bio && (
+                  <div 
+                    className="prose prose-sm prose-slate font-light leading-relaxed text-slate-600 mt-2" 
+                    dangerouslySetInnerHTML={{ __html: autor.bio }} 
+                  />
+                )}
               </div>
             </div>
             )}

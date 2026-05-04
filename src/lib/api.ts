@@ -42,12 +42,12 @@ export function getUpcomingEvents(perPage = 20): Promise<WPEvent[]> {
 
 /** Artículos (Posts estándar de WP) */
 export function getPosts(perPage = 10): Promise<WPPost[]> {
-  return wpFetch<WPPost[]>(`/wp/v2/posts?per_page=${perPage}&_embed`);
+  return wpFetch<WPPost[]>(`/wp/v2/posts?per_page=${perPage}&_embed=wp:featuredmedia`);
 }
 
 /** Obtener un artículo por su slug */
 export async function getPostBySlug(slug: string): Promise<WPPost> {
-  const posts = await wpFetch<WPPost[]>(`/wp/v2/posts?slug=${slug}&_embed`);
+  const posts = await wpFetch<WPPost[]>(`/wp/v2/posts?slug=${slug}&_embed=wp:featuredmedia`);
   if (!posts || posts.length === 0) throw new Error('Artículo no encontrado');
   return posts[0];
 }

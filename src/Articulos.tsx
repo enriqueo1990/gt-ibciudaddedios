@@ -59,6 +59,21 @@ export default function Articulos() {
               <p className="text-slate-500 text-base leading-relaxed mb-8" dangerouslySetInnerHTML={{ __html: featuredArticle.excerpt.rendered }} />
               <div className="flex items-center gap-4 text-xs font-medium text-slate-400 mt-auto">
                 <span className="flex items-center gap-1"><Calendar size={14} /> {new Date(featuredArticle.date).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                {featuredArticle.gtc_autor && (
+                  <>
+                    <span className="w-1 h-1 rounded-full bg-slate-300"></span>
+                    <span className="flex items-center gap-2">
+                      {featuredArticle.gtc_autor.foto && (
+                        <img 
+                          src={featuredArticle.gtc_autor.foto.url} 
+                          alt={featuredArticle.gtc_autor.foto.alt || featuredArticle.gtc_autor.nombre} 
+                          className="w-6 h-6 rounded-full object-cover"
+                        />
+                      )}
+                      <span>{featuredArticle.gtc_autor.nombre}</span>
+                    </span>
+                  </>
+                )}
               </div>
             </div>
           </a>
@@ -90,7 +105,19 @@ export default function Articulos() {
                   <h3 className="text-xl font-serif mb-4 group-hover:text-ibcd-blue transition-colors leading-snug" dangerouslySetInnerHTML={{ __html: article.title.rendered }} />
                   <p className="text-slate-500 text-sm leading-relaxed mb-8 font-light line-clamp-3" dangerouslySetInnerHTML={{ __html: article.excerpt.rendered }} />
                   <div className="mt-auto flex items-center justify-between pt-6 border-t border-slate-50">
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-2">
+                      {article.gtc_autor && (
+                        <div className="flex items-center gap-2">
+                          {article.gtc_autor.foto && (
+                            <img 
+                              src={article.gtc_autor.foto.url} 
+                              alt={article.gtc_autor.foto.alt || article.gtc_autor.nombre} 
+                              className="w-6 h-6 rounded-full object-cover"
+                            />
+                          )}
+                          <span className="text-xs font-medium text-slate-600">{article.gtc_autor.nombre}</span>
+                        </div>
+                      )}
                       <span className="text-[10px] text-slate-400">{new Date(article.date).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                     </div>
                     <ArrowUpRight size={16} className="text-slate-300 group-hover:text-ibcd-blue transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1" />

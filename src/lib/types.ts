@@ -112,6 +112,16 @@ export interface WPEvent {
   };
 }
 
+export type GtcAutor = {
+  id: number;
+  nombre: string;
+  bio: string;
+  foto: {
+    url: string;
+    alt: string;
+  } | null;
+} | null;
+
 /** Estructura de un Post (Artículos) de WordPress */
 export interface WPPost {
   id: number;
@@ -122,10 +132,10 @@ export interface WPPost {
   content: { rendered: string };
   excerpt: { rendered: string };
   author: number;
+  gtc_autor: GtcAutor;
   featured_media: number;
   _embedded?: {
     'wp:featuredmedia'?: Array<{ source_url: string }>;
-    'author'?: Array<{ name: string; avatar_urls?: Record<string, string> }>;
     'wp:term'?: Array<Array<{ name: string; slug: string; taxonomy: string }>>;
   };
 }
