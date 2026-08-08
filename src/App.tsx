@@ -48,7 +48,7 @@ export default function App() {
             </span>
             <h1 className="text-white text-6xl md:text-8xl font-serif leading-[0.95] mb-12">
               Existimos para <br />
-              <span className="italic text-white/90">la gloria de Dios.</span>
+              <span className="italic text-white/90">proclamar a Cristo.</span>
             </h1>
             <div className="flex items-center gap-8">
               <a href="#contacto" className="group flex items-center gap-3 text-white text-sm font-medium outline-none focus-visible:text-ibcd-blue">
@@ -74,14 +74,14 @@ export default function App() {
                 transition={{ duration: 0.8 }}
               >
                 <h2 className="text-5xl md:text-7xl font-serif leading-tight mb-12">
-                  Una comunidad centrada en <span className="italic">el Evangelio.</span>
+                  Una comunidad centrada en <span className="italic">Jesucristo.</span>
                 </h2>
                 <div className="grid md:grid-cols-2 gap-12">
                   <p className="text-slate-500 leading-relaxed">
-                    Somos una iglesia que busca vivir para la gloria de Dios en cada aspecto de la vida. Nuestra misión es proclamar a Cristo y formar discípulos que amen Su Palabra.
+                    Somos una iglesia situada en el sur de Rosario desde el año 2010. Existimos para conocer y dar a conocer a nuestro gran Dios y salvador Jesucristo. Somos una comunidad centrada en el Evangelio y en la Palabra de Dios.
                   </p>
                   <p className="text-slate-500 leading-relaxed">
-                    Aquí encontrarás una familia que te recibirá con gracia, donde la enseñanza bíblica es nuestra prioridad y la comunión nuestra alegría.
+                    Creemos que Jesús vino para salvarnos y restaurar nuestra relación con Dios. Nuestro mayor anhelo es trabajar para hacer más discípulos de Jesús que lo conozcan y vivan para su gloria.
                   </p>
                 </div>
               </motion.div>

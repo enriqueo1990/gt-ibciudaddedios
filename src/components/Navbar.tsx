@@ -90,7 +90,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
                   : 'bg-slate-900 text-white hover:bg-slate-800'
               }`}
             >
-              VISÍTANOS
+              VISITANOS
             </Link>
           </div>
 
@@ -135,7 +135,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
               <Link to="/creencias" className="text-xl font-serif text-slate-500 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Creencias</Link>
             </div>
 
-            <Link to="/visitanos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>VISÍTANOS</Link>
+            <Link to="/visitanos" className="text-4xl font-serif text-slate-900 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>VISITANOS</Link>
           </motion.div>
         )}
       </AnimatePresence>
