@@ -9,13 +9,13 @@ export default function Liderazgo() {
     { 
       name: "Cristian Palomares", 
       title: "Pastor", 
-      bio: "Con veinte años de trayectoria en el ministerio pastoral, Cristian preside ABRA e integra el consejo de Ante Su Palabra. Es bachiller en Teología y Ministerio Pastoral por el SBF y posee una diplomatura en Consejería Bíblica del Seminario Bíblico William Carey, institución donde hoy realiza una Maestría en Estudios Teológicos. Vive junto a su esposa Miriam y sus tres hijos.", 
+      bio: "Con veinte años de trayectoria en el ministerio pastoral, Cristian preside ABRA e integra el consejo de Ante Su Palabra. Posee un bachiller en Teología y Ministerio Pastoral del SBF y una diplomatura en Consejería Bíblica del Seminario Bíblico William Carey, institución donde hoy realiza una Maestría en Estudios Teológicos. Está casado con Miriam y tiene tres hijos.",
       img: "/cristian-palomares.jpg" 
     },
     { 
       name: "Samuel Correa Da Silva", 
       title: "Pastor", 
-      bio: "Originario de Paraná, Samuel se desempeña como pastor en IBCD desde hace siete años. Se encuentra ampliando su formación teológica mediante estudios en IDEAR. Está casado con Daniela, con quien tiene tres hijos.", 
+      bio: "Originario de Paraná, Entre Ríos, Samuel se desempeña como pastor en IBCD desde hace siete años. Se encuentra ampliando su formación teológica en IDEAR. Está casado con Daniela, con quien tiene tres hijos.",
       img: "/samuel-correa.jpg" 
     }
   ];
@@ -40,14 +40,14 @@ export default function Liderazgo() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <span className="text-[10px] uppercase tracking-[0.3em] text-ibcd-orange font-bold mb-6 block">
-              Quiénes Somos
+              Gobierno
             </span>
             <h1 className="text-6xl md:text-8xl font-serif leading-[0.95] mb-8">
-              Nuestro <span className="italic">Liderazgo.</span>
+              <span className="italic">Pastores.</span>
             </h1>
             <p className="text-slate-500 text-lg md:text-xl leading-relaxed font-light max-w-2xl">
-              Hombres y mujeres llamados a servir, guiar y equipar a la iglesia para la obra del ministerio, 
-              buscando siempre la gloria de Dios y el bienestar de Su pueblo.
+              IBCD cree en la pluralidad de ancianos y en la responsabilidad de todos los miembros
+              de participar en la vida y las decisiones de la iglesia.
             </p>
           </div>
         </div>
@@ -56,7 +56,6 @@ export default function Liderazgo() {
       {/* Pastores Section */}
       <section className="py-32 bg-white">
         <div className="container-custom">
-          <h2 className="text-4xl md:text-5xl font-serif mb-16">Pastores</h2>
           <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
             {pastores.map((pastor, i) => (
               <div key={i} className="group cursor-pointer">

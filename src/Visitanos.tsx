@@ -1,7 +1,8 @@
-import { Facebook, Instagram, Youtube, MapPin, Clock, Car, Music, Baby, BookOpen, Shirt } from 'lucide-react';
+import { MapPin, Clock, Music, Baby, BookOpen, HeartHandshake } from 'lucide-react';
 import { Logo } from './components/Logo';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { Link } from 'react-router-dom';
 
 export default function Visitanos() {
   return (
@@ -13,14 +14,14 @@ export default function Visitanos() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <span className="text-[10px] uppercase tracking-[0.3em] text-ibcd-orange font-bold mb-6 block">
-              Planifica tu visita
+              Planificá tu visita
             </span>
             <h1 className="text-6xl md:text-8xl font-serif leading-[0.95] mb-8">
-              Nos encantaría adorar a Dios <span className="italic">junto a ti.</span>
+              Nos encantaría <span className="italic">conocerte.</span>
             </h1>
             <p className="text-slate-500 text-lg md:text-xl leading-relaxed font-light max-w-2xl">
               Ya sea que estés buscando una iglesia local o simplemente quieras saber más acerca de Jesús,
-              eres bienvenido este domingo.
+              te esperamos este domingo.
             </p>
           </div>
         </div>
@@ -43,13 +44,15 @@ export default function Visitanos() {
                   <div>
                     <h3 className="text-xl font-serif mb-2">Cronograma de actividades</h3>
                     <p className="text-slate-500 font-light mb-4">
-                      Nuestras reuniones principales se desarrollan en los siguientes días y horarios:
+                      Nuestras reuniones principales son el culto dominical y la reunión de oración.
+                      Además, los sábados tenemos actividades para niños, adolescentes y jóvenes.
+                      Para otras actividades, ver el{' '}
+                      <Link to="/calendario" className="text-ibcd-blue hover:text-slate-900 transition-colors underline underline-offset-4 outline-none focus-visible:text-slate-900">calendario</Link>.
+                      ¡Te esperamos!
                     </p>
                     <div className="text-slate-500 font-light space-y-1">
-                      <p><strong className="font-medium text-slate-700">Domingos 10:00 h:</strong> Servicio Dominical.</p>
-                      <p><strong className="font-medium text-slate-700">Martes 19:00 h:</strong> Estudio Bíblico.</p>
-                      <p><strong className="font-medium text-slate-700">Miércoles 19:00 h:</strong> Fundamentos de la fe.</p>
-                      <p><strong className="font-medium text-slate-700">Jueves 19:00 h:</strong> Culto de oración.</p>
+                      <p><strong className="font-medium text-slate-700">Domingos 10:00 h:</strong> Culto Dominical.</p>
+                      <p><strong className="font-medium text-slate-700">Jueves 19:00 h:</strong> Reunión de oración.</p>
                       <p><strong className="font-medium text-slate-700">Sábados 10:00 h:</strong> Escuela bíblica para niños.</p>
                       <p><strong className="font-medium text-slate-700">Sábados 19:00 h:</strong> Reunión de jóvenes y adolescentes.</p>
                       <p><strong className="font-medium text-slate-700">Último domingo del mes 19:00 h:</strong> Reunión Evangelística.</p>
@@ -64,11 +67,11 @@ export default function Visitanos() {
                   <div>
                     <h3 className="text-xl font-serif mb-2">Dirección</h3>
                     <p className="text-slate-500 font-light mb-4">
-                      Av. San Martín 1234<br />
+                      San Martín 2650, P.B.<br />
                       Rosario, Santa Fe, Argentina
                     </p>
                     <a
-                      href="https://maps.google.com"
+                      href="https://maps.app.goo.gl/1a1gK4b1tDg2i2bD9"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xs uppercase tracking-widest font-bold text-ibcd-blue hover:text-slate-900 transition-colors"
@@ -84,7 +87,7 @@ export default function Visitanos() {
             {/* Google Map */}
             <div className="aspect-square md:aspect-[4/5] bg-slate-100 rounded-sm overflow-hidden relative">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.2427847990473!2d-60.64335432427218!3d-32.94460597217983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab40a92d0755%3A0x4c22fb0971eb0579!2sAv.%20San%20Mart%C3%ADn%201234%2C%20S2000%20Rosario%2C%20Santa%20Fe!5e0!3m2!1ses-419!2sar!4v1700000000000!5m2!1ses-419!2sar" 
+                src="https://www.google.com/maps?q=San+Mart%C3%ADn+2650%2C+Rosario%2C+Santa+Fe%2C+Argentina&output=embed&hl=es"
                 className="w-full h-full border-0"
                 allowFullScreen={false} 
                 loading="lazy" 
@@ -101,10 +104,9 @@ export default function Visitanos() {
       <section className="py-32 bg-slate-50 border-t border-slate-100">
         <div className="container-custom">
           <div className="max-w-2xl mx-auto text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-serif mb-6">¿Qué puedes esperar?</h2>
+            <h2 className="text-4xl md:text-5xl font-serif mb-6">Qué esperar</h2>
             <p className="text-slate-500 text-lg font-light">
-              Sabemos que visitar una iglesia por primera vez puede ser intimidante.
-              Aquí te contamos un poco sobre cómo son nuestras reuniones.
+              Te contamos un poco sobre cómo son nuestras reuniones.
             </p>
           </div>
 
@@ -112,9 +114,9 @@ export default function Visitanos() {
 
             <div className="bg-white p-8 border border-slate-100 hover:border-ibcd-blue/30 transition-colors group">
               <Music className="text-slate-300 group-hover:text-ibcd-orange transition-colors mb-6" size={32} />
-              <h3 className="text-xl font-serif mb-3">Adoración</h3>
+              <h3 className="text-xl font-serif mb-3">Alabanza</h3>
               <p className="text-slate-500 font-light text-sm leading-relaxed">
-                Cantamos una mezcla de himnos históricos y cánticos contemporáneos, priorizando siempre que la letra sea bíblica y exalte a Cristo.
+                Cantamos una mezcla de himnos históricos y cánticos contemporáneos, priorizando siempre que la letra sea bíblica, clara y exalte a Cristo.
               </p>
             </div>
 
@@ -122,7 +124,15 @@ export default function Visitanos() {
               <BookOpen className="text-slate-300 group-hover:text-ibcd-orange transition-colors mb-6" size={32} />
               <h3 className="text-xl font-serif mb-3">Predicación</h3>
               <p className="text-slate-500 font-light text-sm leading-relaxed">
-                Nuestra predicación es expositiva. Esto significa que estudiamos la Biblia verso a verso, buscando entender el significado original del texto.
+                Nuestra predicación es expositiva. Esto significa que enseñamos la Biblia buscando entender el significado original del texto en el contexto en el que aparece. Cada sermón va acompañado de una lectura del texto.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 border border-slate-100 hover:border-ibcd-blue/30 transition-colors group">
+              <HeartHandshake className="text-slate-300 group-hover:text-ibcd-orange transition-colors mb-6" size={32} />
+              <h3 className="text-xl font-serif mb-3">Oración</h3>
+              <p className="text-slate-500 font-light text-sm leading-relaxed">
+                Nuestros cultos tienen diferentes espacios para adorar a Dios, confesar nuestros pecados e interceder por las necesidades de la iglesia y el mundo.
               </p>
             </div>
 
@@ -130,15 +140,7 @@ export default function Visitanos() {
               <Baby className="text-slate-300 group-hover:text-ibcd-orange transition-colors mb-6" size={32} />
               <h3 className="text-xl font-serif mb-3">Niños</h3>
               <p className="text-slate-500 font-light text-sm leading-relaxed">
-                Ofrecemos cuidado y enseñanza bíblica adaptada para niños (IBCD Kids) durante el tiempo del sermón en un ambiente seguro.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 border border-slate-100 hover:border-ibcd-blue/30 transition-colors group">
-              <Shirt className="text-slate-300 group-hover:text-ibcd-orange transition-colors mb-6" size={32} />
-              <h3 className="text-xl font-serif mb-3">Vestimenta</h3>
-              <p className="text-slate-500 font-light text-sm leading-relaxed">
-                No tenemos un código de vestimenta. Verás personas de traje y otras en jeans. Ven como te sientas cómodo; lo importante es tu presencia.
+                Nos encanta tener a los niños durante todo el culto y poder compartir la adoración a Dios con ellos. ¡Todos son bienvenidos! Contamos con un espacio tranquilo para amamantar, dormir y cambiar al niño.
               </p>
             </div>
 

@@ -13,12 +13,12 @@ export default function App() {
   const featuredSermon = latestSermons?.[0] ?? null;
 
   const galleryItems = [
-    { title: 'Bautismos', tag: 'Vida Nueva', desc: 'Celebrando la fe de nuevos creyentes en nuestra comunidad.', img: '/bautismo2.jpg', height: 'h-100' },
-    { title: 'Tiempo de Alabanza', tag: 'Adoración', desc: 'Nuestra congregación unida en cánticos y gratitud.', img: '/adorar2.png', height: 'h-120' },
-    { title: 'Grupos de Conexión', tag: 'Comunidad', desc: 'Estudiando la Palabra en hogares de toda la ciudad.', img: '/biblia5.jpg', height: 'h-96' },
-    { title: 'Ministerio Infantil', tag: 'Niños', desc: 'Sembrando la semilla del Evangelio en los más pequeños.', img: '/kids.jpg', height: 'h-90' },
-    { title: 'Cena del Señor', tag: 'Comunión', desc: 'Recordando el sacrificio de Cristo en unidad.', img: '/santacena5.jpg', height: 'h-120' },
-    { title: 'Unos a otros', tag: 'Crecimiento', desc: 'Valoramos y alentamos el ministerio de cuidarnos unos a otros.', img: '/cristian2.jpg', height: 'h-120' },
+    { title: 'Servicios dominicales', tag: 'Adoración', desc: 'Nuestra reunión principal es el día del Señor.', img: '/adorar2.png', height: 'h-100' },
+    { title: 'Viviendo en comunidad', tag: 'Discipulado', desc: 'Nos ayudamos mutuamente a seguir a Jesús.', img: '/discipulado.webp', height: 'h-120' },
+    { title: 'Nos nutrimos de Cristo', tag: 'Medios de gracia', desc: 'A través de su Palabra, el Bautismo y la Cena del Señor.', img: '/santacena5.jpg', height: 'h-96' },
+    { title: 'Hacemos discípulos', tag: 'La Misión de Dios', desc: 'Estamos comprometidos con la Gran Comisión.', img: '/bautismo2.jpg', height: 'h-90' },
+    { title: 'Formamos obreros', tag: 'Capacitación', desc: 'Equipamos a las personas para hablar la verdad en amor.', img: '/biblia5.jpg', height: 'h-120' },
+    { title: 'Trabajo pastoral', tag: 'Cuidado', desc: 'Fomentamos el cuidado pastoral en manos de personas fieles.', img: '/kids.jpg', height: 'h-120' },
   ];
 
   return (
@@ -55,7 +55,7 @@ export default function App() {
                 <span className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group-hover:bg-ibcd-blue group-hover:border-ibcd-blue group-hover:text-white group-focus-visible:border-ibcd-blue">
                   <ChevronRight size={18} />
                 </span>
-                Visítanos este domingo
+                Visitanos este domingo
               </a>
             </div>
           </motion.div>
@@ -176,7 +176,7 @@ export default function App() {
               Nuestra vida <span className="italic">en comunidad.</span>
             </h2>
             <p className="text-slate-500 text-lg">
-              Momentos capturados de nuestra congregación viviendo el Evangelio juntos.
+              Conocé nuestros distintivos.
             </p>
           </div>
 
@@ -265,14 +265,16 @@ export default function App() {
         <div className="container-custom relative">
           <div className="max-w-3xl mx-auto text-center pt-8">
             <span className="text-[10px] uppercase tracking-[0.3em] text-ibcd-orange font-bold mb-8 block">
-              Fundamento
+              Qué creemos
             </span>
             <h2 className="font-serif text-4xl md:text-5xl text-slate-900 mb-8 leading-tight">
-              Cimentados en la <span className="italic">autoridad inerrante</span> de la Biblia.
+              Confesamos la <span className="italic">fe cristiana histórica.</span>
             </h2>
             <p className="text-slate-500 text-lg mb-12 leading-relaxed font-light">
-              Abrazamos las doctrinas de la gracia y nos identificamos con la fe cristiana histórica,
-              buscando glorificar a Dios en todo lo que hacemos.
+              Somos una iglesia protestante que confiesa la fe cristiana histórica. Creemos en la
+              suficiencia y la autoridad de la Biblia. Abrazamos los postulados de la fe apostólica
+              que la iglesia ha confesado a lo largo de su historia, que han sido reflejados en los
+              credos históricos y que han sido recuperados por la Reforma Protestante.
             </p>
             <a
               href="/creencias"
@@ -302,25 +304,37 @@ export default function App() {
         <div className="container-custom relative z-10">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div>
-              <h2 className="text-5xl md:text-7xl font-serif mb-16">Visítanos.</h2>
+              <h2 className="text-5xl md:text-7xl font-serif mb-16">Visitanos.</h2>
               <div className="space-y-12">
                 <div className="flex gap-12">
                   <div className="group cursor-pointer">
                     <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4 group-hover:text-ibcd-orange transition-colors">Domingos</p>
                     <p className="text-3xl font-serif group-hover:italic transition-all">10:00 H</p>
-                    <p className="text-xs text-white/60 mt-2">Culto de Adoración</p>
+                    <p className="text-xs text-white/60 mt-2">Culto Dominical</p>
                   </div>
                   <div className="group cursor-pointer">
                     <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4 group-hover:text-ibcd-orange transition-colors">Jueves</p>
                     <p className="text-3xl font-serif group-hover:italic transition-all">19:00 H</p>
-                    <p className="text-xs text-white/60 mt-2">Culto de Oración</p>
+                    <p className="text-xs text-white/60 mt-2">Reunión de Oración</p>
                   </div>
                 </div>
 
                 <div className="pt-12 border-t border-white/10">
-                  <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4">Ubicación</p>
-                  <p className="text-xl font-serif opacity-90 hover:text-ibcd-blue transition-colors cursor-pointer">San Martín 2650, Rosario</p>
-                  <a href="#" className="inline-flex items-center gap-2 text-xs text-white/40 hover:text-ibcd-blue mt-4 transition-colors outline-none focus-visible:text-ibcd-blue">
+                  <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4">Dirección</p>
+                  <a
+                    href="https://maps.app.goo.gl/1a1gK4b1tDg2i2bD9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-xl font-serif opacity-90 hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue"
+                  >
+                    San Martín 2650, P.B., Rosario
+                  </a>
+                  <a
+                    href="https://maps.app.goo.gl/1a1gK4b1tDg2i2bD9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs text-white/40 hover:text-ibcd-blue mt-4 transition-colors outline-none focus-visible:text-ibcd-blue"
+                  >
                     Ver en Google Maps <ArrowUpRight size={12} />
                   </a>
                 </div>
@@ -329,10 +343,12 @@ export default function App() {
 
             <div className="aspect-square bg-white/5 rounded-sm overflow-hidden opacity-50 hover:opacity-100 transition-all duration-700 border border-white/5">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3347.856723467439!2d-60.6481!3d-32.9575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7ab1000000001%3A0x0!2zMzLCsDU3JzI3LjAiUyA2MMKwMzgnNTMuMiJX!5e0!3m2!1ses!2sar!4v1620000000000!5m2!1ses!2sar"
+                src="https://www.google.com/maps?q=San+Mart%C3%ADn+2650%2C+Rosario%2C+Santa+Fe%2C+Argentina&output=embed&hl=es"
                 className="w-full h-full border-0"
                 allowFullScreen
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Mapa de ubicación de IBCD"
               ></iframe>
             </div>
           </div>

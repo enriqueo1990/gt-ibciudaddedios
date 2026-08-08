@@ -14,7 +14,7 @@ export function Footer() {
               <Logo lightText={false} className="h-[80px] w-auto transition-all duration-500 group-hover:scale-105" />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Una iglesia bíblica comprometida con la sana doctrina y la gloria de Dios en Rosario.
+              Existimos para proclamar a Cristo.
             </p>
           </div>
           
@@ -23,12 +23,12 @@ export function Footer() {
               <p className="text-[10px] uppercase tracking-widest font-bold mb-6 text-slate-900">Explorar</p>
               <ul className="space-y-4 text-sm text-slate-500">
                 <li><a href="/#nosotros" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Nosotros</a></li>
-                <li><Link to="/liderazgo" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Liderazgo</Link></li>
+                <li><Link to="/liderazgo" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Pastores</Link></li>
                 <li><Link to="/creencias" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Creencias</Link></li>
                 <li><Link to="/calendario" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Calendario</Link></li>
                 <li><Link to="/sermones" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Sermones</Link></li>
-                <li><Link to="/articulos" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Artículos</Link></li>
-                <li><Link to="/visitanos" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Visítanos</Link></li>
+                <li><Link to="/articulos" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Recursos</Link></li>
+                <li><Link to="/visitanos" className="hover:text-ibcd-blue transition-colors outline-none focus-visible:text-ibcd-blue">Visitanos</Link></li>
               </ul>
             </div>
             <div>

@@ -20,13 +20,13 @@ export default function Articulos() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <span className="text-[10px] uppercase tracking-[0.3em] text-ibcd-orange font-bold mb-6 block">
-              Recursos y Reflexiones
+              Recursos
             </span>
             <h1 className="text-6xl md:text-8xl font-serif leading-[0.95] mb-8">
-              Artículos <span className="italic">Pastorales</span>.
+              Artículos y <span className="italic">Reflexiones</span>.
             </h1>
             <p className="text-slate-500 text-lg md:text-xl leading-relaxed font-light max-w-2xl">
-              Escritos por nuestro equipo pastoral para edificar a la iglesia, profundizar en la teología y aplicar el evangelio a la vida cotidiana.
+              Recursos para edificar a la iglesia, profundizar en la teología y aplicar el evangelio a la vida cotidiana.
             </p>
           </div>
         </div>

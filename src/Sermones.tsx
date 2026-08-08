@@ -20,13 +20,13 @@ export default function Sermones() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <span className="text-[10px] uppercase tracking-[0.3em] text-ibcd-orange font-bold mb-6 block">
-              Predicación Expositiva
+              Ministerio Expositivo
             </span>
             <h1 className="text-6xl md:text-8xl font-serif leading-[0.95] mb-8">
-              La fe viene por el <span className="italic">oír</span>.
+              Sermones y <span className="italic">enseñanzas</span>.
             </h1>
             <p className="text-slate-500 text-lg md:text-xl leading-relaxed font-light max-w-2xl">
-              Explora nuestro archivo de sermones y series de enseñanza. Creemos en la predicación expositiva que revela el significado original del texto bíblico.
+              Creemos que el ministerio expositivo de la Palabra es la forma más fiel de instruir a la iglesia. Explorá nuestro archivo de sermones y enseñanzas.
             </p>
           </div>
         </div>

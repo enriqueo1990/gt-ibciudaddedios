@@ -31,7 +31,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
     { name: 'INICIO', path: '/' },
     { name: 'CALENDARIO', path: '/calendario' },
     { name: 'SERMONES', path: '/sermones' },
-    { name: 'ARTÍCULOS', path: '/articulos' },
+    { name: 'RECURSOS', path: '/articulos' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -76,7 +76,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
               </button>
               <div className="absolute top-full left-0 pt-4 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300">
                 <div className="bg-white border border-slate-100 shadow-xl py-2 min-w-[180px] flex flex-col rounded-sm">
-                  <Link to="/liderazgo" className="px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-medium text-slate-500 hover:text-ibcd-blue hover:bg-slate-50 transition-colors">Liderazgo</Link>
+                  <Link to="/liderazgo" className="px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-medium text-slate-500 hover:text-ibcd-blue hover:bg-slate-50 transition-colors">Pastores</Link>
                   <Link to="/creencias" className="px-6 py-3 text-[11px] uppercase tracking-[0.2em] font-medium text-slate-500 hover:text-ibcd-blue hover:bg-slate-50 transition-colors">Creencias</Link>
                 </div>
               </div>
@@ -131,7 +131,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
             
             <div className="flex flex-col items-center gap-4">
               <span className="text-4xl font-serif text-slate-900">NOSOTROS</span>
-              <Link to="/liderazgo" className="text-xl font-serif text-slate-500 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Liderazgo</Link>
+              <Link to="/liderazgo" className="text-xl font-serif text-slate-500 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Pastores</Link>
               <Link to="/creencias" className="text-xl font-serif text-slate-500 hover:text-ibcd-blue hover:italic transition-all" onClick={() => setMobileMenuOpen(false)}>Creencias</Link>
             </div>
 
