@@ -139,3 +139,13 @@ export interface WPPost {
     'wp:term'?: Array<Array<{ name: string; slug: string; taxonomy: string }>>;
   };
 }
+
+/** Ítem de la galería de la home desde /gtc/v1/galeria-home (plugin GTC Galería) */
+export interface GalleryItem {
+  title: string;
+  tag: string;
+  desc: string;
+  img: string;
+  alt?: string;
+  height: 'baja' | 'media' | 'alta' | string;
+}

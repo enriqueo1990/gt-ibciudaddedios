@@ -1,4 +1,4 @@
-import type { WPSermon, WPSeries, WPSeriesWithSermons, WPEvent, WPPost, WPPreacher } from './types';
+import type { WPSermon, WPSeries, WPSeriesWithSermons, WPEvent, WPPost, WPPreacher, GalleryItem } from './types';
 
 const BASE_URL = import.meta.env.VITE_WP_API_URL as string;
 
@@ -50,4 +50,9 @@ export async function getPostBySlug(slug: string): Promise<WPPost> {
   const posts = await wpFetch<WPPost[]>(`/wp/v2/posts?slug=${slug}&_embed=wp:featuredmedia`);
   if (!posts || posts.length === 0) throw new Error('Artículo no encontrado');
   return posts[0];
+}
+
+/** Galería de la home, editable en WP en Apariencia > Galería de inicio */
+export function getHomeGallery(): Promise<GalleryItem[]> {
+  return wpFetch<GalleryItem[]>('/gtc/v1/galeria-home');
 }

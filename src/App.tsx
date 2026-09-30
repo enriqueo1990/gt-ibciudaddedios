@@ -4,22 +4,34 @@ import { Logo } from './components/Logo';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom';
-import { getLatestSermons, getUpcomingEvents } from './lib/api';
+import { getLatestSermons, getUpcomingEvents, getHomeGallery } from './lib/api';
 import { useFetch } from './lib/hooks';
+import type { GalleryItem } from './lib/types';
+
+// Clases literales para que Tailwind las incluya en el build
+const galleryHeights: Record<string, string> = {
+  baja: 'h-90',
+  media: 'h-100',
+  alta: 'h-120',
+};
+
+const fallbackGalleryItems: GalleryItem[] = [
+  { title: 'Servicios dominicales', tag: 'Adoración', desc: 'Nuestra reunión principal es el día del Señor.', img: '/adorar2.png', height: 'media' },
+  { title: 'Viviendo en comunidad', tag: 'Discipulado', desc: 'Nos ayudamos mutuamente a seguir a Jesús.', img: '/discipulado.webp', height: 'alta' },
+  { title: 'Nos nutrimos de Cristo', tag: 'Medios de gracia', desc: 'A través de su Palabra, el Bautismo y la Cena del Señor.', img: '/santacena5.jpg', height: 'baja' },
+  { title: 'Hacemos discípulos', tag: 'La Misión de Dios', desc: 'Estamos comprometidos con la Gran Comisión.', img: '/bautismo2.jpg', height: 'baja' },
+  { title: 'Formamos obreros', tag: 'Capacitación', desc: 'Equipamos a las personas para hablar la verdad en amor.', img: '/biblia5.jpg', height: 'alta' },
+  { title: 'Trabajo pastoral', tag: 'Cuidado', desc: 'Fomentamos el cuidado pastoral en manos de personas fieles.', img: '/kids.jpg', height: 'alta' },
+];
 
 export default function App() {
   const { data: latestSermons, loading: loadingSermon } = useFetch(getLatestSermons);
   const { data: events, loading: loadingEvents } = useFetch(getUpcomingEvents);
   const featuredSermon = latestSermons?.[0] ?? null;
 
-  const galleryItems = [
-    { title: 'Servicios dominicales', tag: 'Adoración', desc: 'Nuestra reunión principal es el día del Señor.', img: '/adorar2.png', height: 'h-100' },
-    { title: 'Viviendo en comunidad', tag: 'Discipulado', desc: 'Nos ayudamos mutuamente a seguir a Jesús.', img: '/discipulado.webp', height: 'h-120' },
-    { title: 'Nos nutrimos de Cristo', tag: 'Medios de gracia', desc: 'A través de su Palabra, el Bautismo y la Cena del Señor.', img: '/santacena5.jpg', height: 'h-96' },
-    { title: 'Hacemos discípulos', tag: 'La Misión de Dios', desc: 'Estamos comprometidos con la Gran Comisión.', img: '/bautismo2.jpg', height: 'h-90' },
-    { title: 'Formamos obreros', tag: 'Capacitación', desc: 'Equipamos a las personas para hablar la verdad en amor.', img: '/biblia5.jpg', height: 'h-120' },
-    { title: 'Trabajo pastoral', tag: 'Cuidado', desc: 'Fomentamos el cuidado pastoral en manos de personas fieles.', img: '/kids.jpg', height: 'h-120' },
-  ];
+  const { data: wpGallery, loading: loadingGallery } = useFetch(getHomeGallery);
+  // Si WP no devuelve fotos (vacío o error), se usan las de /public
+  const galleryItems = loadingGallery ? [] : wpGallery?.length ? wpGallery : fallbackGalleryItems;
 
   return (
     <div className="bg-white selection:bg-ibcd-blue/10 selection:text-ibcd-blue">
@@ -188,11 +200,12 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`relative group overflow-hidden bg-slate-100 break-inside-avoid rounded-sm cursor-pointer ${item.height}`}
+                className={`relative group overflow-hidden bg-slate-100 break-inside-avoid rounded-sm cursor-pointer ${galleryHeights[item.height] ?? galleryHeights.media}`}
               >
                 <img
-                  src={item.img.startsWith('/') ? item.img : `https://picsum.photos/seed/ibcd-gal-${item.img}/800/1000`}
-                  alt={item.title}
+                  src={item.img}
+                  alt={item.alt || item.title}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
